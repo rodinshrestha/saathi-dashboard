@@ -1,5 +1,3 @@
-import React from "react";
-
 import { StyledDiv } from "./style";
 
 import Button from "@/components/Button";

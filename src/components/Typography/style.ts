@@ -14,6 +14,7 @@ const style = (theme: DefaultTheme) => css`
     font-family: "ui-sans-serif, system-ui, sans-serif";
     margin-block-start: 0;
     margin-block-end: 0;
+    color: ${theme.color.textColor.highContrast};
   }
 
   &.h1 {
