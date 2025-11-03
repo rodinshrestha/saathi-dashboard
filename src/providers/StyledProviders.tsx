@@ -23,17 +23,10 @@ type Props = {
 };
 
 export default function StyledProviders({ children }: Props) {
-  const [isDark, setIsDark] = React.useState(false);
-
-  /**
-   * Checks the client default mode
-   */
-  React.useEffect(() => {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setIsDark(prefersDark);
-  }, []);
+  const [isDark, setIsDark] = React.useState(
+    // window.matchMedia("(prefers-color-scheme: dark)").matches
+    false
+  );
 
   const toggleTheme = () => setIsDark((prev) => !prev);
 

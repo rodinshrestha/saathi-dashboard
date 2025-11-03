@@ -3,9 +3,9 @@
  */
 export const lightPrimaryColor = {
   backgroundColor: {
-    highContrast: "#F5F6FA",
+    highContrast: "#F3F3F5",
   },
-  text: {
+  textColor: {
     highContrast: "#252525",
     lowContrast: "#717182",
   },
@@ -24,7 +24,7 @@ export const darkPrimaryColor: typeof lightPrimaryColor = {
   backgroundColor: {
     highContrast: "#000",
   },
-  text: {
+  textColor: {
     highContrast: "#FAFAFA",
     lowContrast: "#A9A9A9",
   },
@@ -41,6 +41,7 @@ export const darkPrimaryColor: typeof lightPrimaryColor = {
 export const color = {
   blue: {
     100: "#3A86FF",
+    200: "#2F6FD1",
   },
   green: {
     100: "#10b981",
@@ -50,5 +51,8 @@ export const color = {
   },
   yellow: {
     100: "#FFD93D",
+  },
+  white: {
+    100: "#fff",
   },
 };
