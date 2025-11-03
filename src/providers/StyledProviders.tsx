@@ -4,6 +4,7 @@ import React from "react";
 
 import { ThemeProvider } from "styled-components";
 
+import { GlobalStyle } from "@/theme/globalStyles";
 import { createTheme } from "@/theme/theme";
 
 type ThemeContextType = {
@@ -34,7 +35,10 @@ export default function StyledProviders({ children }: Props) {
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {children}
+      </ThemeProvider>
     </ThemeContext.Provider>
   );
 }

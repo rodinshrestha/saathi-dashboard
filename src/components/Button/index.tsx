@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { StyledButton, StyledLink } from "./style";
 
-interface ButtonBaseProps extends React.HTMLAttributes<HTMLElement> {
+interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "contained" | "outline";
   size?: "sm" | "md" | "full-width";

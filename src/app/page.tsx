@@ -1,11 +1,5 @@
-import Image from "next/image";
-
-import Button from "@/components/Button";
+import LoginModule from "@/modules/login";
 
 export default function Home() {
-  return (
-    <Button size="md" onClick={() => alert("test")} variant="contained">
-      Test
-    </Button>
-  );
+  return <LoginModule />;
 }

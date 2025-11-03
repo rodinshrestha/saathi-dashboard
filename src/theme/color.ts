@@ -12,6 +12,9 @@ export const lightPrimaryColor = {
   borderColor: {
     highContrast: "#0000001a",
   },
+  outlineColor: {
+    highContrast: "#5A5A5A80",
+  },
   boxShadow:
     "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px",
 };
@@ -30,6 +33,9 @@ export const darkPrimaryColor: typeof lightPrimaryColor = {
   },
   borderColor: {
     highContrast: "#FFFFFF1A",
+  },
+  outlineColor: {
+    highContrast: "#5A5A5A80",
   },
   boxShadow:
     "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
