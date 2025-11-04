@@ -5,11 +5,13 @@ import Link from "next/link";
 
 import { StyledButton, StyledLink } from "./style";
 
-interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "contained" | "outline";
   size?: "sm" | "md" | "full-width";
   className?: string;
+  loading?: boolean;
 }
 
 interface NormalButtonProps extends ButtonBaseProps {
@@ -28,6 +30,7 @@ const Button = ({
   children,
   variant = "contained",
   size = "sm",
+  loading = false,
   className,
   ...rest
 }: NormalButtonProps | LinkButtonProps) => {
@@ -43,10 +46,13 @@ const Button = ({
 
   return (
     <StyledButton
-      className={clsx(variant, size, className, "btn")}
+      className={clsx(variant, size, className, "btn", {
+        ["btn-loader"]: loading,
+      })}
       disabled={rest.disabled}
+      {...rest}
     >
-      {children}
+      {loading ? <span className="loader" /> : children}
     </StyledButton>
   );
 };

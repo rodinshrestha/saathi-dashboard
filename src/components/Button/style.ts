@@ -57,10 +57,42 @@ export const StyledLink = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  &:disabled {
-    cursor: not-allowed;
-  }
   ${({ theme }) => css`
     ${defaultBtnStyle(theme)}
   `}
+
+  &.btn-loader {
+    min-height: 33px;
+    position: relative;
+    pointer-events: none;
+    background-color: ${({ theme }) => theme.color.grey["100"]};
+    border: 1px solid ${({ theme }) => theme.color.grey["100"]};
+
+    .loader {
+      border: 2px solid #fff; /* circle border color */
+      border-top: 2px solid transparent; /* top is transparent to create spinning effect */
+      border-radius: 50%;
+      width: 16px; /* circle size */
+      height: 16px;
+      animation: spin 1s linear infinite;
+      position: absolute;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${({ theme }) => theme.color.grey["100"]};
+    border: 1px solid ${({ theme }) => theme.color.grey["100"]};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.color.grey["100"]};
+      border: 1px solid ${({ theme }) => theme.color.grey["100"]};
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;

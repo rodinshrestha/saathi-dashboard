@@ -1,11 +1,38 @@
+"use client";
+import React from "react";
+
+import { useFormik } from "formik";
+
 import Button from "@/components/Button";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import InputField from "@/components/InputField";
 import Typography from "@/components/Typography";
+import { authAxios } from "@/utils/axios";
 
+import { loginSchema } from "./login.schema";
 import { StyledDiv } from "./style";
 
 const LoginModule = () => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+      setIsLoading(true);
+      authAxios
+        .post("/login", { ...values })
+        .then((res) => {
+          console.log(res);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+  });
+
   return (
     <StyledDiv>
       <div className="login-wrapper">
@@ -20,15 +47,38 @@ const LoginModule = () => {
           </Typography>
         </div>
 
-        <form className="login-form-wrapper">
+        <form className="login-form-wrapper" onSubmit={formik.handleSubmit}>
           <InputField
+            name="email"
             label="Email"
             type="text"
             placeholder="Enter your email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.errors.email}
+            touched={formik.touched.email}
           />
-          <InputField label="Password" type="password" placeholder="*****" />
+          <InputField
+            name="password"
+            label="Password"
+            type="password"
+            placeholder="*****"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.errors.password}
+            touched={formik.touched.password}
+          />
 
-          <Button size="full-width">Sign In</Button>
+          <Button
+            size="full-width"
+            type="submit"
+            disabled={!formik.isValid || isLoading}
+            loading={isLoading}
+          >
+            Sign In
+          </Button>
         </form>
       </div>
     </StyledDiv>

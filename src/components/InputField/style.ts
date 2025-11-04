@@ -14,17 +14,30 @@ export const InputContainer = styled.div`
     color: ${({ theme }) => theme.color.textColor.highContrast};
   }
 
-  input {
-    border-radius: 8px;
-    background-color: ${({ theme }) =>
-      theme.color.backgroundColor.highContrast};
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid transparent;
+  .input-wrapper {
+    width: 100%;
+    position: relative;
+    input {
+      box-sizing: border-box;
+      border-radius: 8px;
+      background-color: ${({ theme }) =>
+        theme.color.backgroundColor.highContrast};
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      width: 100%;
 
-    &:focus {
-      border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
-      outline: ${({ theme }) => theme.color.outlineColor.highContrast};
+      &:focus {
+        border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
+        outline: ${({ theme }) => theme.color.outlineColor.highContrast};
+      }
+    }
+    .password-toggle-icon {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
     }
   }
   .input-error {
