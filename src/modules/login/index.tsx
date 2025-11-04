@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import InputField from "@/components/InputField";
 import Typography from "@/components/Typography";
+import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
 
 import { loginSchema } from "./login.schema";
@@ -14,10 +15,13 @@ import { StyledDiv } from "./style";
 
 const LoginModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const { errorToast } = useToaster();
+
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "admin@saathi.com",
+      password: "password",
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
@@ -26,6 +30,9 @@ const LoginModule = () => {
         .post("/login", { ...values })
         .then((res) => {
           console.log(res);
+        })
+        .catch(() => {
+          errorToast("Failed");
         })
         .finally(() => {
           setIsLoading(false);
