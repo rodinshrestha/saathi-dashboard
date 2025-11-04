@@ -1,9 +1,9 @@
-import { StyledDiv } from "./style";
-
 import Button from "@/components/Button";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import InputField from "@/components/InputField";
 import Typography from "@/components/Typography";
+
+import { StyledDiv } from "./style";
 
 const LoginModule = () => {
   return (
