@@ -4,9 +4,10 @@
 export const lightPrimaryColor = {
   backgroundColor: {
     highContrast: "#F3F3F5",
+    lowContrast: "#fff",
   },
   textColor: {
-    highContrast: "#252525",
+    highContrast: "#0A0A0A",
     lowContrast: "#717182",
   },
   borderColor: {
@@ -26,6 +27,7 @@ export const lightPrimaryColor = {
 export const darkPrimaryColor: typeof lightPrimaryColor = {
   backgroundColor: {
     highContrast: "#000",
+    lowContrast: "#111",
   },
   textColor: {
     highContrast: "#FAFAFA",

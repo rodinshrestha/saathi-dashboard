@@ -1,36 +1,45 @@
+import ApprovalIcon from "@/assets/svg/approvalIcon";
+import dashboardIcon from "@/assets/svg/dashboardIcon";
+import FileIcon from "@/assets/svg/fileIcon";
+import FolderIcon from "@/assets/svg/folderIcon";
+import ListIcon from "@/assets/svg/listIcon";
+import NotificationIcon from "@/assets/svg/notificationIcon";
+
 export const navData = [
   {
     id: 1,
-    label: "Dasbhoard",
-    slug: "dashboard",
+    icon: dashboardIcon,
+    label: "Dashboard",
+    slug: "",
   },
   {
     id: 2,
+    icon: FileIcon,
     label: "Data Entry",
     slug: "data-entry",
   },
   {
     id: 3,
-    label: "Regisration List",
+    icon: ListIcon,
+    label: "Registration List",
     slug: "registration-list",
   },
+
   {
     id: 4,
-    label: "Participants",
-    slug: "participants",
-  },
-  {
-    id: 5,
+    icon: NotificationIcon,
     label: "Notifications",
     slug: "notifications",
   },
   {
-    id: 6,
+    id: 5,
+    icon: ApprovalIcon,
     label: "Approvals",
     slug: "approvals",
   },
   {
-    id: 7,
+    id: 6,
+    icon: FolderIcon,
     label: "Projects",
     slug: "projects",
   },

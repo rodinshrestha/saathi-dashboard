@@ -10,7 +10,9 @@ const style = (theme: DefaultTheme) => css`
   &.h6,
   &.p,
   &.subtitle2,
-  &.subtitle1 {
+  &.subtitle1,
+  &.body1,
+  &.body2 {
     font-family: "ui-sans-serif, system-ui, sans-serif";
     margin-block-start: 0;
     margin-block-end: 0;
@@ -58,17 +60,18 @@ const style = (theme: DefaultTheme) => css`
   }
 
   &.subtitle1 {
-    font-size: 16px;
-    line-height: 32px;
-    letter-spacing: 1px;
+    font-size: 14px;
   }
 
   &.subtitle2 {
+    font-size: 12px;
+  }
+
+  &.body1 {
+    font-size: 16px;
+  }
+  &.body2 {
     font-size: 14px;
-    line-height: 24px;
-    strong {
-      font-weight: 500;
-    }
   }
 `;
 
