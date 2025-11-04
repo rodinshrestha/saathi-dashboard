@@ -14,13 +14,13 @@ export default function BaseLayout({ children }: Props) {
       <Navbar />
       <main className="dashboard-main">
         <Header />
-        <Container>
-          <Row>
-            <Col>
-              <div className="dashboard-body">{children}</div>
-            </Col>
-          </Row>
-        </Container>
+        <div className="dashboard-body">
+          <Container>
+            <Row>
+              <Col>{children}</Col>
+            </Row>
+          </Container>
+        </div>
       </main>
     </div>
   );

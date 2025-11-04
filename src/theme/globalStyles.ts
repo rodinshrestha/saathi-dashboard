@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
  .container {
-    max-width: 1600px; /* optional: adjust for your breakpoint */
+    /* max-width: 1600px; optional: adjust for your breakpoint */
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem;
@@ -74,6 +74,8 @@ export const GlobalStyle = createGlobalStyle`
     .dashboard-body{
       height: 100%;
       width: 100%;
+      background-color: ${({ theme }) => theme.color.backgroundColor.highContrast};
+      padding-top: 20px;
     }
   }
 }

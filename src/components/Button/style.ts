@@ -39,7 +39,7 @@ const defaultBtnStyle = (theme: DefaultTheme) => css`
   }
 
   &.md {
-    min-width: 290px;
+    min-width: 200px;
   }
   &.full-width {
     width: 100%;

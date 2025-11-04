@@ -60,18 +60,23 @@ const style = (theme: DefaultTheme) => css`
   }
 
   &.subtitle1 {
-    font-size: 14px;
+    font-size: 16px;
+    color: ${({ theme }) => theme.color.textColor.highContrast};
   }
 
   &.subtitle2 {
-    font-size: 12px;
+    font-size: 14px;
+    color: ${({ theme }) => theme.color.textColor.lowContrast};
   }
 
   &.body1 {
-    font-size: 16px;
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: medium;
   }
   &.body2 {
-    font-size: 14px;
+    font-size: 16px;
+    color: ${({ theme }) => theme.color.textColor.lowContrast};
   }
 `;
 

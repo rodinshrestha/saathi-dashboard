@@ -2,6 +2,7 @@
 import React from "react";
 
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
 
 import Button from "@/components/Button";
 import ImageWithFallback from "@/components/ImageWithFallback";
@@ -17,6 +18,7 @@ const LoginModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { errorToast } = useToaster();
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +32,7 @@ const LoginModule = () => {
         .post("/login", { ...values })
         .then((res) => {
           console.log(res);
+          router.push("/dashboard");
         })
         .catch(() => {
           errorToast("Failed");
