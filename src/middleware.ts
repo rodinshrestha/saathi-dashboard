@@ -39,5 +39,5 @@ export function middleware(request: NextRequest) {
 
 // Optional: only run middleware on "/" and "/dashboard/***" routes
 export const config = {
-  matcher: ["/", "/dashboard/:path*", "/:path*"],
+  matcher: ["/((?!api|_next/static|favicon.ico).*)"],
 };
