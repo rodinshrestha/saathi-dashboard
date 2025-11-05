@@ -9,7 +9,7 @@ import { getApiResponseErrorObj } from "./get-api-response-error";
  * shows in the toast
  */
 export const getApiResponseErrorToast = (err: ApiErrorResponseType) => {
-  const { message = "" } = err?.response?.data || {};
+  const { message = "Something went wrong" } = err?.response?.data || {};
 
   const errorObj = getApiResponseErrorObj(err);
 

@@ -12,3 +12,11 @@ export type DistrictListType = {
   created_at: string;
   updated_at: string;
 };
+
+export type ProgramListType = {
+  id: number;
+  name: string;
+  code: string;
+  description: string;
+  is_active: boolean;
+};
