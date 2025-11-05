@@ -18,7 +18,7 @@ import { setFormikResponseError } from "@/utils/set-formik-response-error";
 import { convertDistrictList } from "../../utils/convert-district-list";
 import { convertProvinceList } from "../../utils/convert-province-list";
 
-import { districtsByProvince, programOption } from "./data";
+import { programOption } from "./data";
 import { projectSchema } from "./project.schema";
 import { StyledDiv } from "./style";
 
