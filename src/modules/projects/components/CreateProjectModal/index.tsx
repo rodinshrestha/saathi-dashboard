@@ -72,11 +72,6 @@ const CreateProjectModal = ({
         });
     },
   });
-  const districtOptions = React.useMemo(() => {
-    if (!formik.values.province_id) return [];
-
-    return districtsByProvince[formik.values.province_id];
-  }, [formik.values.province_id]);
 
   // Fetch Province list
   React.useEffect(() => {
