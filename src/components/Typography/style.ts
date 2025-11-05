@@ -57,6 +57,13 @@ const style = (theme: DefaultTheme) => css`
 
   &.p {
     font-size: 14px;
+
+    &.input-error {
+      font-size: 12px;
+      color: red;
+      margin-top: 5px;
+      margin-left: 5px;
+    }
   }
 
   &.subtitle1 {

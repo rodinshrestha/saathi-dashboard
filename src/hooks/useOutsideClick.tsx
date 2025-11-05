@@ -8,8 +8,7 @@ interface Opt {
 
 const useOutsideClick = (ref: Ref, cb: Cb, opt?: Opt) => {
   React.useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const listener = (e: any) => {
+    const listener = (e: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(e.target as Node)) {
         return;
       }

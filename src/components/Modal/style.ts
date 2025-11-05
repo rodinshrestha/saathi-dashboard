@@ -17,7 +17,7 @@ export const StyledDiv = styled.div`
       transform: translate(-50%, -50%);
       width: 600px;
       background-color: ${({ theme }) =>
-        theme.color.backgroundColor.highContrast};
+        theme.color.backgroundColor.lowContrast};
       box-shadow: ${({ theme }) => theme.color.boxShadow};
       min-height: 400px;
       border-radius: 8px;

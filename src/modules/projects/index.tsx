@@ -4,13 +4,14 @@ import React from "react";
 import { Plus } from "lucide-react";
 
 import Button from "@/components/Button";
-import Modal from "@/components/Modal";
 import Typography from "@/components/Typography";
 
+import CreateProjectModal from "./components/CreateProjectModal";
 import { StyledDiv } from "./style";
 
 const ProjectModule = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
+
   return (
     <StyledDiv>
       <div className="section-wrapper">
@@ -30,14 +31,10 @@ const ProjectModule = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-        headerTitle="Create New Project"
-        headerSubTitle="Enter the project details below"
-      >
-        Test
-      </Modal>
+      <CreateProjectModal
+        isCreateModalOpen={isCreateModalOpen}
+        setIsCreateModalOpen={setIsCreateModalOpen}
+      />
     </StyledDiv>
   );
 };

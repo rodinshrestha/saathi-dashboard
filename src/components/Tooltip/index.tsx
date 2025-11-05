@@ -1,5 +1,4 @@
-import React from "react";
-
+"use client";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import Portal from "../Portal";

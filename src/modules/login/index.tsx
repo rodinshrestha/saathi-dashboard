@@ -8,8 +8,10 @@ import Button from "@/components/Button";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import InputField from "@/components/InputField";
 import Typography from "@/components/Typography";
+import { ACCESS_TOKEN } from "@/constant/token.constant";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
+import { setCookie } from "@/utils/cookie";
 
 import { loginSchema } from "./login.schema";
 import { StyledDiv } from "./style";
@@ -31,7 +33,13 @@ const LoginModule = () => {
       authAxios
         .post("/login", { ...values })
         .then((res) => {
-          console.log(res);
+          const { token = "" } = res?.data || {};
+          if (!token) {
+            errorToast("Token is empty. Check API");
+            return;
+          }
+
+          setCookie(ACCESS_TOKEN, token);
           router.push("/dashboard");
         })
         .catch(() => {

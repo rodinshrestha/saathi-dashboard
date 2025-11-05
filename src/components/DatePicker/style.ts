@@ -1,21 +1,18 @@
-"use client";
-
 import styled from "styled-components";
 
-export const InputContainer = styled.div`
-  display: flex;
-  gap: 5px;
-  flex-direction: column;
-
-  .input-label {
+export const StyledDiv = styled.div`
+  width: 100%;
+  .date-picker-label {
+    margin-bottom: 8px;
     font-size: 14px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
+    display: block;
   }
 
-  .input-wrapper {
+  .react-datepicker-wrapper {
     width: 100%;
-    position: relative;
-    input {
+
+    .date-picker {
       box-sizing: border-box;
       border-radius: 8px;
       background-color: ${({ theme }) =>
@@ -29,13 +26,10 @@ export const InputContainer = styled.div`
         border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
         outline: ${({ theme }) => theme.color.outlineColor.highContrast};
       }
-    }
-    .password-toggle-icon {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
 `;
