@@ -51,7 +51,7 @@ const CreateProjectModal = ({
   const formik = useFormik({
     initialValues: {
       program_id: "",
-      program_title: "",
+      project_title: "",
       event_title: "",
       province_id: "",
       district_id: "",
@@ -61,9 +61,16 @@ const CreateProjectModal = ({
     validationSchema: projectSchema,
     onSubmit: () => {
       setIsLoading(true);
-      console.log(formik.values);
+      const { district_id, program_id, province_id, ...rest } = formik.values;
+      const body = {
+        district_id: Number(district_id),
+        program_id: Number(program_id),
+        province_id: Number(province_id),
+        ...rest,
+      };
+
       authAxios
-        .post("/create/project", { ...formik.values })
+        .post("/create/project", body)
         .then((res) => {
           console.log(res);
           successToast("Project created successfully.");
@@ -71,6 +78,8 @@ const CreateProjectModal = ({
         .catch((err) => {
           const errorObj = getApiResponseErrorObj(err);
           setFormikResponseError(formik, errorObj);
+
+          console.log(err);
           getApiResponseErrorToast(err);
         })
         .finally(() => {
@@ -161,15 +170,15 @@ const CreateProjectModal = ({
         />
 
         <InputField
-          name="program_title"
-          value={formik.values.program_title}
+          name="project_title"
+          value={formik.values.project_title}
           onChange={formik.handleChange}
           label="Project title"
           type="text"
           placeholder="Enter project title"
           onBlur={formik.handleBlur}
-          error={formik.errors.program_title}
-          touched={formik.touched.program_title}
+          error={formik.errors.project_title}
+          touched={formik.touched.project_title}
         />
 
         <Select
