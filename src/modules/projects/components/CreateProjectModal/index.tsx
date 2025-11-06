@@ -2,6 +2,7 @@
 import React from "react";
 
 import { useFormik } from "formik";
+import { Plus, Trash } from "lucide-react";
 import { SingleValue } from "react-select";
 
 import Button from "@/components/Button";
@@ -9,10 +10,12 @@ import DatePicker from "@/components/DatePicker";
 import InputField from "@/components/InputField";
 import Modal from "@/components/Modal";
 import { Option, Select } from "@/components/Select";
+import Typography from "@/components/Typography";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorObj } from "@/utils/get-api-response-error";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 import { setFormikResponseError } from "@/utils/set-formik-response-error";
 
 import { getProgram } from "../../http/get-program";
@@ -57,15 +60,25 @@ const CreateProjectModal = ({
       district_id: "",
       start_date: null as Date | null,
       end_date: null,
+      funders: [{ name: "" }],
     },
     validationSchema: projectSchema,
     onSubmit: () => {
       setIsLoading(true);
-      const { district_id, program_id, province_id, ...rest } = formik.values;
+      const {
+        district_id,
+        program_id,
+        province_id,
+        start_date,
+        end_date,
+        ...rest
+      } = formik.values;
       const body = {
         district_id: Number(district_id),
         program_id: Number(program_id),
         province_id: Number(province_id),
+        start_date: getConvertedDate(start_date),
+        end_date: getConvertedDate(end_date),
         ...rest,
       };
 
@@ -90,17 +103,17 @@ const CreateProjectModal = ({
 
   // Fetch Province list
   React.useEffect(() => {
-    if (!isCreateModalOpen) return;
     setLoader(true);
 
     Promise.all([getProvince(), getProgram()])
       .then((res) => {
+        console.log(res, "@@@@");
         const [provinceRes, programRes] = res || [];
 
         setProvinceList(convertProvinceList(provinceRes?.data || []));
         console.log(convertProgramList(programRes?.data?.data || []));
 
-        setProgramList(convertProgramList(programRes?.data?.data || []));
+        setProgramList(convertProgramList(programRes?.data || []));
       })
       .catch((err) => {
         getApiResponseErrorToast(err);
@@ -108,7 +121,7 @@ const CreateProjectModal = ({
       .finally(() => {
         setLoader(false);
       });
-  }, [isCreateModalOpen]);
+  }, []);
 
   const handleProvinceChange = (item: SingleValue<Option>) => {
     const { value = "" } = item || {};
@@ -135,6 +148,18 @@ const CreateProjectModal = ({
       });
   };
 
+  const handleAddFunder = () => {
+    formik.setFieldValue("funders", [...formik.values.funders, { name: "" }]);
+  };
+
+  const handleRemoveFunder = (index: number) => {
+    const updated = [...formik.values.funders];
+    updated.splice(index, 1);
+    formik.setFieldValue("funders", updated);
+  };
+
+  console.log(formik);
+
   return (
     <Modal
       isOpen={isCreateModalOpen}
@@ -155,18 +180,7 @@ const CreateProjectModal = ({
           touched={formik.touched.program_id}
           disabled={loader}
           isLoading={loader}
-        />
-
-        <InputField
-          name="event_title"
-          value={formik.values.event_title}
-          onChange={formik.handleChange}
-          label="Event title"
-          type="text"
-          placeholder="Enter event title"
-          onBlur={formik.handleBlur}
-          error={formik.errors.event_title}
-          touched={formik.touched.event_title}
+          requiredField
         />
 
         <InputField
@@ -179,7 +193,23 @@ const CreateProjectModal = ({
           onBlur={formik.handleBlur}
           error={formik.errors.project_title}
           touched={formik.touched.project_title}
+          requiredField
         />
+
+        {formik.values.program_id && (
+          <InputField
+            name="event_title"
+            value={formik.values.event_title}
+            onChange={formik.handleChange}
+            label="Event title"
+            type="text"
+            placeholder="Enter event title"
+            onBlur={formik.handleBlur}
+            error={formik.errors.event_title}
+            touched={formik.touched.event_title}
+            requiredField
+          />
+        )}
 
         <Select
           name="province_id"
@@ -235,6 +265,45 @@ const CreateProjectModal = ({
             tooltipMsg="First select the start date"
             showToolttip={!formik.values.start_date}
           />
+        </div>
+
+        <div className="project-dynamic-input-field">
+          <div className="dynamic-input-label-wrapper">
+            <Typography as="p" className="input-form-label">
+              Funded By
+            </Typography>
+            <div className="dynamic-funder-btn-wrapper">
+              <Button variant="outline" onClick={handleAddFunder}>
+                <Plus size={14} />
+                Add Funder
+              </Button>
+            </div>
+          </div>
+          {formik.values.funders.map((funder, i) => {
+            return (
+              <div key={i} className="dynamic-input-field-wrapper">
+                <InputField
+                  name={`funders[${i}].name`}
+                  value={funder.name}
+                  onChange={formik.handleChange}
+                  type="text"
+                  placeholder="Enter funder name (eg, UNFPA, UNICEF)"
+                  onBlur={formik.handleBlur}
+                  className="input-dynamic-field"
+                  // error={formik.errors.funders}
+                  // touched={formik.touched.project_title}
+                />
+                {formik.values.funders.length > 1 && (
+                  <div
+                    className="dynamic-input-remove-icon-wrapper"
+                    onClick={() => handleRemoveFunder(i)}
+                  >
+                    <Trash size={16} color="#D4183D" />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="project-modal-btn-wrapper">

@@ -15,16 +15,19 @@ export const StyledDiv = styled.div`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 600px;
+      width: 32rem;
+      max-height: 80vh;
+      overflow-y: auto;
       background-color: ${({ theme }) =>
         theme.color.backgroundColor.lowContrast};
       box-shadow: ${({ theme }) => theme.color.boxShadow};
-      min-height: 400px;
+      min-height: 150px;
       border-radius: 8px;
       z-index: 5;
 
       .modal-content {
         padding: 24px;
+        padding-bottom: 10px;
 
         .modal-header {
           display: flex;

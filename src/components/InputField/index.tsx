@@ -3,6 +3,7 @@ import React from "react";
 import clsx from "clsx";
 import { Eye, EyeClosed } from "lucide-react";
 
+import Tooltip from "../Tooltip";
 import Typography from "../Typography";
 
 import { InputContainer } from "./style";
@@ -11,6 +12,7 @@ type InputProps = {
   label?: string;
   error?: string;
   touched?: boolean;
+  requiredField?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputField = ({
@@ -19,18 +21,29 @@ const InputField = ({
   touched,
   autoComplete,
   type,
+  requiredField,
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const inputId = React.useId();
+  const requiredLabelId = React.useId();
 
   const isError = !!error && touched;
 
   return (
-    <InputContainer className={clsx({ error: !!error })}>
+    <InputContainer className={clsx({ error: !!error }, "input-field-wrapper")}>
       {label && (
         <label htmlFor={inputId} className="input-label">
           {label}
+          {requiredField && (
+            <span
+              data-tooltip-id={requiredLabelId}
+              className="label-required-indicator"
+            >
+              *
+            </span>
+          )}
+          <Tooltip id={requiredLabelId} content="Required field" />
         </label>
       )}
       <div className="input-wrapper">

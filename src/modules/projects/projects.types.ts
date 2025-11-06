@@ -20,3 +20,15 @@ export type ProgramListType = {
   description: string;
   is_active: boolean;
 };
+
+export type ProjectListType = {
+  project_id: number;
+  program_id: string;
+  province_id: string;
+  district_id: string;
+  project_title: string;
+  event_title: string;
+  funders?: Array<{ name: string }>;
+  start_date: string;
+  end_date: string;
+};

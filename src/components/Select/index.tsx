@@ -6,6 +6,7 @@ import { default as ReactSelect, SingleValue, MultiValue } from "react-select";
 import Tooltip from "../Tooltip";
 import Typography from "../Typography";
 
+import CustomLoadingIndicator from "./CustomLoadingIndicator";
 import { StyledDiv } from "./style";
 
 export type Option = {
@@ -30,6 +31,7 @@ interface MySelectProps<TMulti extends boolean> {
   tooltipMsg?: string;
   disabled?: boolean;
   isLoading?: boolean;
+  requiredField?: boolean;
 }
 
 export function Select<TMulti extends boolean = false>({
@@ -47,8 +49,10 @@ export function Select<TMulti extends boolean = false>({
   disabled = false,
   tooltipMsg,
   isLoading,
+  requiredField,
 }: MySelectProps<TMulti>) {
   const selectId = React.useId();
+  const requiredLabelId = React.useId();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const selectedValue: any = Array.isArray(options)
@@ -61,9 +65,18 @@ export function Select<TMulti extends boolean = false>({
     <StyledDiv data-tooltip-id={selectId}>
       {label && (
         <label htmlFor={selectId} className="react-select-label">
-          {label}
+          {label}{" "}
+          {requiredField && (
+            <span
+              data-tooltip-id={requiredLabelId}
+              className="label-required-indicator"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
+      <Tooltip content="Required Field" id={requiredLabelId} />
       <ReactSelect<Option, TMulti>
         name={name}
         inputId={selectId}
@@ -77,6 +90,7 @@ export function Select<TMulti extends boolean = false>({
         onBlur={onBlur}
         isDisabled={disabled}
         isLoading={isLoading}
+        components={{ LoadingIndicator: CustomLoadingIndicator }}
       />
       {tooltipMsg && showTooltip && (
         <Tooltip id={selectId} content={tooltipMsg} />

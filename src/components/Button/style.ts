@@ -28,6 +28,8 @@ const defaultBtnStyle = (theme: DefaultTheme) => css`
 
   &.outline {
     border: 1px solid ${theme.color.borderColor.highContrast};
+    color: ${({ theme }) => theme.color.textColor.highContrast};
+    letter-spacing: 0;
 
     &:hover {
       background-color: ${theme.color.backgroundColor.highContrast};

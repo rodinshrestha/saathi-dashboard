@@ -56,6 +56,7 @@ export const color = {
   },
   orange: {
     100: "#FF6B35",
+    200: "#d4183de6",
   },
   yellow: {
     100: "#FFD93D",
@@ -65,5 +66,13 @@ export const color = {
   },
   grey: {
     100: "#A0AEC0",
+    200: "#e9ebef",
+  },
+  red: {
+    100: "#D4183D",
+  },
+  black: {
+    100: "#0A0A0A",
+    200: "#000",
   },
 };

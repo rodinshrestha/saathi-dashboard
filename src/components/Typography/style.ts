@@ -64,6 +64,15 @@ const style = (theme: DefaultTheme) => css`
       margin-top: 5px;
       margin-left: 5px;
     }
+
+    &.input-form-label {
+      font-size: 14px;
+      color: ${({ theme }) => theme.color.textColor.highContrast};
+    }
+    &.table-title {
+      font-size: 16px;
+      color: ${({ theme }) => theme.color.textColor.highContrast};
+    }
   }
 
   &.subtitle1 {
