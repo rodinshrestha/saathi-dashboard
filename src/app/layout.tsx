@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
 import StyledComponentsRegistry from "@/lib/registry";
 import StyledProviders from "@/providers/StyledProviders";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Sathi Dashboard",
@@ -27,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={` antialiased`}>
         <StyledComponentsRegistry>
           <StyledProviders>
             <ToastContainer theme="colored" />

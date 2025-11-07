@@ -8,6 +8,12 @@ export const StyledDiv = styled.div`
     align-items: center;
     margin-bottom: 24px;
 
+    .section-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
     .section-btn-wrapper {
       .section-btn {
         display: flex;

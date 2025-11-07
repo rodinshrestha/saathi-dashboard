@@ -10,7 +10,7 @@ export const InputContainer = styled.div`
   .input-label {
     font-size: 14px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
-
+    font-weight: 500;
     .label-required-indicator {
       cursor: pointer;
       margin-left: 3px;

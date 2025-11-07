@@ -1,7 +1,7 @@
-import React from "react";
+import ApprovalsModule from "@/modules/approvals";
 
 const Approvals = () => {
-  return <div>Approvals</div>;
+  return <ApprovalsModule />;
 };
 
 export default Approvals;

@@ -59,7 +59,9 @@ const Modal = ({
           <div className="modal-content">
             <div className="modal-header">
               {headerTitle && (
-                <Typography as="subtitle1">{headerTitle}</Typography>
+                <Typography as="subtitle1" className="modal-title">
+                  {headerTitle}
+                </Typography>
               )}
               {headerSubTitle && (
                 <Typography as="subtitle2">{headerSubTitle}</Typography>

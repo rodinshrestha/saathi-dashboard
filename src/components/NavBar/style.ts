@@ -23,8 +23,7 @@ export const StyledNavBar = styled.nav`
     }
 
     &.expanded {
-      width: 256px;
-      min-width: 256px;
+      width: 248.5px;
 
       .nav-item-label {
         display: unset;
@@ -34,7 +33,6 @@ export const StyledNavBar = styled.nav`
 
     .navbar-expand-icon-wrapper {
       position: absolute;
-      /* border: 1px solid black; */
       border-radius: 50%;
       height: 26px;
       width: 26px;

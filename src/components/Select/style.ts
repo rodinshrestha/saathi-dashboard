@@ -7,6 +7,7 @@ export const StyledDiv = styled.div`
     font-size: 14px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
     display: block;
+    font-weight: 500;
 
     .label-required-indicator {
       cursor: pointer;

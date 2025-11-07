@@ -8,10 +8,17 @@ export const StyledDiv = styled.div`
   padding: 24px;
   background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
 
+  table,
+  th,
+  td {
+    font-family: ${({ theme }) => theme.fonts.sans} !important;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 24px;
+    font-family: ${({ theme }) => theme.fonts.sans} !important;
 
     tr {
       border-bottom: 1px solid
@@ -31,6 +38,7 @@ export const StyledDiv = styled.div`
       padding: 0 8px;
       width: 190px;
       text-transform: capitalize;
+      font-size: 14px;
 
       .table-action-wrapper {
         display: flex;

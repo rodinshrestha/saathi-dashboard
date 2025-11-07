@@ -6,7 +6,6 @@ const defaultBtnStyle = (theme: DefaultTheme) => css`
   outline: none;
   text-align: center;
   transition: all 0.2s ease-in-out;
-  letter-spacing: 1px;
   border-radius: 8px;
   color: ${theme.color.white["100"]};
   background-color: transparent;
@@ -16,6 +15,8 @@ const defaultBtnStyle = (theme: DefaultTheme) => css`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: inherit;
+  font-weight: 500;
 
   &.contained {
     background-color: ${theme.color.blue["100"]};
@@ -41,7 +42,7 @@ const defaultBtnStyle = (theme: DefaultTheme) => css`
   }
 
   &.md {
-    min-width: 200px;
+    min-width: 183px;
   }
   &.full-width {
     width: 100%;

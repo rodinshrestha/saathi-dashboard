@@ -13,7 +13,7 @@ const style = (theme: DefaultTheme) => css`
   &.subtitle1,
   &.body1,
   &.body2 {
-    font-family: "ui-sans-serif, system-ui, sans-serif";
+    font-family: ${theme.fonts.sans};
     margin-block-start: 0;
     margin-block-end: 0;
     color: ${theme.color.textColor.highContrast};
@@ -67,6 +67,7 @@ const style = (theme: DefaultTheme) => css`
 
     &.input-form-label {
       font-size: 14px;
+      font-weight: 500;
       color: ${({ theme }) => theme.color.textColor.highContrast};
     }
     &.table-title {
@@ -78,6 +79,11 @@ const style = (theme: DefaultTheme) => css`
   &.subtitle1 {
     font-size: 16px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
+
+    &.modal-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
 
   &.subtitle2 {
@@ -88,7 +94,7 @@ const style = (theme: DefaultTheme) => css`
   &.body1 {
     font-size: 24px;
     line-height: 36px;
-    font-weight: medium;
+    font-weight: 500;
   }
   &.body2 {
     font-size: 16px;
