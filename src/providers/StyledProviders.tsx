@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 
 import { GlobalStyle } from "@/theme/globalStyles";
 import { createTheme } from "@/theme/theme";
+import { isDarkMode } from "@/utils/get-mode";
 
 type ThemeContextType = {
   toggleTheme: () => void;
@@ -26,7 +27,7 @@ type Props = {
 export default function StyledProviders({ children }: Props) {
   const [isDark, setIsDark] = React.useState(
     // window.matchMedia("(prefers-color-scheme: dark)").matches
-    localStorage.getItem("mode") === "dark" || false
+    isDarkMode() || false
   );
 
   const toggleTheme = () => setIsDark((prev) => !prev);
