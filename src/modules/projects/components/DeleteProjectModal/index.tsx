@@ -17,15 +17,20 @@ import { StyledDiv } from "./style";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  data: ProjectDataType;
+  data: ProjectDataType | null;
 };
 
 const DeleteProjectModal = ({ isOpen, onClose, data }: Props) => {
   const [loader, setLoader] = React.useState(false);
   const { fetchProjectData } = useFetchProjectData();
-  const { successToast } = useToaster();
+  const { successToast, errorToast } = useToaster();
 
-  const handleOnDelete = async (id: number) => {
+  const handleOnDelete = async (id: number | undefined) => {
+    if (!id) {
+      errorToast("id cannot be null");
+      return;
+    }
+
     setLoader(true);
     authAxios
       .delete(`/projects/${id}`)
@@ -61,7 +66,7 @@ const DeleteProjectModal = ({ isOpen, onClose, data }: Props) => {
           </Button>
           <Button
             className="project-delete-btn"
-            onClick={() => handleOnDelete(data.id)}
+            onClick={() => handleOnDelete(data?.id)}
             disabled={loader}
             loading={loader}
           >

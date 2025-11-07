@@ -95,7 +95,9 @@ const ProjectFormModal = ({
         .then(() => {
           fetchProjectData()
             .then(() => {
-              successToast("Project created successfully.");
+              successToast(
+                `Project ${isEdit ? "updated" : "created"} successfully.`
+              );
               setIsLoading(false);
               onClose();
             })
@@ -145,6 +147,7 @@ const ProjectFormModal = ({
       onClose={onClose}
       headerTitle="Create New Project"
       headerSubTitle="Enter the project details below"
+      disableClose={isLoading}
     >
       <StyledDiv>
         <Select

@@ -4,17 +4,22 @@ import React from "react";
 import { SquarePen, Trash } from "lucide-react";
 
 import { ProjectDataType } from "../../projects.types";
-import DeleteProjectModal from "../DeleteProjectModal";
-import ProjectFormModal from "../ProjectFormModal";
 
 type Props = {
+  setSelectedValue: React.Dispatch<
+    React.SetStateAction<ProjectDataType | null>
+  >;
+  setIsDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   value: ProjectDataType;
 };
 
-const ProjectTableAction = ({ value }: Props) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
-
+const ProjectTableAction = ({
+  setSelectedValue,
+  value,
+  setIsDeleteModalOpen,
+  setIsEditModalOpen,
+}: Props) => {
   return (
     <>
       <div className="table-action-wrapper">
@@ -22,30 +27,21 @@ const ProjectTableAction = ({ value }: Props) => {
           className="table-action-icon"
           onClick={() => {
             setIsEditModalOpen(true);
+            setSelectedValue(value);
           }}
         >
           <SquarePen size={16} />{" "}
         </div>
         <div
           className="table-action-icon"
-          onClick={() => setIsDeleteModalOpen(true)}
+          onClick={() => {
+            setIsDeleteModalOpen(true);
+            setSelectedValue(value);
+          }}
         >
           <Trash size={16} color="#D4183D" />
         </div>
       </div>
-
-      <DeleteProjectModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        data={value}
-      />
-
-      <ProjectFormModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        selectedValue={value}
-        isEdit
-      />
     </>
   );
 };
