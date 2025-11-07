@@ -29,6 +29,7 @@ export const StyledDiv = styled.div`
     td {
       height: 40px;
       padding: 0 8px;
+      width: 190px;
 
       .table-action-wrapper {
         display: flex;

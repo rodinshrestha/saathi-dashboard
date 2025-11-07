@@ -18,49 +18,48 @@ import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { setFormikResponseError } from "@/utils/set-formik-response-error";
 
-import { getProgram } from "../../http/get-program";
-import { getProvince } from "../../http/get-province";
+import { createProject, updateProject } from "../../http/get-project";
+import { ProjectListType } from "../../projects.types";
+import { useProjectFormDataStore } from "../../store/useProjectFormDataStore";
 import { convertDistrictList } from "../../utils/convert-district-list";
-import { convertProgramList } from "../../utils/convert-program-list";
-import { convertProvinceList } from "../../utils/convert-province-list";
 
 import { projectSchema } from "./project.schema";
 import { StyledDiv } from "./style";
 
 type Props = {
-  isCreateModalOpen: boolean;
-  setIsCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  onClose: () => void;
+  selectedValue: ProjectListType | null;
+  isEdit?: boolean;
 };
 
-const CreateProjectModal = ({
-  isCreateModalOpen,
-  setIsCreateModalOpen,
+const ProjectFormModal = ({
+  isOpen,
+  onClose,
+  selectedValue = null,
+  isEdit,
 }: Props) => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [loader, setLoader] = React.useState(false);
   const [districtLoader, setDistrictLoader] = React.useState(false);
-  const [provinceList, setProvinceList] = React.useState<
-    Array<{ label: string; value: string }>
-  >([]);
-  const [programList, setProgramList] = React.useState<
-    Array<{ label: string; value: string }>
-  >([]);
   const [districtList, setDistrictList] = React.useState<
     Array<{ label: string; value: string }>
   >([]);
 
   const { successToast, errorToast } = useToaster();
+  const { loader, programList, provinceList } = useProjectFormDataStore();
 
   const formik = useFormik({
     initialValues: {
-      program_id: "",
-      project_title: "",
-      event_title: "",
-      province_id: "",
-      district_id: "",
-      start_date: null as Date | null,
-      end_date: null,
-      funders: [{ name: "" }],
+      program_id: selectedValue?.program_id || "",
+      project_title: selectedValue?.project_title || "",
+      event_title: selectedValue?.event_title || "",
+      province_id: selectedValue?.province_id || "",
+      district_id: selectedValue?.district_id || "",
+      start_date: selectedValue?.start_date || (null as Date | null),
+      end_date: selectedValue?.end_date || null,
+      funders: selectedValue?.funders?.length
+        ? selectedValue.funders
+        : [{ name: "" }],
     },
     validationSchema: projectSchema,
     onSubmit: () => {
@@ -82,8 +81,9 @@ const CreateProjectModal = ({
         ...rest,
       };
 
-      authAxios
-        .post("/create/project", body)
+      const httpRequest = isEdit ? updateProject(body) : createProject(body);
+
+      httpRequest
         .then((res) => {
           console.log(res);
           successToast("Project created successfully.");
@@ -100,28 +100,6 @@ const CreateProjectModal = ({
         });
     },
   });
-
-  // Fetch Province list
-  React.useEffect(() => {
-    setLoader(true);
-
-    Promise.all([getProvince(), getProgram()])
-      .then((res) => {
-        console.log(res, "@@@@");
-        const [provinceRes, programRes] = res || [];
-
-        setProvinceList(convertProvinceList(provinceRes?.data || []));
-        console.log(convertProgramList(programRes?.data?.data || []));
-
-        setProgramList(convertProgramList(programRes?.data || []));
-      })
-      .catch((err) => {
-        getApiResponseErrorToast(err);
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, []);
 
   const handleProvinceChange = (item: SingleValue<Option>) => {
     const { value = "" } = item || {};
@@ -162,8 +140,8 @@ const CreateProjectModal = ({
 
   return (
     <Modal
-      isOpen={isCreateModalOpen}
-      onClose={() => setIsCreateModalOpen(false)}
+      isOpen={isOpen}
+      onClose={onClose}
       headerTitle="Create New Project"
       headerSubTitle="Enter the project details below"
     >
@@ -310,7 +288,7 @@ const CreateProjectModal = ({
           <Button
             variant="outline"
             className="project-modal-cancel-btn"
-            onClick={() => setIsCreateModalOpen(false)}
+            onClick={onClose}
           >
             Cancel
           </Button>
@@ -319,7 +297,7 @@ const CreateProjectModal = ({
             disabled={!formik.isValid || isLoading}
             loading={isLoading}
           >
-            Create Project
+            {isEdit ? "update Project" : "Create Project"}
           </Button>
         </div>
       </StyledDiv>
@@ -327,4 +305,4 @@ const CreateProjectModal = ({
   );
 };
 
-export default CreateProjectModal;
+export default ProjectFormModal;

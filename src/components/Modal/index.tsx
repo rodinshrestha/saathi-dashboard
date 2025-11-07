@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { X } from "lucide-react";
@@ -16,6 +17,7 @@ type Props = {
   children: React.ReactNode;
   headerTitle?: string;
   headerSubTitle?: string;
+  disableClose?: boolean;
 };
 
 const Modal = ({
@@ -24,16 +26,21 @@ const Modal = ({
   children,
   headerTitle,
   headerSubTitle,
+  disableClose,
 }: Props) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
 
-  useOutsideClick(ref as React.RefObject<HTMLDivElement>, onClose);
+  const handleClose = () => {
+    if (disableClose) return;
+    onClose();
+  };
 
-  useEscapeKey(onClose);
+  useOutsideClick(ref as React.RefObject<HTMLDivElement>, handleClose);
+
+  useEscapeKey(handleClose);
 
   React.useEffect(() => {
     if (!isOpen) {
-      document.body.classList.remove("modal-open");
       return;
     }
 
@@ -58,7 +65,7 @@ const Modal = ({
                 <Typography as="subtitle2">{headerSubTitle}</Typography>
               )}
 
-              <div className="modal-close-icon" onClick={onClose}>
+              <div className="modal-close-icon" onClick={handleClose}>
                 <X size={16} />
               </div>
             </div>

@@ -1,16 +1,18 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { SquarePen, Trash } from "lucide-react";
 
+import ProjectTableAction from "./components/ProjectTableAction";
 import { ProjectListType } from "./projects.types";
 
 type Props = {
-  setIsDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedData: React.Dispatch<React.SetStateAction<ProjectListType | null>>;
+  setSelectedValue: React.Dispatch<
+    React.SetStateAction<ProjectListType | null>
+  >;
+  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const ProjectTableColumn = ({
-  setIsDeleteModalOpen,
-  setSelectedData,
+  setSelectedValue,
+  setIsEditModalOpen,
 }: Props): ColumnDef<ProjectListType>[] => {
   return [
     {
@@ -41,28 +43,17 @@ export const ProjectTableColumn = ({
       accessorKey: "end_date",
       header: "End Date",
     },
+
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => {
-        const user = row.original;
-        return (
-          <div className="table-action-wrapper">
-            <div className="table-action-icon">
-              <SquarePen size={16} />
-            </div>
-            <div
-              className="table-action-icon"
-              onClick={() => {
-                setIsDeleteModalOpen(true);
-                setSelectedData(user);
-              }}
-            >
-              <Trash size={16} color="#D4183D" />
-            </div>
-          </div>
-        );
-      },
+      cell: ({ row }) => (
+        <ProjectTableAction
+          value={row.original}
+          setSelectedValue={setSelectedValue}
+          setIsEditModalOpen={setIsEditModalOpen}
+        />
+      ),
     },
   ];
 };

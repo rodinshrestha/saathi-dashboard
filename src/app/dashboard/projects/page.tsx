@@ -1,8 +1,6 @@
-import React from "react";
-
 import ProjectModule from "@/modules/projects";
 
-const Projects = () => {
+const Projects = async () => {
   return <ProjectModule />;
 };
 
