@@ -30,6 +30,7 @@ export const StyledDiv = styled.div`
       height: 40px;
       padding: 0 8px;
       width: 190px;
+      text-transform: capitalize;
 
       .table-action-wrapper {
         display: flex;
@@ -51,6 +52,7 @@ export const StyledDiv = styled.div`
 
 export const TableHeader = styled.th<{ isSorted?: string }>`
   padding: 12px;
+  padding-left: 8px;
   text-align: left;
   background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
   border-bottom: 1px solid #ddd;
