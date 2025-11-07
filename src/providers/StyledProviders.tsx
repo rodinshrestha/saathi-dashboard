@@ -26,7 +26,7 @@ type Props = {
 export default function StyledProviders({ children }: Props) {
   const [isDark, setIsDark] = React.useState(
     // window.matchMedia("(prefers-color-scheme: dark)").matches
-    false
+    localStorage.getItem("mode") === "dark" || false
   );
 
   const toggleTheme = () => setIsDark((prev) => !prev);

@@ -1,7 +1,7 @@
 export type ApiErrorResponseType = {
   response?: {
     data?: {
-      errors?: Record<string, string[]>;
+      data?: Record<string, string[]>;
       message: string;
     };
   };

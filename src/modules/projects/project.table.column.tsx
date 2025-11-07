@@ -30,11 +30,11 @@ export const ProjectTableColumn = ({
       header: "Program",
     },
     {
-      accessorFn: (row) => row.province.name,
+      accessorFn: (row) => row?.province?.name || "",
       header: "Province",
     },
     {
-      accessorFn: (row) => row.district.name,
+      accessorFn: (row) => row?.district?.name || "",
       header: "District",
     },
     {

@@ -77,13 +77,15 @@ const ProjectFormModal = ({
         ...rest
       } = formik.values;
       const body = {
-        district_id: Number(district_id),
+        district_id: Number(district_id) || null,
         program_id: Number(program_id),
-        province_id: Number(province_id),
+        province_id: Number(province_id) || null,
         start_date: getConvertedDate(start_date),
         end_date: getConvertedDate(end_date),
         ...rest,
       };
+
+      console.log(body);
 
       const { id } = selectedValue || {};
 

@@ -7,7 +7,7 @@ import { ApiErrorResponseType } from "@/types/api-error-response.types";
 export const getApiResponseErrorObj = (
   err: unknown
 ): Record<string, string> => {
-  const errors = (err as ApiErrorResponseType)?.response?.data?.errors || {};
+  const errors = (err as ApiErrorResponseType)?.response?.data?.data || {};
 
   if (!errors || Object.keys(errors).length === 0) {
     return {};

@@ -1,7 +1,6 @@
 export const getConvertedDate = (date: string | Date | null) => {
   if (!date) {
-    console.error("Date cannot be null");
-    return;
+    return "";
   }
 
   if (typeof date === "string") {
