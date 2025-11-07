@@ -4,9 +4,9 @@ import { IDLE } from "@/constant/loading.state";
 import { LoadingType } from "@/types/loading.types";
 
 import {
-  ProgramDataType,
   ProvinceDataType,
   ProjectDataResponseType,
+  ProgramDataType,
 } from "../projects.types";
 
 type SetFormDataTypes = {

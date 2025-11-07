@@ -11,6 +11,14 @@ export type ProvinceDataType = {
   districts: Array<ProvinceDistrictType>;
 };
 
+export type ProgramDataType = {
+  id: number;
+  name: string;
+  code: string;
+  description: string;
+  is_active: boolean;
+};
+
 export type ProjectDataType = {
   created_by: {
     id: number;
