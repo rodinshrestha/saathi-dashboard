@@ -24,6 +24,8 @@ export const StyledNavBar = styled.nav`
 
     &.expanded {
       width: 256px;
+      min-width: 256px;
+
       .nav-item-label {
         display: unset;
         white-space: nowrap;
