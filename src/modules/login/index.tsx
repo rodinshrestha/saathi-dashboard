@@ -34,7 +34,7 @@ const LoginModule = () => {
         .post("/login", { ...values })
         .then((res) => {
           console.log(res);
-          const { token = "" } = res?.data || {};
+          const { token = "" } = res?.data?.data || {};
           if (!token) {
             errorToast("Token is empty. Check API");
             return;
