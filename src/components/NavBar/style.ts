@@ -72,7 +72,7 @@ export const StyledNavBar = styled.nav`
           text-decoration: none;
           &:hover {
             background-color: ${({ theme }) =>
-              theme.color.backgroundColor.highContrast};
+              theme.color.hoverBgColor.highContrast};
           }
 
           &.active {

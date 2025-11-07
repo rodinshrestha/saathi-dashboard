@@ -1,8 +1,12 @@
-export const getConvertedDate = (date: Date | null) => {
+export const getConvertedDate = (date: string | Date | null) => {
   if (!date) {
     console.error("Date cannot be null");
     return;
   }
 
-  return date.toISOString().split("T")[0];
+  if (typeof date === "string") {
+    return date;
+  }
+
+  return (date as Date).toISOString().split("T")[0];
 };

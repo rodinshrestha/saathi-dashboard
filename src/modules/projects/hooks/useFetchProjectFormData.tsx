@@ -4,26 +4,21 @@ import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 
 import { getProgram } from "../http/get-program";
 import { getProvince } from "../http/get-province";
-import { useProjectFormDataStore } from "../store/useProjectFormDataStore";
-import { convertProgramList } from "../utils/convert-program-list";
-import { convertProvinceList } from "../utils/convert-province-list";
+import { useProjectStore } from "../store/useProjectStore";
 
 const useFetchProjectFormData = () => {
-  const { setterStore, setLoader, provinceList, programList, loader } =
-    useProjectFormDataStore();
+  const { setFormData, setLoader } = useProjectStore();
 
-  React.useEffect(() => {
+  const fetchFormData = React.useCallback(() => {
     setLoader(true);
     Promise.all([getProvince(), getProgram()])
       .then((res) => {
-        console.log(res, "@@@@");
         const [provinceRes, programRes] = res || [];
 
-        const provinceList = convertProvinceList(provinceRes?.data || []);
+        const provinceData = provinceRes?.data?.data || [];
+        const programData = programRes?.data?.data || [];
 
-        const programList = convertProgramList(programRes?.data || []);
-
-        setterStore({ provinceList, programList });
+        setFormData({ provinceData, programData });
       })
       .catch((err) => {
         getApiResponseErrorToast(err);
@@ -31,12 +26,10 @@ const useFetchProjectFormData = () => {
       .finally(() => {
         setLoader(false);
       });
-  }, [setterStore, setLoader]);
+  }, [setFormData, setLoader]);
 
   return {
-    loader,
-    provinceList,
-    programList,
+    fetchFormData,
   };
 };
 

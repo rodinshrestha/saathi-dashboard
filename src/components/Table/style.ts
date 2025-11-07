@@ -4,9 +4,11 @@ import styled from "styled-components";
 export const StyledDiv = styled.div`
   overflow-x: auto;
   border: 1px solid #ddd;
+  position: relative;
   border-radius: 8px;
   padding: 24px;
-  background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
+  background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
+  border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
 
   table,
   th,
@@ -39,6 +41,7 @@ export const StyledDiv = styled.div`
       width: 190px;
       text-transform: capitalize;
       font-size: 14px;
+      color: ${({ theme }) => theme.color.textColor.highContrast};
 
       .table-action-wrapper {
         display: flex;
@@ -56,13 +59,21 @@ export const StyledDiv = styled.div`
       }
     }
   }
+
+  .pagination-wrapper {
+    border: 1px solid black;
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+  }
 `;
 
 export const TableHeader = styled.th<{ isSorted?: string }>`
   padding: 12px;
   padding-left: 8px;
   text-align: left;
-  background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
+  background-color: inherit;
+  color: ${({ theme }) => theme.color.textColor.highContrast};
   border-bottom: 1px solid #ddd;
   font-size: 14px;
   font-weight: 500;

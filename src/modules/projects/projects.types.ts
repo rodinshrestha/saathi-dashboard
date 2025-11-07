@@ -1,34 +1,55 @@
-export type ProvinceListType = {
+import { MetaType } from "@/types/api-respone.types";
+
+export type ProvinceDistrictType = {
   id: number;
   name: string;
-  created_at: string;
-  updated_at: string;
 };
 
-export type DistrictListType = {
+export type ProvinceDataType = {
   id: number;
-  province_id: string;
   name: string;
-  created_at: string;
-  updated_at: string;
+  districts: Array<ProvinceDistrictType>;
 };
 
-export type ProgramListType = {
-  id: number;
-  name: string;
+export type ProgramDataType = {
   code: string;
   description: string;
+  id: number;
   is_active: boolean;
+  name: string;
 };
 
-export type ProjectListType = {
-  project_id: number;
-  program_id: string;
-  province_id: string;
-  district_id: string;
-  project_title: string;
-  event_title: string;
-  funders?: Array<{ name: string }>;
-  start_date: Date;
+export type ProjectDataType = {
+  created_by: {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+  };
+  district: {
+    id: number;
+    name: string;
+  };
+  program: {
+    id: number;
+    name: string;
+    code: string;
+    description: string;
+    is_active: boolean;
+  };
   end_date: Date;
+  event_title: string;
+  funders: Array<{ id: number; name: string }>;
+  id: number;
+  project_title: string;
+  province: { id: number; name: string };
+  start_date: Date;
+};
+
+export type ProjectDataResponseType = {
+  data: Array<ProjectDataType>;
+  meta: MetaType;
+  success: boolean;
+  message: string;
+  code: number;
 };

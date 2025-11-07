@@ -1,0 +1,24 @@
+import { Option } from "@/components/Select";
+
+import { ProvinceDataType } from "../projects.types";
+
+import { convertDistrictList } from "./convert-district-list";
+
+export const initializeDistrictList = (
+  provinceData: Array<ProvinceDataType>,
+  selectedProvinceId?: number
+): Array<Option> => {
+  if (!selectedProvinceId) {
+    return [];
+  }
+
+  if (!Array.isArray(provinceData) || !provinceData.length) {
+    return [];
+  }
+
+  const selectedDistrict =
+    provinceData.find((province) => province.id === selectedProvinceId)
+      ?.districts || [];
+
+  return convertDistrictList(selectedDistrict);
+};

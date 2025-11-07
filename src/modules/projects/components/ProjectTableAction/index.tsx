@@ -3,23 +3,18 @@ import React from "react";
 
 import { SquarePen, Trash } from "lucide-react";
 
-import { ProjectListType } from "../../projects.types";
+import { ProjectDataType } from "../../projects.types";
 import DeleteProjectModal from "../DeleteProjectModal";
+import ProjectFormModal from "../ProjectFormModal";
 
 type Props = {
-  value: ProjectListType;
-  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedValue: React.Dispatch<
-    React.SetStateAction<ProjectListType | null>
-  >;
+  value: ProjectDataType;
 };
 
-const ProjectTableAction = ({
-  value,
-  setIsEditModalOpen,
-  setSelectedValue,
-}: Props) => {
+const ProjectTableAction = ({ value }: Props) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
+
   return (
     <>
       <div className="table-action-wrapper">
@@ -27,7 +22,6 @@ const ProjectTableAction = ({
           className="table-action-icon"
           onClick={() => {
             setIsEditModalOpen(true);
-            setSelectedValue(value);
           }}
         >
           <SquarePen size={16} />{" "}
@@ -43,7 +37,14 @@ const ProjectTableAction = ({
       <DeleteProjectModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        title={value.project_title}
+        data={value}
+      />
+
+      <ProjectFormModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        selectedValue={value}
+        isEdit
       />
     </>
   );

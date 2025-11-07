@@ -12,16 +12,19 @@ import Modal from "@/components/Modal";
 import { Option, Select } from "@/components/Select";
 import Typography from "@/components/Typography";
 import useToaster from "@/hooks/useToaster";
-import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorObj } from "@/utils/get-api-response-error";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { setFormikResponseError } from "@/utils/set-formik-response-error";
 
+import useFetchProjectData from "../../hooks/useFetchProjectData";
 import { createProject, updateProject } from "../../http/get-project";
-import { ProjectListType } from "../../projects.types";
-import { useProjectFormDataStore } from "../../store/useProjectFormDataStore";
+import { ProjectDataType } from "../../projects.types";
+import { useProjectStore } from "../../store/useProjectStore";
 import { convertDistrictList } from "../../utils/convert-district-list";
+import { convertProgramList } from "../../utils/convert-program-list";
+import { convertProvinceList } from "../../utils/convert-province-list";
+import { initializeDistrictList } from "../../utils/initialize-district-list";
 
 import { projectSchema } from "./project.schema";
 import { StyledDiv } from "./style";
@@ -29,7 +32,7 @@ import { StyledDiv } from "./style";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  selectedValue: ProjectListType | null;
+  selectedValue?: ProjectDataType | null;
   isEdit?: boolean;
 };
 
@@ -39,23 +42,24 @@ const ProjectFormModal = ({
   selectedValue = null,
   isEdit,
 }: Props) => {
+  const { loader, programData, provinceData } = useProjectStore();
+
   const [isLoading, setIsLoading] = React.useState(false);
-  const [districtLoader, setDistrictLoader] = React.useState(false);
-  const [districtList, setDistrictList] = React.useState<
-    Array<{ label: string; value: string }>
-  >([]);
+  const [districtList, setDistrictList] = React.useState<Array<Option>>(
+    initializeDistrictList(provinceData, selectedValue?.province?.id)
+  );
 
   const { successToast, errorToast } = useToaster();
-  const { loader, programList, provinceList } = useProjectFormDataStore();
+  const { fetchProjectData } = useFetchProjectData();
 
   const formik = useFormik({
     initialValues: {
-      program_id: selectedValue?.program_id || "",
+      program_id: selectedValue?.program?.id || "",
       project_title: selectedValue?.project_title || "",
       event_title: selectedValue?.event_title || "",
-      province_id: selectedValue?.province_id || "",
-      district_id: selectedValue?.district_id || "",
-      start_date: selectedValue?.start_date || (null as Date | null),
+      province_id: selectedValue?.province?.id || "",
+      district_id: selectedValue?.district?.id || "",
+      start_date: selectedValue?.start_date || null,
       end_date: selectedValue?.end_date || null,
       funders: selectedValue?.funders?.length
         ? selectedValue.funders
@@ -81,12 +85,23 @@ const ProjectFormModal = ({
         ...rest,
       };
 
-      const httpRequest = isEdit ? updateProject(body) : createProject(body);
+      const { id } = selectedValue || {};
+
+      const httpRequest = isEdit
+        ? updateProject(body, id)
+        : createProject(body);
 
       httpRequest
-        .then((res) => {
-          console.log(res);
-          successToast("Project created successfully.");
+        .then(() => {
+          fetchProjectData()
+            .then(() => {
+              successToast("Project created successfully.");
+              setIsLoading(false);
+              onClose();
+            })
+            .catch(() => {
+              setIsLoading(false);
+            });
         })
         .catch((err) => {
           const errorObj = getApiResponseErrorObj(err);
@@ -94,8 +109,6 @@ const ProjectFormModal = ({
 
           console.log(err);
           getApiResponseErrorToast(err);
-        })
-        .finally(() => {
           setIsLoading(false);
         });
     },
@@ -108,22 +121,12 @@ const ProjectFormModal = ({
       errorToast("Province value is empty");
       return;
     }
-    setDistrictLoader(true);
-    formik.setFieldValue("province_id", item?.value);
+    formik.setFieldValue("province_id", value);
 
-    authAxios
-      .get(`/districts/${value}`)
-      .then((res) => {
-        const { data = [] } = res || [];
-        console.log(data);
-        setDistrictList(convertDistrictList(data));
-      })
-      .catch((err) => {
-        getApiResponseErrorToast(err);
-      })
-      .finally(() => {
-        setDistrictLoader(false);
-      });
+    const selectedDistrict =
+      provinceData.find((province) => province.id === value)?.districts || [];
+
+    setDistrictList(convertDistrictList(selectedDistrict));
   };
 
   const handleAddFunder = () => {
@@ -136,8 +139,6 @@ const ProjectFormModal = ({
     formik.setFieldValue("funders", updated);
   };
 
-  console.log(formik);
-
   return (
     <Modal
       isOpen={isOpen}
@@ -148,7 +149,7 @@ const ProjectFormModal = ({
       <StyledDiv>
         <Select
           name="program_id"
-          options={programList}
+          options={convertProgramList(programData)}
           placeholder="Select Program"
           label="Program"
           onChange={(item) => formik.setFieldValue("program_id", item?.value)}
@@ -191,7 +192,7 @@ const ProjectFormModal = ({
 
         <Select
           name="province_id"
-          options={provinceList}
+          options={convertProvinceList(provinceData)}
           placeholder="Select province"
           label="Province"
           onChange={handleProvinceChange}
@@ -215,8 +216,7 @@ const ProjectFormModal = ({
           touched={formik.touched.district_id}
           showTooltip={!formik.values.province_id}
           tooltipMsg="First select the province"
-          disabled={!formik.values.province_id || districtLoader}
-          isLoading={districtLoader}
+          disabled={!formik.values.province_id}
         />
 
         <div className="project-modal-date-wrapper">
@@ -233,7 +233,7 @@ const ProjectFormModal = ({
             name="end_date"
             label="End Date"
             onChange={(e) => formik.setFieldValue("end_date", e)}
-            selected={formik.values.end_date}
+            selected={formik.values.end_date as Date}
             onBlur={() => formik.setFieldTouched("end_date", true)}
             touched={formik.touched.end_date}
             error={formik.errors.end_date}
@@ -268,8 +268,6 @@ const ProjectFormModal = ({
                   placeholder="Enter funder name (eg, UNFPA, UNICEF)"
                   onBlur={formik.handleBlur}
                   className="input-dynamic-field"
-                  // error={formik.errors.funders}
-                  // touched={formik.touched.project_title}
                 />
                 {formik.values.funders.length > 1 && (
                   <div
@@ -297,7 +295,7 @@ const ProjectFormModal = ({
             disabled={!formik.isValid || isLoading}
             loading={isLoading}
           >
-            {isEdit ? "update Project" : "Create Project"}
+            {isEdit ? "Update Project" : "Create Project"}
           </Button>
         </div>
       </StyledDiv>

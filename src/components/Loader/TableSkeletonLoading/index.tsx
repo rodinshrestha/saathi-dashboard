@@ -22,9 +22,9 @@ const SkeletonCell = styled.div`
   height: 10px;
   background: linear-gradient(
     90deg,
-    ${({ theme }) => theme.color.backgroundColor.highContrast || "#eee"} 25%,
-    ${({ theme }) => theme.color.backgroundColor.lowContrast || "#f5f5f5"} 50%,
-    ${({ theme }) => theme.color.backgroundColor.lowContrast || "#eee"} 75%
+    ${({ theme }) => theme.color.skeletonBgColor.highContrast} 25%,
+    ${({ theme }) => theme.color.skeletonBgColor.lowContrast} 50%,
+    ${({ theme }) => theme.color.skeletonBgColor.lowContrast} 75%
   );
   background-size: 200%;
   animation: ${shimmer} 4s infinite linear;

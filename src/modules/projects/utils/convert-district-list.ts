@@ -1,9 +1,13 @@
-import { DistrictListType } from "../projects.types";
+import { Option } from "@/components/Select";
 
-export const convertDistrictList = (data: Array<DistrictListType>) => {
+import { ProvinceDistrictType } from "../projects.types";
+
+export const convertDistrictList = (
+  data: Array<ProvinceDistrictType>
+): Array<Option> => {
   if (Array.isArray(data) && !data.length) {
     return [];
   }
 
-  return data.map((x) => ({ label: x.name, value: x.id.toString() }));
+  return data.map((x) => ({ label: x.name, value: x.id }));
 };

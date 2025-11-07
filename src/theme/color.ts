@@ -6,6 +6,16 @@ export const lightPrimaryColor = {
     highContrast: "#F3F3F5",
     lowContrast: "#fff",
   },
+  hoverBgColor: {
+    highContrast: "#F3F3F5",
+  },
+  skeletonBgColor: {
+    highContrast: "#F3F3F5",
+    lowContrast: "#fff",
+  },
+  cardBgColor: {
+    highContrast: "#fff",
+  },
   textColor: {
     highContrast: "#0A0A0A",
     lowContrast: "#717182",
@@ -26,15 +36,25 @@ export const lightPrimaryColor = {
  */
 export const darkPrimaryColor: typeof lightPrimaryColor = {
   backgroundColor: {
-    highContrast: "#000",
-    lowContrast: "#111",
+    highContrast: "#101828",
+    lowContrast: "#101828",
+  },
+  hoverBgColor: {
+    highContrast: "#ffffff08",
+  },
+  skeletonBgColor: {
+    highContrast: "#A9A9A9",
+    lowContrast: "#999999",
+  },
+  cardBgColor: {
+    highContrast: "#ffffff08",
   },
   textColor: {
     highContrast: "#FAFAFA",
     lowContrast: "#A9A9A9",
   },
   borderColor: {
-    highContrast: "#FFFFFF1A",
+    highContrast: "#1d2939",
   },
   outlineColor: {
     highContrast: "#5A5A5A80",

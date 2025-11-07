@@ -10,13 +10,13 @@ import CustomLoadingIndicator from "./CustomLoadingIndicator";
 import { StyledDiv } from "./style";
 
 export type Option = {
-  value: string;
+  value: string | number;
   label: string;
 };
 
 interface MySelectProps<TMulti extends boolean> {
   options: Option[];
-  value: string;
+  value: string | number;
   onChange: (
     value: TMulti extends true ? MultiValue<Option> : SingleValue<Option>
   ) => void;

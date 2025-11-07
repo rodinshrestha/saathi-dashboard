@@ -17,8 +17,7 @@ export const StyledDiv = styled.div`
     .react-select__control {
       position: relative;
       border: none;
-      background-color: ${({ theme }) =>
-        theme.color.backgroundColor.highContrast};
+      background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
       outline: none;
       box-shadow: none;
 

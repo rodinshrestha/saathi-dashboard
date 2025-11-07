@@ -23,12 +23,12 @@ export const InputContainer = styled.div`
     input {
       box-sizing: border-box;
       border-radius: 8px;
-      background-color: ${({ theme }) =>
-        theme.color.backgroundColor.highContrast};
+      background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
       padding: 8px 12px;
       font-size: 14px;
       border: 1px solid transparent;
       width: 100%;
+      color: ${({ theme }) => theme.color.textColor.highContrast};
 
       &:focus {
         border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};

@@ -1,22 +1,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import ProjectTableAction from "./components/ProjectTableAction";
-import { ProjectListType } from "./projects.types";
+import { ProjectDataType } from "./projects.types";
 
-type Props = {
-  setSelectedValue: React.Dispatch<
-    React.SetStateAction<ProjectListType | null>
-  >;
-  setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const ProjectTableColumn = ({
-  setSelectedValue,
-  setIsEditModalOpen,
-}: Props): ColumnDef<ProjectListType>[] => {
+export const ProjectTableColumn = (): ColumnDef<ProjectDataType>[] => {
   return [
     {
-      accessorKey: "project_id",
+      accessorFn: (_, i) => `Proj-${++i}`,
       header: "Project ID",
     },
     {
@@ -24,15 +14,15 @@ export const ProjectTableColumn = ({
       header: "Project Title",
     },
     {
-      accessorKey: "program_id",
+      accessorFn: (row) => row.program.name,
       header: "Program",
     },
     {
-      accessorKey: "province_id",
+      accessorFn: (row) => row.province.name,
       header: "Province",
     },
     {
-      accessorKey: "district_id",
+      accessorFn: (row) => row.district.name,
       header: "District",
     },
     {
@@ -47,13 +37,7 @@ export const ProjectTableColumn = ({
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => (
-        <ProjectTableAction
-          value={row.original}
-          setSelectedValue={setSelectedValue}
-          setIsEditModalOpen={setIsEditModalOpen}
-        />
-      ),
+      cell: ({ row }) => <ProjectTableAction value={row.original} />,
     },
   ];
 };
