@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 export const StyledNavBar = styled.nav`
   &.navbar-wrapper {
+    --w: 84px;
     width: 84px;
+    min-width: var(--w);
     border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
     background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
     display: flex;
@@ -14,7 +16,7 @@ export const StyledNavBar = styled.nav`
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    transition: width 0.2s linear;
+    transition: all 0.2s linear;
 
     .nav-item {
       .nav-item-label {
@@ -23,7 +25,7 @@ export const StyledNavBar = styled.nav`
     }
 
     &.expanded {
-      width: 248.5px;
+      --w: 248.5px;
 
       .nav-item-label {
         display: unset;

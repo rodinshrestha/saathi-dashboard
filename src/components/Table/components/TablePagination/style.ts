@@ -23,6 +23,12 @@ export const StyledDiv = styled.div<{ $active?: boolean }>`
     .per-page-wrapper {
       display: flex;
       align-items: center;
+
+      .table-per-page {
+        border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
+        padding: 0.4rem;
+        border-radius: 6px;
+      }
     }
   }
 `;
