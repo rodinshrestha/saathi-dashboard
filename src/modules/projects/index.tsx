@@ -65,6 +65,7 @@ const ProjectModule = () => {
       />
 
       <Table
+        tableTitle="All Projects"
         columns={ProjectTableColumn({
           setSelectedValue,
           setIsDeleteModalOpen,

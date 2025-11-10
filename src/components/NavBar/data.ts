@@ -3,7 +3,6 @@ import dashboardIcon from "@/assets/svg/dashboardIcon";
 import FileIcon from "@/assets/svg/fileIcon";
 import FolderIcon from "@/assets/svg/folderIcon";
 import ListIcon from "@/assets/svg/listIcon";
-import NotificationIcon from "@/assets/svg/notificationIcon";
 
 export const navData = [
   {
@@ -25,12 +24,6 @@ export const navData = [
     slug: "registration-list",
   },
 
-  {
-    id: 4,
-    icon: NotificationIcon,
-    label: "Notifications",
-    slug: "notifications",
-  },
   {
     id: 5,
     icon: ApprovalIcon,

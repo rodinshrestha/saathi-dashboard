@@ -1,7 +1,9 @@
 import React from "react";
 
-const RegistrationList = () => {
-  return <div>RegistrationList</div>;
+import RegistrationList from "@/modules/registration-list";
+
+const RegistrationListPage = () => {
+  return <RegistrationList />;
 };
 
-export default RegistrationList;
+export default RegistrationListPage;

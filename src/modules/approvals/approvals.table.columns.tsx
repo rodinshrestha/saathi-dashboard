@@ -40,10 +40,6 @@ export const ApprovalsTableColumns = ({
       header: "Date Submitted",
     },
     {
-      accessorKey: "status",
-      header: "Status",
-    },
-    {
       id: "actions",
       header: "Actions",
       size: 400,
