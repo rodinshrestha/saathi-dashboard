@@ -29,9 +29,12 @@ const ProjectModule = () => {
   const { projectData, projectDataLoader } = useProjectStore();
 
   React.useEffect(() => {
-    fetchProjectData();
     fetchFormData();
-  }, [fetchProjectData, fetchFormData]);
+  }, [fetchFormData]);
+
+  React.useEffect(() => {
+    fetchProjectData();
+  }, [fetchProjectData]);
 
   return (
     <StyledDiv>
@@ -69,6 +72,7 @@ const ProjectModule = () => {
         })}
         data={projectData?.data || []}
         isLoading={projectDataLoader === IDLE || projectDataLoader === PENDING}
+        pageMeta={projectData?.meta}
       />
     </StyledDiv>
   );

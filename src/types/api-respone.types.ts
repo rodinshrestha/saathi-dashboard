@@ -13,4 +13,5 @@ export type MetaType = {
   per_page: number;
   to: number;
   total: number;
+  last_page: number;
 };

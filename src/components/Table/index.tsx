@@ -9,9 +9,15 @@ import {
   ColumnDef,
   flexRender,
 } from "@tanstack/react-table";
+import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
 
+import { PER_PAGE } from "@/constant/pagination.constant";
+import { usePagination } from "@/hooks/usePagination";
+import { MetaType } from "@/types/api-respone.types";
+
 import TableSkeleton from "../Loader/TableSkeletonLoading";
+import { Select } from "../Select";
 import Typography from "../Typography";
 
 import { StyledDiv, TableHeader } from "./style";
@@ -20,9 +26,17 @@ interface TableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   isLoading?: boolean;
+  pageMeta?: MetaType;
 }
 
-const Table = <T,>({ data, columns, isLoading }: TableProps<T>) => {
+const Table = <T,>({ data, columns, isLoading, pageMeta }: TableProps<T>) => {
+  const { setPage, setPerPage } = usePagination();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const currentPerPage = Number(searchParams.get("per_page")) || PER_PAGE;
+
+  const { total = 0, last_page = 0 } = pageMeta || {};
+
   const table = useReactTable({
     data,
     columns,
@@ -36,21 +50,25 @@ const Table = <T,>({ data, columns, isLoading }: TableProps<T>) => {
         pageSize: 5,
       },
     },
+    manualPagination: true,
   });
 
-  const totalPages = table.getPageCount();
-  const currentPage = table.getState().pagination.pageIndex + 1;
+  React.useEffect(() => {
+    table.setPageIndex(currentPage);
+  }, [currentPage, table]);
 
   // Limit number buttons (like 1...5 or current±2)
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, i) => i + 1
-  ).filter(
+  const pageNumbers = Array.from({ length: last_page }, (_, i) => i + 1).filter(
     (page) =>
       page === 1 ||
-      page === totalPages ||
+      page === last_page ||
       (page >= currentPage - 2 && page <= currentPage + 2)
   );
+
+  const handleOnPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = Number(e.target.value);
+    setPerPage(value);
+  };
 
   return (
     <StyledDiv className="table-wrapper">
@@ -92,57 +110,70 @@ const Table = <T,>({ data, columns, isLoading }: TableProps<T>) => {
           </tbody>
         )}
       </table>
-      {/* <div className="pagination-wrapper">
-        <PageButton
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}
-        >
-          ‹
-        </PageButton>
+      {!isLoading && (
+        <div className="pagination-wrapper">
+          <div className="page-index-wrapper">
+            {currentPage} - {last_page} of {total}
+          </div>
+          <div className="per-page-wrapper">
+            <select
+              onChange={handleOnPerPageChange}
+              defaultValue={5}
+              value={currentPerPage}
+            >
+              <option value={5}>5</option>
+              <option value={15}>15</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
 
-        {pageNumbers.map((page, index) => {
-          const isCurrent = page === currentPage;
-          const isEllipsis = index > 0 && page - pageNumbers[index - 1] > 1;
+          <PageButton
+            disabled={currentPage <= 1}
+            onClick={() => {
+              table.previousPage();
+              setPage(currentPage - 1);
+            }}
+          >
+            ‹
+          </PageButton>
 
-          return (
-            <React.Fragment key={page}>
-              {isEllipsis && <span>...</span>}
-              <PageButton
-                $active={isCurrent}
-                onClick={() => table.setPageIndex(page - 1)}
-              >
-                {page}
-              </PageButton>
-            </React.Fragment>
-          );
-        })}
+          {pageNumbers.map((page, index) => {
+            const isCurrent = page === currentPage;
+            const isEllipsis = index > 0 && page - pageNumbers[index - 1] > 1;
 
-        <PageButton
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}
-        >
-          ›
-        </PageButton>
-      </div> */}
+            return (
+              <React.Fragment key={page}>
+                {isEllipsis && <span>...</span>}
+                <PageButton
+                  $active={isCurrent}
+                  onClick={() => {
+                    setPage(page);
+                    table.setPageIndex(page - 1);
+                  }}
+                >
+                  {page}
+                </PageButton>
+              </React.Fragment>
+            );
+          })}
+
+          <PageButton
+            disabled={currentPage === last_page}
+            onClick={() => {
+              table.nextPage();
+              setPage(currentPage + 1);
+            }}
+          >
+            ›
+          </PageButton>
+        </div>
+      )}
     </StyledDiv>
   );
 };
 
 export default Table;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 1rem;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-
-  span {
-    padding: 0 0.25rem;
-    color: #999;
-  }
-`;
 
 const PageButton = styled.button<{ $active?: boolean }>`
   padding: 0.4rem 0.7rem;

@@ -2,14 +2,14 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
-  overflow-x: auto;
+  /* overflow-x: auto; */
   border: 1px solid #ddd;
   position: relative;
   border-radius: 8px;
   padding: 24px;
   background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
   border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
-
+  border-bottom-right-radius: 0;
   table,
   th,
   td {
@@ -61,10 +61,27 @@ export const StyledDiv = styled.div`
   }
 
   .pagination-wrapper {
-    border: 1px solid black;
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
+    border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
+    border-top: none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
     position: absolute;
-    right: 0;
-    bottom: -10px;
+    right: -1px;
+    bottom: -50px;
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    .page-index-wrapper {
+      font-size: 14px;
+      display: flex;
+      align-self: center;
+    }
+    .per-page-wrapper {
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
