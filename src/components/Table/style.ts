@@ -78,30 +78,6 @@ export const StyledDiv = styled.div`
       text-align: center;
     }
   }
-
-  .pagination-wrapper {
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
-    border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
-    border-top: none;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-    position: absolute;
-    right: -1px;
-    bottom: -50px;
-    padding: 10px 20px;
-    display: flex;
-    gap: 10px;
-    .page-index-wrapper {
-      font-size: 14px;
-      display: flex;
-      align-self: center;
-    }
-    .per-page-wrapper {
-      display: flex;
-      align-items: center;
-    }
-  }
 `;
 
 export const TableHeader = styled.th<{ isSorted?: string }>`

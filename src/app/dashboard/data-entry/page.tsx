@@ -1,7 +1,10 @@
 import React from "react";
 
-const PageEntry = () => {
-  return <div>PageEntry</div>;
+import Card from "@/components/Card";
+import DataEntry from "@/modules/data-entry";
+
+const PageEntryPage = () => {
+  return <DataEntry />;
 };
 
-export default PageEntry;
+export default PageEntryPage;
