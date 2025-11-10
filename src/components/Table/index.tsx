@@ -20,6 +20,7 @@ import TableSkeleton from "../Loader/TableSkeletonLoading";
 import { Select } from "../Select";
 import Typography from "../Typography";
 
+import TableSearch from "./components/TableSearch";
 import { StyledDiv, TableHeader } from "./style";
 
 interface TableProps<T> {
@@ -72,9 +73,12 @@ const Table = <T,>({ data, columns, isLoading, pageMeta }: TableProps<T>) => {
 
   return (
     <StyledDiv className="table-wrapper">
-      <Typography as="p" className="table-title">
-        All Projects
-      </Typography>
+      <div className="table-title-wrapper">
+        <Typography as="p" className="table-title">
+          All Projects
+        </Typography>
+        <TableSearch />
+      </div>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

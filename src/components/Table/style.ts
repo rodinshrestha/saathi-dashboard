@@ -10,6 +10,16 @@ export const StyledDiv = styled.div`
   background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
   border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
   border-bottom-right-radius: 0;
+  .table-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .table-title {
+      display: flex;
+      align-self: center;
+    }
+  }
+
   table,
   th,
   td {
