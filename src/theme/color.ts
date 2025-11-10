@@ -73,6 +73,9 @@ export const color = {
   },
   green: {
     100: "#10b981",
+    200: "#0A7B43",
+    300: "#06532E",
+    400: "#008236",
   },
   orange: {
     100: "#FF6B35",
@@ -83,10 +86,12 @@ export const color = {
   },
   white: {
     100: "#fff",
+    200: "#f3f3f3",
   },
   grey: {
     100: "#A0AEC0",
     200: "#e9ebef",
+    300: "#ececf0",
   },
   red: {
     100: "#D4183D",
@@ -94,5 +99,6 @@ export const color = {
   black: {
     100: "#0A0A0A",
     200: "#000",
+    300: "#333",
   },
 };

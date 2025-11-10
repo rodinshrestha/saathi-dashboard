@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Search } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { StyledDiv } from "./style";
 
@@ -10,9 +10,13 @@ type Props = {
 };
 
 const TableSearch = ({ placeHolder = "Search by anything" }: Props) => {
-  const [searchText, setSearchText] = React.useState("");
+  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  const searchterm = searchParams.get("search");
+
+  const [searchText, setSearchText] = React.useState(searchterm || "");
 
   const timerRef = React.useRef<NodeJS.Timeout | null>(null);
 
@@ -21,14 +25,12 @@ const TableSearch = ({ placeHolder = "Search by anything" }: Props) => {
     setSearchText(value);
 
     const params = new URLSearchParams();
+    params.set("search", value.toString());
 
     if (timerRef.current) clearTimeout(timerRef.current);
 
     timerRef.current = setTimeout(() => {
-      params.set("search", searchText.toString());
       router.replace(`${pathname}?${params.toString()}`);
-
-      // API call here
     }, 500);
   };
 

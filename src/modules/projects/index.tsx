@@ -73,6 +73,8 @@ const ProjectModule = () => {
         data={projectData?.data || []}
         isLoading={projectDataLoader === IDLE || projectDataLoader === PENDING}
         pageMeta={projectData?.meta}
+        searchable
+        showPagination
       />
     </StyledDiv>
   );

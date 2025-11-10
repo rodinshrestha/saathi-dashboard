@@ -68,6 +68,15 @@ export const StyledDiv = styled.div`
         }
       }
     }
+
+    .no-data-found-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      width: 100%;
+      text-align: center;
+    }
   }
 
   .pagination-wrapper {

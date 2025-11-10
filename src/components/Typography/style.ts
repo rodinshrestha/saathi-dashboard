@@ -33,8 +33,6 @@ const style = (theme: DefaultTheme) => css`
 
   &.h3 {
     font-size: 28px;
-    line-height: 38px;
-    letter-spacing: 1px;
   }
 
   &.h4 {
