@@ -6,11 +6,83 @@ export const StyledDiv = styled.div`
     border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
     padding: 24px;
     border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
+
+    &.prevention {
+      .icon-wrapper {
+        background-color: rgba(16, 185, 129, 0.125);
+      }
+      .card-feature-list {
+        li::marker {
+          color: ${({ theme }) => theme.color.green["100"]};
+        }
+      }
+      .card-feature-btn-wrapper {
+        a {
+          color: ${({ theme }) => theme.color.green["100"]};
+        }
+      }
+    }
+    &.prosecution {
+      .icon-wrapper {
+        background-color: #3b82f620;
+      }
+      .card-feature-list {
+        li::marker {
+          color: ${({ theme }) => theme.color.blue["300"]};
+        }
+      }
+      .card-feature-btn-wrapper {
+        a {
+          color: ${({ theme }) => theme.color.blue["300"]};
+        }
+      }
+    }
+    &.response {
+      .icon-wrapper {
+        background-color: #ff6b3520;
+      }
+      .card-feature-list {
+        li::marker {
+          color: ${({ theme }) => theme.color.orange["100"]};
+        }
+      }
+      .card-feature-btn-wrapper {
+        a {
+          color: ${({ theme }) => theme.color.orange["100"]};
+        }
+      }
+    }
+    &.protection {
+      .icon-wrapper {
+        background-color: #ffd93d20;
+      }
+      .card-feature-list {
+        li::marker {
+          color: ${({ theme }) => theme.color.yellow["100"]};
+        }
+      }
+      .card-feature-btn-wrapper {
+        a {
+          color: ${({ theme }) => theme.color.yellow["100"]};
+        }
+      }
+    }
+    &:hover {
+      border-color: oklab(63.714% -0.035553 -0.19199 / 0.3);
+      scale: 1.02;
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
 
     .card-icon-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+
       .icon-wrapper {
         height: 64px;
         width: 64px;
@@ -18,7 +90,9 @@ export const StyledDiv = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgba(16, 185, 129, 0.125);
+        box-shadow:
+          0 1px 3px 0 #0000001a,
+          0 1px 2px -1px #0000001a;
       }
       .card-icon-info {
         display: flex;
@@ -48,7 +122,7 @@ export const StyledDiv = styled.div`
     }
 
     .card-feature-wrapper {
-      margin-top: 50px;
+      margin-top: 35px;
       padding-bottom: 20px;
       border-bottom: 1px solid
         ${({ theme }) => theme.color.borderColor.highContrast};

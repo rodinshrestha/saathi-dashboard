@@ -70,6 +70,7 @@ export const color = {
   blue: {
     100: "#3A86FF",
     200: "#2F6FD1",
+    300: "#3b82f6",
   },
   green: {
     100: "#10b981",

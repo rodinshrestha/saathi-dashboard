@@ -1,7 +1,13 @@
+import { Suspense } from "react";
+
 import ApprovalsModule from "@/modules/approvals";
 
 const Approvals = () => {
-  return <ApprovalsModule />;
+  return (
+    <Suspense>
+      <ApprovalsModule />
+    </Suspense>
+  );
 };
 
 export default Approvals;

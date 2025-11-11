@@ -6,7 +6,9 @@ export const StyledDiv = styled.div`
     display: flex;
     gap: 20px;
 
-    .card-wrapper {
+    .card-link {
+      color: none;
+      text-decoration: none;
       flex: 1 1 30%;
     }
   }

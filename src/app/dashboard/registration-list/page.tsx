@@ -1,9 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import RegistrationList from "@/modules/registration-list";
 
 const RegistrationListPage = () => {
-  return <RegistrationList />;
+  return (
+    <Suspense>
+      <RegistrationList />
+    </Suspense>
+  );
 };
 
 export default RegistrationListPage;
