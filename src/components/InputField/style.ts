@@ -7,6 +7,17 @@ export const InputContainer = styled.div`
   gap: 5px;
   flex-direction: column;
 
+  &.bg-color {
+    input {
+      background-color: ${({ theme }) =>
+        theme.color.backgroundColor.highContrast} !important;
+    }
+  }
+
+  &.flex-2 {
+    flex: 2;
+  }
+
   .input-label {
     font-size: 14px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
@@ -33,6 +44,9 @@ export const InputContainer = styled.div`
       &:focus {
         border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
         outline: ${({ theme }) => theme.color.outlineColor.highContrast};
+      }
+      &:disabled {
+        cursor: not-allowed;
       }
     }
     .password-toggle-icon {

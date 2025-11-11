@@ -72,6 +72,19 @@ const style = (theme: DefaultTheme) => css`
       font-size: 16px;
       color: ${({ theme }) => theme.color.textColor.highContrast};
     }
+
+    &.form-title {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    &.flex-1 {
+      display: flex;
+      flex: 1;
+    }
+    &.flex-2 {
+      display: flex;
+      flex: 2;
+    }
   }
 
   &.subtitle1 {

@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 export const StyledDiv = styled.div`
   width: 100%;
+  &.bg-color {
+    .date-picker {
+      background-color: ${({ theme }) =>
+        theme.color.backgroundColor.highContrast} !important;
+    }
+  }
   .date-picker-label {
     margin-bottom: 8px;
     font-size: 14px;

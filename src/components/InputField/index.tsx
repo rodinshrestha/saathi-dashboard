@@ -31,7 +31,13 @@ const InputField = ({
   const isError = !!error && touched;
 
   return (
-    <InputContainer className={clsx({ error: !!error }, "input-field-wrapper")}>
+    <InputContainer
+      className={clsx(
+        { error: !!error },
+        "input-field-wrapper",
+        rest.className
+      )}
+    >
       {label && (
         <label htmlFor={inputId} className="input-label">
           {label}

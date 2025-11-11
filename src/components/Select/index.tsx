@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 
+import clsx from "clsx";
 import { default as ReactSelect, SingleValue, MultiValue } from "react-select";
 
 import Tooltip from "../Tooltip";
@@ -32,6 +33,7 @@ interface MySelectProps<TMulti extends boolean> {
   disabled?: boolean;
   isLoading?: boolean;
   requiredField?: boolean;
+  className?: string;
 }
 
 export function Select<TMulti extends boolean = false>({
@@ -50,6 +52,7 @@ export function Select<TMulti extends boolean = false>({
   tooltipMsg,
   isLoading,
   requiredField,
+  className,
 }: MySelectProps<TMulti>) {
   const selectId = React.useId();
   const requiredLabelId = React.useId();
@@ -62,7 +65,10 @@ export function Select<TMulti extends boolean = false>({
   const isError = !!error && touched;
 
   return (
-    <StyledDiv data-tooltip-id={selectId}>
+    <StyledDiv
+      data-tooltip-id={selectId}
+      className={clsx("select-field-wrapper", className)}
+    >
       {label && (
         <label htmlFor={selectId} className="react-select-label">
           {label}{" "}

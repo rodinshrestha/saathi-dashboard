@@ -2,6 +2,17 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
+  &.bg-color {
+    .react-select-container {
+      .react-select__control {
+        background-color: ${({ theme }) =>
+          theme.color.backgroundColor.highContrast} !important;
+      }
+    }
+  }
+  &.flex-2 {
+    flex: 2;
+  }
   .react-select-label {
     margin-bottom: 8px;
     font-size: 14px;
@@ -18,6 +29,7 @@ export const StyledDiv = styled.div`
       position: relative;
       border: none;
       background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
+
       outline: none;
       box-shadow: none;
 

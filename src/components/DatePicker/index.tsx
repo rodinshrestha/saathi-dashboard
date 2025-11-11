@@ -2,6 +2,7 @@
 
 import React from "react";
 
+import clsx from "clsx";
 import ReactDatePicker from "react-datepicker";
 
 import Tooltip from "../Tooltip";
@@ -28,6 +29,7 @@ interface DatePickerProps {
   disabled?: boolean;
   tooltipMsg?: string;
   showToolttip?: boolean;
+  className?: string;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -46,6 +48,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   disabled,
   tooltipMsg,
   showToolttip,
+  className,
 }) => {
   const dateId = React.useId();
 
@@ -54,7 +57,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const isError = !!error && touched;
 
   return (
-    <StyledDiv className="date-picker-wrapper" data-tooltip-id={inputId}>
+    <StyledDiv
+      className={clsx("date-picker-wrapper", className)}
+      data-tooltip-id={inputId}
+    >
       {label && (
         <label htmlFor={inputId} className="date-picker-label">
           {label}

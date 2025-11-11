@@ -93,6 +93,7 @@ export const color = {
     100: "#A0AEC0",
     200: "#e9ebef",
     300: "#ececf0",
+    400: "oklch(.872 .01 258.338)",
   },
   red: {
     100: "#D4183D",
