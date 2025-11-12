@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledDiv = styled.div`
   &.multi-step-form-wrapper {
     /* display: flex; */
+    width: 100%;
 
     .multi-step-form-header-content {
       display: flex;

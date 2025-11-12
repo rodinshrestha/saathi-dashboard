@@ -85,4 +85,24 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 }
+a{
+  &.multi-form-back-btn{
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px;
+    padding-left: 0;
+    border-radius: 8px;
+    color: ${({ theme }) => theme.color.textColor.highContrast};
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    &:hover{
+      background-color: ${({ theme }) => theme.color.grey["200"]};
+    }
+
+    svg{
+      margin-right: 10px;
+    }
+  }
+}
 `;

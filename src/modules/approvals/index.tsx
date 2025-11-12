@@ -75,6 +75,7 @@ const ApprovalsModule = () => {
           setIsViewModalOpen,
         })}
         data={data}
+        searchable
       />
     </StyledDiv>
   );

@@ -1,14 +1,7 @@
 "use client";
 
 import { useFormik } from "formik";
-import {
-  ArrowLeft,
-  FileText,
-  MapPin,
-  MoveLeft,
-  Paperclip,
-  Users,
-} from "lucide-react";
+import { ArrowLeft, FileText, MapPin, Paperclip, Users } from "lucide-react";
 import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";
@@ -18,10 +11,11 @@ import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
 
-import { PreventionProgramFormType } from "./prevention-program.types";
+import { PreventionProgramFormType } from "../prevention-program-form/prevention-program.types";
+
 import { StyledDiv } from "./style";
 
-const PreventionProgramForm = () => {
+const ProsecutionProgramForm = () => {
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
       event_title: "",
@@ -90,7 +84,7 @@ const PreventionProgramForm = () => {
         Back to Program Selection
       </Link>
       <ModuleSectionWrapper
-        title="Prevention Program - Data Entry"
+        title="Prosecution Program - Data Entry"
         className="multi-form-title"
       />
       <MultiStepForm steps={step} onSubmit={formik.handleSubmit} />
@@ -98,4 +92,4 @@ const PreventionProgramForm = () => {
   );
 };
 
-export default PreventionProgramForm;
+export default ProsecutionProgramForm;
