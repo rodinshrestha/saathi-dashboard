@@ -1,14 +1,7 @@
 "use client";
 
 import { useFormik } from "formik";
-import {
-  ArrowLeft,
-  FileText,
-  MapPin,
-  MoveLeft,
-  Paperclip,
-  Users,
-} from "lucide-react";
+import { ArrowLeft, FileText, MapPin, Paperclip, Users } from "lucide-react";
 import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";

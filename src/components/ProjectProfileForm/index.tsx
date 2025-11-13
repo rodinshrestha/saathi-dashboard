@@ -7,12 +7,10 @@ import InputField from "@/components/InputField";
 import { Select } from "@/components/Select";
 import Typography from "@/components/Typography";
 
-import { PreventionProgramFormType } from "../../prevention-program.types";
-
 import { StyledDiv } from "./style";
 
 type Props = {
-  formik: FormikProps<PreventionProgramFormType>;
+  formik: FormikProps<any>;
 };
 
 const ProjectProfileForm = ({ formik }: Props) => {
