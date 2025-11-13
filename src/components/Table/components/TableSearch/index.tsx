@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Search } from "lucide-react";
@@ -7,9 +8,10 @@ import { StyledDiv } from "./style";
 
 type Props = {
   placeHolder?: string;
+  label?: string;
 };
 
-const TableSearch = ({ placeHolder = "Search by anything" }: Props) => {
+const TableSearch = ({ placeHolder = "Search by anything", label }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -35,14 +37,17 @@ const TableSearch = ({ placeHolder = "Search by anything" }: Props) => {
   };
 
   return (
-    <StyledDiv>
-      <Search size={16} className="table-search-icon" />
-      <input
-        type="text"
-        value={searchText}
-        onChange={handleSearch}
-        placeholder={placeHolder}
-      />
+    <StyledDiv className="table-search-wrapper">
+      {label && <label>Search</label>}
+      <div className="search-wrapper">
+        <Search size={16} className="table-search-icon" />
+        <input
+          type="text"
+          value={searchText}
+          onChange={handleSearch}
+          placeholder={placeHolder}
+        />
+      </div>
     </StyledDiv>
   );
 };

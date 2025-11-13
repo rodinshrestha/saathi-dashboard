@@ -9,6 +9,7 @@ import {
   ColumnDef,
   flexRender,
 } from "@tanstack/react-table";
+import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 
 import { MetaType } from "@/types/api-respone.types";
@@ -28,6 +29,7 @@ interface TableProps<T> {
   searchable?: boolean;
   showPagination?: boolean;
   tableTitle?: string;
+  showBoxShadow?: boolean;
 }
 
 const Table = <T,>({
@@ -38,6 +40,7 @@ const Table = <T,>({
   searchable,
   showPagination,
   tableTitle = "",
+  showBoxShadow,
 }: TableProps<T>) => {
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -66,7 +69,9 @@ const Table = <T,>({
   const showError = !isLoading && data.length === 0;
 
   return (
-    <StyledDiv className="table-wrapper">
+    <StyledDiv
+      className={clsx("table-wrapper", { "box-shadow": showBoxShadow })}
+    >
       <div className="table-title-wrapper">
         {tableTitle && (
           <Typography as="p" className="table-title">

@@ -82,6 +82,8 @@ export const GlobalStyle = createGlobalStyle`
       width: 100%;
       background-color: ${({ theme }) => theme.color.backgroundColor.highContrast};
       padding-top: 20px;
+      overflow: auto;
+      padding-bottom: 80px;
     }
   }
 }

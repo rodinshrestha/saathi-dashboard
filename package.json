@@ -20,6 +20,7 @@
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.13.1",
+    "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
