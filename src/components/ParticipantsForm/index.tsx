@@ -7,8 +7,7 @@ import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import { Select } from "@/components/Select";
 import Typography from "@/components/Typography";
-
-import { PreventionProgramFormType } from "../../prevention-program.types";
+import { PreventionProgramFormType } from "@/modules/prevention-program-form/prevention-program.types";
 
 import { StyledDiv } from "./style";
 type Props = {
