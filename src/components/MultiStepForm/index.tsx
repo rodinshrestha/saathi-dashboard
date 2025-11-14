@@ -21,9 +21,10 @@ type Step = {
 type MultiStepForm = {
   steps: Array<Step>;
   onSubmit: () => void;
+  loader: boolean;
 };
 
-const MultiStepForm = ({ steps, onSubmit }: MultiStepForm) => {
+const MultiStepForm = ({ steps, onSubmit, loader }: MultiStepForm) => {
   const [currentStep, setCurrentStep] = React.useState(1);
   const isLastStep = currentStep === steps.length;
 
@@ -73,7 +74,7 @@ const MultiStepForm = ({ steps, onSubmit }: MultiStepForm) => {
         >
           <MoveLeft /> Previous
         </Button>
-        <Button onClick={handleNext}>
+        <Button onClick={handleNext} loading={loader}>
           {isLastStep ? "Submit" : "Next"} <MoveRight />
         </Button>
       </div>

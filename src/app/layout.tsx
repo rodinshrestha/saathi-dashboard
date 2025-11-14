@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 
 import StyledComponentsRegistry from "@/lib/registry";
-import BaseProvider from "@/providers/BaseProvider";
 import StyledProviders from "@/providers/StyledProviders";
 import { SwrConfigProviders } from "@/providers/SwrConfigProviders";
 
@@ -23,7 +22,7 @@ export default function RootLayout({
           <SwrConfigProviders>
             <StyledProviders>
               <ToastContainer theme="colored" />
-              <BaseProvider>{children}</BaseProvider>
+              {children}
             </StyledProviders>
           </SwrConfigProviders>
         </StyledComponentsRegistry>

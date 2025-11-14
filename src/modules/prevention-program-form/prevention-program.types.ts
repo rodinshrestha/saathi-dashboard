@@ -11,6 +11,7 @@ type ParticipantType = {
 };
 
 export type PreventionProgramFormType = {
+  program_id: number;
   project_id: string;
   event_id: string;
   activity_code: string;

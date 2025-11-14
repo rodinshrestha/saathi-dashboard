@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Navbar from "@/components/NavBar";
 import Row from "@/components/Row";
+import BaseProvider from "@/providers/BaseProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -10,18 +11,20 @@ type Props = {
 
 export default function BaseLayout({ children }: Props) {
   return (
-    <div className="dasbhoard-layout">
-      <Navbar />
-      <main className="dashboard-main">
-        <Header />
-        <div className="dashboard-body">
-          <Container>
-            <Row>
-              <Col>{children}</Col>
-            </Row>
-          </Container>
-        </div>
-      </main>
-    </div>
+    <BaseProvider>
+      <div className="dasbhoard-layout">
+        <Navbar />
+        <main className="dashboard-main">
+          <Header />
+          <div className="dashboard-body">
+            <Container>
+              <Row>
+                <Col>{children}</Col>
+              </Row>
+            </Container>
+          </div>
+        </main>
+      </div>
+    </BaseProvider>
   );
 }

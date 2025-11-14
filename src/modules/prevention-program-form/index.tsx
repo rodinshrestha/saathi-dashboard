@@ -12,6 +12,9 @@ import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
 import useFetchEventList from "@/hooks/useFetchEventList";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 
 import { PreventionProgramFormType } from "./prevention-program.types";
@@ -19,6 +22,8 @@ import { StyledDiv } from "./style";
 
 const PreventionProgramForm = () => {
   const { fetchEventData, eventData } = useFetchEventList();
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
 
   React.useEffect(() => {
     fetchEventData(1); // 1 means prevention program
@@ -26,6 +31,7 @@ const PreventionProgramForm = () => {
 
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
+      program_id: 1,
       project_id: "",
       event_id: "",
       activity_code: "",
@@ -56,15 +62,18 @@ const PreventionProgramForm = () => {
     },
     onSubmit: () => {
       const { start_date, end_date, ...rest } = formik.values;
-
+      setLoader(true);
       const body = {
         start_date: getConvertedDate(start_date),
         end_date: getConvertedDate(end_date),
         ...rest,
       };
 
-      console.log(body, "final value");
-      //
+      authAxios
+        .post("/survivors", body)
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -105,7 +114,11 @@ const PreventionProgramForm = () => {
         title="Prevention Program - Data Entry"
         className="multi-form-title"
       />
-      <MultiStepForm steps={step} onSubmit={formik.handleSubmit} />
+      <MultiStepForm
+        steps={step}
+        onSubmit={formik.handleSubmit}
+        loader={loader}
+      />
     </StyledDiv>
   );
 };
