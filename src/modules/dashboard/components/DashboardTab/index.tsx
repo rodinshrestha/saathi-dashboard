@@ -1,5 +1,3 @@
-import React from "react";
-
 import Tab from "@/components/Tab";
 
 import DashboardPreventionTab from "../DashboardPreventionTab";

@@ -37,7 +37,7 @@ export const StyledDiv = styled.div`
     }
 
     .select-field-wrapper {
-      flex: 0 0 16%;
+      flex: 0 0 15%;
     }
 
     .btn {

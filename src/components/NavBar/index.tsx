@@ -41,6 +41,7 @@ const Navbar = () => {
                 className={clsx("nav-item", { active: isActive })}
                 key={item.id}
                 href={getNavUrlPath(item.slug)}
+                prefetch
               >
                 <Icon
                   active={isActive}

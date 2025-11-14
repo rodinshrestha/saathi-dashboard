@@ -17,7 +17,7 @@ export const RecentActivityTableColumn = () => {
       header: "Date",
     },
     {
-      accessorKey: "organization",
+      accessorKey: "organization_type",
       header: "Organization Type",
     },
     {

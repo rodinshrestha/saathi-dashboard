@@ -13,7 +13,7 @@ export const FundedTableColumn = () => {
       header: "Province",
     },
     {
-      accessorKey: "funded_by",
+      accessorKey: "funders",
       header: "Funded By",
     },
   ];

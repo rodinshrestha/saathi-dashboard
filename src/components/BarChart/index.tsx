@@ -3,30 +3,33 @@ import React from "react";
 
 import { Chart, registerables } from "chart.js";
 
+import { BarChartDataType } from "@/constant/barchart.types";
+
 import Typography from "../Typography";
 
 import { StyledDiv } from "./style";
 
 Chart.register(...registerables);
 
-const attendanceData = {
-  labels: ["Project A", "Project B", "Project C", "Project D", "Project E"],
-  datasets: [
-    {
-      label: "Attendance",
-      data: [120, 95, 145, 78, 110],
-      backgroundColor: "#10B981",
-      borderRadius: 8,
-    },
-  ],
-};
-
 type Props = {
+  data: BarChartDataType;
   label?: string;
 };
 
-const BarChart = ({ label }: Props) => {
+const BarChart = ({ label, data }: Props) => {
   const barChartRef = React.useRef<HTMLCanvasElement>(null);
+
+  const attendanceData = {
+    labels: data.labels,
+    datasets: [
+      {
+        label: "Attendance",
+        data: data.value,
+        backgroundColor: "#10B981",
+        borderRadius: 8,
+      },
+    ],
+  };
 
   React.useEffect(() => {
     let chart: Chart<"bar", number[], string> | null = null;

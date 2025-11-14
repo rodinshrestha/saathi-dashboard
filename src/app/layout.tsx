@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 
 import StyledComponentsRegistry from "@/lib/registry";
 import StyledProviders from "@/providers/StyledProviders";
+import { SwrConfigProviders } from "@/providers/SwrConfigProviders";
 
 export const metadata: Metadata = {
   title: "Sathi Dashboard",
@@ -18,10 +19,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={` antialiased`}>
         <StyledComponentsRegistry>
-          <StyledProviders>
-            <ToastContainer theme="colored" />
-            {children}
-          </StyledProviders>
+          <SwrConfigProviders>
+            <StyledProviders>
+              <ToastContainer theme="colored" />
+
+              {children}
+            </StyledProviders>
+          </SwrConfigProviders>
         </StyledComponentsRegistry>
       </body>
     </html>
