@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { useFormik } from "formik";
 import { ArrowLeft, FileText, MapPin, Paperclip, Users } from "lucide-react";
@@ -10,21 +11,30 @@ import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
+import useFetchEventList from "@/hooks/useFetchEventList";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import { PreventionProgramFormType } from "./prevention-program.types";
 import { StyledDiv } from "./style";
 
 const PreventionProgramForm = () => {
+  const { fetchEventData, eventData } = useFetchEventList();
+
+  React.useEffect(() => {
+    fetchEventData(1); // 1 means prevention program
+  }, [fetchEventData]);
+
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
-      event_title: "",
+      project_id: "",
+      event_id: "",
       activity_code: "",
       fund_code: "",
       organizer: "",
       start_date: null,
       end_date: null,
-      province: "",
-      district: "",
+      province_id: "",
+      district_id: "",
       address: "",
       ward: "",
       event_venue: "",
@@ -42,9 +52,18 @@ const PreventionProgramForm = () => {
         },
       ],
       profile_picture: "",
-      supporting_documents: [],
+      // supporting_documents: [],
     },
     onSubmit: () => {
+      const { start_date, end_date, ...rest } = formik.values;
+
+      const body = {
+        start_date: getConvertedDate(start_date),
+        end_date: getConvertedDate(end_date),
+        ...rest,
+      };
+
+      console.log(body, "final value");
       //
     },
   });
@@ -54,7 +73,7 @@ const PreventionProgramForm = () => {
       id: "project-profile",
       label: " Project Profile",
       icon: <FileText />,
-      component: <ProjectProfileForm formik={formik} />,
+      component: <ProjectProfileForm formik={formik} eventData={eventData} />,
     },
     {
       id: "location-details",

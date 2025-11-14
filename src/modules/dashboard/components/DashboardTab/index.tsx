@@ -1,4 +1,5 @@
 import Tab from "@/components/Tab";
+import { SelectValueTypes } from "@/types/select.types";
 
 import DashboardPreventionTab from "../DashboardPreventionTab";
 import DashboardProsecutionTab from "../DashboardProsecutionTab";
@@ -7,7 +8,11 @@ import DashboardResponseTab from "../DashboardResponseTab";
 
 import { StyledDiv } from "./style";
 
-const DashboardTab = () => {
+type Props = {
+  selectedProgram: SelectValueTypes;
+};
+
+const DashboardTab = ({ selectedProgram }: Props) => {
   const tabList = [
     {
       id: "prevention",
@@ -34,7 +39,7 @@ const DashboardTab = () => {
 
   return (
     <StyledDiv className="dashboard-tab-wrapper">
-      <Tab tabs={tabList} />
+      <Tab tabs={tabList} defaultSelectedTab={selectedProgram as string} />
     </StyledDiv>
   );
 };

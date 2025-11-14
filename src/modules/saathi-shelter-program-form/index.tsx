@@ -57,8 +57,6 @@ const SaathiShelterProgramForm = () => {
     },
   });
 
-  console.log(formik);
-
   return <StyledDiv>SaathiShelterProgramForm</StyledDiv>;
 };
 

@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { useFormik } from "formik";
 import { ArrowLeft, FileText, MapPin, Paperclip, Users } from "lucide-react";
@@ -10,22 +11,30 @@ import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
+import useFetchEventList from "@/hooks/useFetchEventList";
 
 import { PreventionProgramFormType } from "../prevention-program-form/prevention-program.types";
 
 import { StyledDiv } from "./style";
 
 const ProsecutionProgramForm = () => {
+  const { fetchEventData, eventData } = useFetchEventList();
+
+  React.useEffect(() => {
+    fetchEventData(2); // 2 means prosecution program
+  }, [fetchEventData]);
+
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
-      event_title: "",
+      project_id: "",
+      event_id: "",
       activity_code: "",
       fund_code: "",
       organizer: "",
       start_date: null,
       end_date: null,
-      province: "",
-      district: "",
+      province_id: "",
+      district_id: "",
       address: "",
       ward: "",
       event_venue: "",
@@ -43,7 +52,7 @@ const ProsecutionProgramForm = () => {
         },
       ],
       profile_picture: "",
-      supporting_documents: [],
+      // supporting_documents: [],
     },
     onSubmit: () => {
       //
@@ -55,7 +64,7 @@ const ProsecutionProgramForm = () => {
       id: "project-profile",
       label: " Project Profile",
       icon: <FileText />,
-      component: <ProjectProfileForm formik={formik} />,
+      component: <ProjectProfileForm formik={formik} eventData={eventData} />,
     },
     {
       id: "location-details",

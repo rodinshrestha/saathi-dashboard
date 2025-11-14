@@ -13,8 +13,6 @@ export const getApiResponseErrorToast = (err: ApiErrorResponseType) => {
 
   const errorObj = getApiResponseErrorObj(err);
 
-  console.log(errorObj, "@@@");
-
   if (Object.keys(errorObj).length === 0) {
     toast.error(message, {
       position: "top-right",

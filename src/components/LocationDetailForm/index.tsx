@@ -1,11 +1,16 @@
 import React from "react";
 
 import { FormikProps } from "formik";
+import { SingleValue } from "react-select";
 
 import InputField from "@/components/InputField";
-import { Select } from "@/components/Select";
+import { Option, Select } from "@/components/Select";
 import Typography from "@/components/Typography";
+import useToaster from "@/hooks/useToaster";
 import { PreventionProgramFormType } from "@/modules/prevention-program-form/prevention-program.types";
+import { convertDistrictList } from "@/modules/projects/utils/convert-district-list";
+import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
 
 import { StyledDiv } from "./style";
 
@@ -14,6 +19,26 @@ type Props = {
 };
 
 const LocationDetailForm = ({ formik }: Props) => {
+  const [districtList, setDistrictList] = React.useState<Array<Option>>([]);
+
+  const { provinceData } = useGlobalStore();
+  const { errorToast } = useToaster();
+
+  const handleProvinceChange = (item: SingleValue<Option>) => {
+    const { value = "" } = item || {};
+
+    if (!value) {
+      errorToast("Province value is empty");
+      return;
+    }
+    formik.setFieldValue("province_id", value);
+
+    const selectedDistrict =
+      provinceData.find((province) => province.id === value)?.districts || [];
+
+    setDistrictList(convertDistrictList(selectedDistrict));
+  };
+
   return (
     <StyledDiv className="location-details-form-wrapper">
       <Typography as="p" className="form-title">
@@ -23,17 +48,17 @@ const LocationDetailForm = ({ formik }: Props) => {
       <div className="location-details-form-list">
         <Select
           label="Province"
-          options={[{ label: "test", value: "test" }]}
-          value={formik.values.province}
-          onChange={(e) => formik.setFieldValue("province", e?.value)}
+          options={convertProvinceList(provinceData)}
+          value={formik.values.province_id}
+          onChange={handleProvinceChange}
           className="bg-color"
         />
 
         <Select
           label="District"
-          options={[{ label: "test", value: "test" }]}
-          value={formik.values.district}
-          onChange={(e) => formik.setFieldValue("district", e?.value)}
+          options={districtList}
+          value={formik.values.district_id}
+          onChange={(e) => formik.setFieldValue("district_id", e?.value)}
           className="bg-color"
         />
 

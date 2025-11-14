@@ -1,10 +1,16 @@
+"use client";
+import React from "react";
+
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
+import { SelectValueTypes } from "@/types/select.types";
 
 import DashboardFilter from "./components/DashboardFilter";
 import DashboardTab from "./components/DashboardTab";
 import { StyledDiv } from "./style";
 
 const Dasbhoard = () => {
+  const [selectedProgram, setSelectedProgram] =
+    React.useState<SelectValueTypes>("");
   return (
     <StyledDiv>
       <ModuleSectionWrapper
@@ -12,9 +18,12 @@ const Dasbhoard = () => {
         titleHelperText="Program Data Overview"
       />
 
-      <DashboardFilter />
+      <DashboardFilter
+        setSelectedProgram={setSelectedProgram}
+        selectedProgram={selectedProgram}
+      />
 
-      <DashboardTab />
+      <DashboardTab selectedProgram={selectedProgram} />
     </StyledDiv>
   );
 };

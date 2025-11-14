@@ -12,6 +12,7 @@ import Modal from "@/components/Modal";
 import { Option, Select } from "@/components/Select";
 import Typography from "@/components/Typography";
 import useToaster from "@/hooks/useToaster";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
 import { getApiResponseErrorObj } from "@/utils/get-api-response-error";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
@@ -42,7 +43,8 @@ const ProjectFormModal = ({
   selectedValue = null,
   isEdit,
 }: Props) => {
-  const { loader, programData, provinceData } = useProjectStore();
+  const { provinceData } = useGlobalStore();
+  const { loader, programData } = useProjectStore();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [districtList, setDistrictList] = React.useState<Array<Option>>(
@@ -84,8 +86,6 @@ const ProjectFormModal = ({
         end_date: getConvertedDate(end_date),
         ...rest,
       };
-
-      console.log(body);
 
       const { id } = selectedValue || {};
 

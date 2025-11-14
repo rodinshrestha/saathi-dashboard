@@ -8,6 +8,7 @@ import DatePicker from "@/components/DatePicker";
 import { Select } from "@/components/Select";
 import TableSearch from "@/components/Table/components/TableSearch";
 import Typography from "@/components/Typography";
+import { SelectValueTypes } from "@/types/select.types";
 
 import { StyledDiv } from "./style";
 
@@ -19,7 +20,12 @@ const programOption = [
   { label: "Protection", value: "protection" },
 ];
 
-const DashboardFilter = () => {
+type Props = {
+  setSelectedProgram: React.Dispatch<React.SetStateAction<SelectValueTypes>>;
+  selectedProgram: SelectValueTypes;
+};
+
+const DashboardFilter = ({ setSelectedProgram, selectedProgram }: Props) => {
   return (
     <StyledDiv>
       <Typography as="body2">Filter</Typography>
@@ -43,8 +49,10 @@ const DashboardFilter = () => {
         <Select
           label="Program"
           options={programOption}
-          onChange={() => {}}
-          value=""
+          onChange={(e) => {
+            setSelectedProgram(e?.value);
+          }}
+          value={selectedProgram as string | number}
           className="bg-color"
         />
         <Select

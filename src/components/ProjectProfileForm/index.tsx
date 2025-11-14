@@ -1,19 +1,44 @@
 import React from "react";
 
 import { FormikProps } from "formik";
+import { SingleValue } from "react-select";
 
 import DatePicker from "@/components/DatePicker";
 import InputField from "@/components/InputField";
-import { Select } from "@/components/Select";
+import { Option, Select } from "@/components/Select";
 import Typography from "@/components/Typography";
+import { getEventProject } from "@/http/get-event-list";
+import { PreventionProgramFormType } from "@/modules/prevention-program-form/prevention-program.types";
+import { EventDataTypes } from "@/types/event-data.types";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getEventOptionList } from "@/utils/get-event-option-list";
 
 import { StyledDiv } from "./style";
 
 type Props = {
-  formik: FormikProps<any>;
+  formik: FormikProps<PreventionProgramFormType>;
+  eventData: Array<EventDataTypes>;
 };
 
-const ProjectProfileForm = ({ formik }: Props) => {
+const ProjectProfileForm = ({ formik, eventData }: Props) => {
+  const [projectTitle, setProjectTitle] = React.useState("");
+
+  const handleEventChange = (e: SingleValue<Option>) => {
+    const value = e?.value;
+    formik.setFieldValue("event_id", value);
+    formik.setFieldValue("project_id", value);
+
+    getEventProject(value as number)
+      .then((res) => {
+        const { project_title = "" } = res?.data?.data || {};
+
+        setProjectTitle(project_title);
+      })
+      .catch((err) => {
+        getApiResponseErrorToast(err);
+      });
+  };
+
   return (
     <StyledDiv className="project-profile-form-wrapper">
       <Typography as="p" className="form-title">
@@ -25,15 +50,16 @@ const ProjectProfileForm = ({ formik }: Props) => {
           label="Project Title"
           placeholder="Auto-populated from event"
           className="bg-color"
+          value={projectTitle}
           disabled
           readOnly
         />
         <Select
           name="event_title"
           label="Event Title"
-          options={[{ label: "test", value: "test" }]}
-          value={formik.values.event_title}
-          onChange={(e) => formik.setFieldValue("event_title", e?.value)}
+          options={getEventOptionList(eventData)}
+          value={formik.values.event_id}
+          onChange={handleEventChange}
           className="bg-color"
         />
 

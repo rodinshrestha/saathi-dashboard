@@ -11,18 +11,19 @@ type ParticipantType = {
 };
 
 export type PreventionProgramFormType = {
-  event_title: string;
+  project_id: string;
+  event_id: string;
   activity_code: string;
   fund_code: string;
   organizer: string;
   start_date: Date | null;
   end_date: Date | null;
-  province: string;
-  district: string;
+  province_id: string;
+  district_id: string;
   address: string;
   ward: string;
   event_venue: string;
   participant: ParticipantType[];
   profile_picture: string;
-  supporting_documents: string[];
+  // supporting_documents: string[];
 };

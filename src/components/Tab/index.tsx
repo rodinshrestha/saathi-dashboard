@@ -3,9 +3,11 @@ import React from "react";
 
 import clsx from "clsx";
 
+import { getSelectedTab } from "@/utils/get-selected-tab";
+
 import { StyledDiv } from "./style";
 
-type Tab = {
+export type Tab = {
   id: string;
   label: string;
   content: React.ReactNode;
@@ -13,10 +15,14 @@ type Tab = {
 
 type Props = {
   tabs: Array<Tab>;
+  defaultSelectedTab?: string;
 };
 
-const Tab = ({ tabs }: Props) => {
-  const [activeTab, setActiveTab] = React.useState(tabs?.[0]?.id);
+const Tab = ({ tabs, defaultSelectedTab }: Props) => {
+  const [activeTab, setActiveTab] = React.useState(
+    getSelectedTab({ tabs, selectedTab: defaultSelectedTab })
+  );
+
   return (
     <StyledDiv className="tab-wrapper">
       <div className="tab-header-list">
