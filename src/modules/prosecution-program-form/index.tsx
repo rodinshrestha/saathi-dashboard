@@ -12,6 +12,10 @@ import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
 import useFetchEventList from "@/hooks/useFetchEventList";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import { PreventionProgramFormType } from "../prevention-program-form/prevention-program.types";
 
@@ -19,6 +23,8 @@ import { StyledDiv } from "./style";
 
 const ProsecutionProgramForm = () => {
   const { fetchEventData, eventData } = useFetchEventList();
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
 
   React.useEffect(() => {
     fetchEventData(2); // 2 means prosecution program
@@ -26,6 +32,7 @@ const ProsecutionProgramForm = () => {
 
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
+      program_id: 2,
       project_id: "",
       event_id: "",
       activity_code: "",
@@ -55,7 +62,19 @@ const ProsecutionProgramForm = () => {
       // supporting_documents: [],
     },
     onSubmit: () => {
-      //
+      const { start_date, end_date, ...rest } = formik.values;
+      setLoader(true);
+      const body = {
+        start_date: getConvertedDate(start_date),
+        end_date: getConvertedDate(end_date),
+        ...rest,
+      };
+
+      authAxios
+        .post("/survivors", body)
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -96,7 +115,11 @@ const ProsecutionProgramForm = () => {
         title="Prosecution Program - Data Entry"
         className="multi-form-title"
       />
-      <MultiStepForm steps={step} onSubmit={formik.handleSubmit} />
+      <MultiStepForm
+        steps={step}
+        onSubmit={formik.handleSubmit}
+        loader={loader}
+      />
     </StyledDiv>
   );
 };

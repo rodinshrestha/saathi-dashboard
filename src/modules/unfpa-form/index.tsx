@@ -104,7 +104,11 @@ const UnfpaForm = () => {
         title="Prosecution Program - Data Entry"
         className="multi-form-title"
       />
-      <MultiStepForm steps={step} onSubmit={formik.handleSubmit} />
+      <MultiStepForm
+        steps={step}
+        onSubmit={formik.handleSubmit}
+        loader={false}
+      />
     </StyledDiv>
   );
 };
