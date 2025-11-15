@@ -5,6 +5,7 @@ import { Chart, registerables } from "chart.js";
 
 import { BarChartDataType } from "@/constant/barchart.types";
 
+import { BarGraphSkeletonLoading } from "../Loader/BarGraphSkeletonLoading";
 import Typography from "../Typography";
 
 import { StyledDiv } from "./style";
@@ -14,39 +15,43 @@ Chart.register(...registerables);
 type Props = {
   label?: string;
   data: BarChartDataType;
+  isLoading?: boolean;
 };
 
-const BarGraph = ({ label, data }: Props) => {
+const BarGraph = ({ label, data, isLoading }: Props) => {
   const barGraphRef = React.useRef<HTMLCanvasElement>(null);
 
-  const participationByOrgData = {
-    labels: data.labels,
-    datasets: [
-      {
-        label: "Participants",
-        data: data.value,
-        backgroundColor: [
-          "#10B981",
-          "#3B82F6",
-          "#F59E0B",
-          "#EF4444",
-          "#8B5CF6",
-          "#EC4899",
-          "#14B8A6",
-          "#F97316",
-          "#06B6D4",
-          "#84CC16",
-          "#6366F1",
-          "#A855F7",
-          "#22D3EE",
-          "#FB923C",
-          "#94A3B8",
-          "#10B981",
-        ],
-        borderWidth: 0,
-      },
-    ],
-  };
+  const participationByOrgData = React.useMemo(
+    () => ({
+      labels: data.labels,
+      datasets: [
+        {
+          label: "Participants",
+          data: data.value,
+          backgroundColor: [
+            "#10B981",
+            "#3B82F6",
+            "#F59E0B",
+            "#EF4444",
+            "#8B5CF6",
+            "#EC4899",
+            "#14B8A6",
+            "#F97316",
+            "#06B6D4",
+            "#84CC16",
+            "#6366F1",
+            "#A855F7",
+            "#22D3EE",
+            "#FB923C",
+            "#94A3B8",
+            "#10B981",
+          ],
+          borderWidth: 0,
+        },
+      ],
+    }),
+    [data.labels, data.value]
+  );
 
   React.useEffect(() => {
     let chart: Chart<"bar", number[], string> | null = null;
@@ -87,7 +92,11 @@ const BarGraph = ({ label, data }: Props) => {
     return () => {
       chart?.destroy();
     };
-  }, []);
+  }, [participationByOrgData]);
+
+  if (isLoading) {
+    return <BarGraphSkeletonLoading />;
+  }
 
   return (
     <StyledDiv>

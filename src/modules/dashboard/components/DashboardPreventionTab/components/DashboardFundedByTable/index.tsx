@@ -6,15 +6,17 @@ import { FundedTableColumn } from "./funded.table.column";
 
 type Props = {
   tableData: Array<{ [keyof: string]: string }>;
+  isLoading?: boolean;
 };
 
-const DashboardFundedByTable = ({ tableData }: Props) => {
+const DashboardFundedByTable = ({ tableData, isLoading }: Props) => {
   return (
     <Table
       columns={FundedTableColumn()}
       data={tableData}
       showBoxShadow
       tableTitle="Funded by"
+      isLoading={isLoading}
     />
   );
 };

@@ -5,6 +5,7 @@ import { Chart, registerables } from "chart.js";
 
 import { BarChartDataType } from "@/constant/barchart.types";
 
+import { BarChartSkeletonLoading } from "../Loader/BarChartSkeletonLoading";
 import Typography from "../Typography";
 
 import { StyledDiv } from "./style";
@@ -14,22 +15,26 @@ Chart.register(...registerables);
 type Props = {
   data: BarChartDataType;
   label?: string;
+  isLoading?: boolean;
 };
 
-const BarChart = ({ label, data }: Props) => {
+const BarChart = ({ label, data, isLoading }: Props) => {
   const barChartRef = React.useRef<HTMLCanvasElement>(null);
 
-  const attendanceData = {
-    labels: data.labels,
-    datasets: [
-      {
-        label: "Attendance",
-        data: data.value,
-        backgroundColor: "#10B981",
-        borderRadius: 8,
-      },
-    ],
-  };
+  const attendanceData = React.useMemo(
+    () => ({
+      labels: data.labels,
+      datasets: [
+        {
+          label: "Attendance",
+          data: data.value,
+          backgroundColor: "#10B981",
+          borderRadius: 8,
+        },
+      ],
+    }),
+    [data.labels, data.value]
+  );
 
   React.useEffect(() => {
     let chart: Chart<"bar", number[], string> | null = null;
@@ -68,7 +73,11 @@ const BarChart = ({ label, data }: Props) => {
     return () => {
       chart?.destroy();
     };
-  }, []);
+  }, [attendanceData]);
+
+  if (isLoading) {
+    return <BarChartSkeletonLoading />;
+  }
 
   return (
     <StyledDiv className="barchart-wrapper">

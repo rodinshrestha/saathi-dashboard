@@ -18,10 +18,6 @@ const DashboardPreventionTab = () => {
 
   const { prevention } = data?.data || {};
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <StyledDiv>
       <div className="prevention-tab-card-wrapper">
@@ -29,30 +25,39 @@ const DashboardPreventionTab = () => {
           label="No. of Projects"
           value={prevention?.kpis?.project_count}
           icon={<FolderOpen />}
+          isLoading={isLoading}
         />
         <MiniCard
           label="Province Covered"
           value={prevention?.kpis?.provinces_covered}
           icon={<MapPin />}
+          isLoading={isLoading}
         />
         <MiniCard
           label="Attendance Count"
           value={prevention?.kpis?.provinces_covered}
           icon={<UsersRound />}
+          isLoading={isLoading}
         />
       </div>
       <BarChart
         label="Attendance per Project"
         data={getBarChartData(prevention?.attendance_per_project || [])}
+        isLoading={isLoading}
       />
       <BarGraph
         label="Participation by Organization"
         data={getBarGraphData(prevention?.participation_by_organization || [])}
+        isLoading={isLoading}
       />
       <DashboardRecentActivityTable
         tableData={prevention?.recent_activities || []}
+        isLoading={isLoading}
       />
-      <DashboardFundedByTable tableData={prevention?.funders || []} />
+      <DashboardFundedByTable
+        tableData={prevention?.funders || []}
+        isLoading={isLoading}
+      />
     </StyledDiv>
   );
 };

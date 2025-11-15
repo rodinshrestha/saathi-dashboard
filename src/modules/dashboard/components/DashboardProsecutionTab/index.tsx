@@ -15,10 +15,6 @@ import { StyledDiv } from "./style";
 const DashboardProsecutionTab = () => {
   const { data, isLoading } = useSWR("/dashboard?program=prosecution");
 
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
-
   const { prosecution } = data?.data || {};
 
   return (
@@ -29,33 +25,39 @@ const DashboardProsecutionTab = () => {
           value={prosecution?.kpis?.project_count}
           icon={<FolderOpen />}
           variant="blue"
+          isLoading={isLoading}
         />
         <MiniCard
           label="Province Covered"
           value={prosecution?.kpis?.provinces_covered}
           icon={<MapPin />}
           variant="blue"
+          isLoading={isLoading}
         />
         <MiniCard
           label="Attendance Count"
           value={prosecution?.kpis?.attendance_count}
           icon={<UsersRound />}
           variant="blue"
+          isLoading={isLoading}
         />
       </div>
 
       <BarChart
         label="Attendance per Project"
         data={getBarChartData(prosecution?.attendance_per_project || [])}
+        isLoading={isLoading}
       />
 
       <BarGraph
         label="Participation by Organization"
         data={getBarGraphData(prosecution?.participation_by_organization || [])}
+        isLoading={isLoading}
       />
 
       <DashboardRecentActivityTable
         tableData={prosecution?.recent_activities || []}
+        isLoading={isLoading}
       />
     </StyledDiv>
   );

@@ -2,6 +2,7 @@ import React from "react";
 
 import clsx from "clsx";
 
+import MiniCardSkeletonLoading from "../Loader/MiniCardSkeletonLoading";
 import Typography from "../Typography";
 
 import { StyledDiv } from "./style";
@@ -11,9 +12,20 @@ type Props = {
   value: string | number;
   variant?: "green" | "blue" | "orange" | "yellow";
   icon: React.ReactNode;
+  isLoading?: boolean;
 };
 
-const MiniCard = ({ label, value, icon: Icon, variant = "green" }: Props) => {
+const MiniCard = ({
+  label,
+  value,
+  icon: Icon,
+  isLoading,
+  variant = "green",
+}: Props) => {
+  if (isLoading) {
+    return <MiniCardSkeletonLoading />;
+  }
+
   return (
     <StyledDiv className={clsx("mini-card-wrapper", variant)}>
       <div className="mini-card-content-wrapper">
