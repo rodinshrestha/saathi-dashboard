@@ -1,6 +1,5 @@
 import { Option } from "@/components/Select";
-
-import { ProvinceDistrictType } from "../projects.types";
+import { ProvinceDistrictType } from "@/types/province.types";
 
 export const convertDistrictList = (
   data: Array<ProvinceDistrictType>
