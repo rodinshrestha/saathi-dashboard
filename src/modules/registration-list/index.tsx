@@ -6,6 +6,7 @@ import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import Table from "@/components/Table";
 
 import RegistrationViewModal from "./components/RegistrationViewModal";
+import useFetchRegistration from "./hooks/useFetchRegistration";
 import { RegistrationTableColumns } from "./registration.table.columns";
 import { StyledDiv } from "./style";
 
@@ -41,6 +42,8 @@ export const registrationData = [
 
 const RegistrationList = () => {
   const [isViewModalOpen, setIsViewModalOpen] = React.useState(false);
+
+  const { registrationList, isLoading } = useFetchRegistration();
   return (
     <StyledDiv>
       <ModuleSectionWrapper
@@ -58,7 +61,11 @@ const RegistrationList = () => {
         columns={RegistrationTableColumns({
           setIsViewModalOpen,
         })}
-        data={registrationData}
+        data={registrationList?.data || []}
+        isLoading={isLoading}
+        pageMeta={registrationList?.meta}
+        searchable
+        showPagination
       />
     </StyledDiv>
   );

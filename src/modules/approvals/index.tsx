@@ -3,47 +3,30 @@ import React from "react";
 
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import Table from "@/components/Table";
+import { IDLE, PENDING } from "@/constant/loading.state";
 
+import { ApprovalType } from "./approval.types";
 import { ApprovalsTableColumns } from "./approvals.table.columns";
 import ApprovalApprovedModal from "./components/ApprovalApprovedModal";
 import ApprovalCancelModal from "./components/ApprovalCancelModal";
 import ApprovalViewModal from "./components/ApprovalViewModal";
+import useFetchApproval from "./hooks/useFetchApproval";
+import { useApprovalStore } from "./store/useApprovalStore";
 import { StyledDiv } from "./style";
-
-const data = [
-  {
-    registration_id: "REG-2024-002",
-    name: "John Doe",
-    program: "Prosecution",
-    project: "Legal Aid Initiative",
-    province: "Madhesh province",
-    date_submitted: "2024-03-10",
-    status: "pending",
-  },
-  {
-    registration_id: "REG-2024-003",
-    name: "Manish Basnet",
-    program: "Prosecution",
-    project: "Aid Initiative",
-    province: "Bagmati province",
-    date_submitted: "2024-04-10",
-    status: "approved",
-  },
-  {
-    registration_id: "REG-2024-004",
-    name: "Sudeep",
-    program: "Prosecution",
-    project: "Legal Aid Initiative",
-    province: "Madhesh province",
-    date_submitted: "2023-03-10",
-    status: "canceled",
-  },
-];
 
 const ApprovalsModule = () => {
   const [isApproveModalOpen, setIsApproveModalOpen] = React.useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = React.useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = React.useState(false);
+  const [selectedApprovalData, setSelectedApprovalData] =
+    React.useState<ApprovalType | null>(null);
+
+  const { fetchApprovalList } = useFetchApproval();
+  const { approvalLoader, approvalData } = useApprovalStore();
+
+  React.useEffect(() => {
+    fetchApprovalList();
+  }, [fetchApprovalList]);
 
   return (
     <StyledDiv>
@@ -55,11 +38,13 @@ const ApprovalsModule = () => {
       <ApprovalApprovedModal
         isOpen={isApproveModalOpen}
         onClose={() => setIsApproveModalOpen(false)}
+        selectedApprovalData={selectedApprovalData}
       />
 
       <ApprovalCancelModal
         isOpen={isCancelModalOpen}
         onClose={() => setIsCancelModalOpen(false)}
+        selectedApprovalData={selectedApprovalData}
       />
 
       <ApprovalViewModal
@@ -68,13 +53,17 @@ const ApprovalsModule = () => {
       />
 
       <Table
-        tableTitle="Pending Approvals(1)"
+        tableTitle={`Pending Approvals(${approvalData?.data?.length})`}
         columns={ApprovalsTableColumns({
           setIsApproveModalOpen,
           setIsCancelModalOpen,
           setIsViewModalOpen,
+          setSelectedApprovalData,
         })}
-        data={data}
+        data={approvalData?.data || []}
+        isLoading={approvalLoader === IDLE || approvalLoader === PENDING}
+        pageMeta={approvalData?.meta}
+        showPagination
         searchable
       />
     </StyledDiv>

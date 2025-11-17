@@ -1,6 +1,6 @@
-import { ProvinceDataType } from "../projects.types";
+import { ProvinceType } from "@/types/province.types";
 
-export const convertProvinceList = (data: Array<ProvinceDataType>) => {
+export const convertProvinceList = (data: Array<ProvinceType>) => {
   if (Array.isArray(data) && !data.length) {
     return [];
   }

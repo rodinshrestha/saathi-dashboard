@@ -8,6 +8,8 @@ import DatePicker from "@/components/DatePicker";
 import { Select } from "@/components/Select";
 import TableSearch from "@/components/Table/components/TableSearch";
 import Typography from "@/components/Typography";
+import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
 import { SelectValueTypes } from "@/types/select.types";
 
 import { StyledDiv } from "./style";
@@ -26,6 +28,8 @@ type Props = {
 };
 
 const DashboardFilter = ({ setSelectedProgram, selectedProgram }: Props) => {
+  const { provinceData } = useGlobalStore();
+
   return (
     <StyledDiv>
       <Typography as="body2">Filter</Typography>
@@ -41,7 +45,7 @@ const DashboardFilter = ({ setSelectedProgram, selectedProgram }: Props) => {
         />
         <Select
           label="Province"
-          options={[{ label: "text", value: "text" }]}
+          options={convertProvinceList(provinceData)}
           onChange={() => {}}
           value=""
           className="bg-color"

@@ -1,11 +1,10 @@
 import { Option } from "@/components/Select";
-
-import { ProvinceDataType } from "../projects.types";
+import { ProvinceType } from "@/types/province.types";
 
 import { convertDistrictList } from "./convert-district-list";
 
 export const initializeDistrictList = (
-  provinceData: Array<ProvinceDataType>,
+  provinceData: Array<ProvinceType>,
   selectedProvinceId?: number
 ): Array<Option> => {
   if (!selectedProvinceId) {

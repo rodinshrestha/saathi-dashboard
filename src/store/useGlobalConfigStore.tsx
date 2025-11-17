@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
-import { ProvinceDataType } from "@/modules/projects/projects.types";
+import { ProvinceType } from "@/types/province.types";
 
 type setGlobalDataTypes = {
-  provinceData: Array<ProvinceDataType>;
+  provinceData: Array<ProvinceType>;
 };
 
 interface GlobalConfigStore {
   globalLoader: boolean;
-  provinceData: Array<ProvinceDataType>;
+  provinceData: Array<ProvinceType>;
   setGlobalLoader: (loader: boolean) => void;
   setGlobalData: ({ provinceData }: setGlobalDataTypes) => void;
 }

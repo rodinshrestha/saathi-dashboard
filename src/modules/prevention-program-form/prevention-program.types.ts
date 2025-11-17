@@ -1,12 +1,29 @@
-type ParticipantType = {
+export type ParticipantType = {
+  /** Full name of the participant */
   participant_name: string;
+
+  /** Name of the office or school the participant belongs to */
   office_school: string;
+
+  /** Participant's job position or role */
   position: string;
+
+  /** Participant’s contact phone number */
   phone_number: string;
+
+  /** Participant’s email address */
   email: string;
+
+  /** Participant’s age */
   age: string;
+
+  /** Participant’s sex (e.g., Male/Female/Other) */
   sex: string;
+
+  /** Participant’s ethnicity group */
   ethnicity: string;
+
+  /** Type of disability, if any (empty string if none) */
   disability_type: string;
 };
 
