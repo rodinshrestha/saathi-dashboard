@@ -35,6 +35,10 @@ export const StyledDiv = styled.div`
     margin-top: 24px;
     font-family: ${({ theme }) => theme.fonts.sans} !important;
 
+    th {
+      cursor: pointer;
+    }
+
     tr {
       border-bottom: 1px solid
         ${({ theme }) => theme.color.borderColor.highContrast};
@@ -50,7 +54,7 @@ export const StyledDiv = styled.div`
 
     td {
       height: 40px;
-      padding: 0 8px;
+      padding: 4px 8px;
       width: 190px;
       text-transform: capitalize;
       font-size: 14px;
