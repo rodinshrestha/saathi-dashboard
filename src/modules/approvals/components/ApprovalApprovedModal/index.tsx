@@ -60,7 +60,7 @@ const ApprovalApprovedModal = ({
     >
       <StyledDiv>
         <Typography as="p" className="approve-registration-content">
-          {`Are you sure you want to approve registration ${selectedApprovalData?.registration_id} for ${selectedApprovalData?.user.name}? This action will make the data visible in the dashboard.`}
+          {`Are you sure you want to approve registration ${selectedApprovalData?.registration_id} for ${selectedApprovalData?.user?.name}? This action will make the data visible in the dashboard.`}
         </Typography>
 
         <div className="approve-registration-btn-wrapper">

@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 
 import { MetaType } from "@/types/api-respone.types";
 
+import ApiDebugger from "../ApiDebugger";
 import TableSkeleton from "../Loader/TableSkeletonLoading";
 import Typography from "../Typography";
 
@@ -75,75 +76,81 @@ const Table = <T,>({
   console.log(noData, "@@@@");
 
   return (
-    <StyledDiv
-      className={clsx("table-wrapper", { "box-shadow": showBoxShadow })}
-    >
-      <div className="table-title-wrapper">
-        {tableTitle && (
-          <Typography as="p" className="table-title">
-            {tableTitle}
-          </Typography>
-        )}
-        {searchable && <TableSearch />}
-      </div>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHeader
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
-                >
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                </TableHeader>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        {(showError || noData) && (
-          <tbody>
-            <tr>
-              <td colSpan={columns.length}>
-                <div className="no-data-found-wrapper">
-                  <Typography as="p">No Data Found</Typography>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        )}
-
-        {isLoading ? (
-          <TableSkeleton columns={columns.length} />
-        ) : (
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    style={{ width: cell.column.columnDef.size ?? "auto" }}
+    <>
+      <ApiDebugger data={data} />
+      <StyledDiv
+        className={clsx("table-wrapper", { "box-shadow": showBoxShadow })}
+      >
+        <div className="table-title-wrapper">
+          {tableTitle && (
+            <Typography as="p" className="table-title">
+              {tableTitle}
+            </Typography>
+          )}
+          {searchable && <TableSearch />}
+        </div>
+        <table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHeader
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </TableHeader>
                 ))}
               </tr>
             ))}
-          </tbody>
-        )}
-      </table>
+          </thead>
+          {(showError || noData) && (
+            <tbody>
+              <tr>
+                <td colSpan={columns.length}>
+                  <div className="no-data-found-wrapper">
+                    <Typography as="p">No Data Found</Typography>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          )}
 
-      {showPagination && (
-        <TablePagination
-          isLoading={isLoading}
-          pageMeta={pageMeta}
-          table={table}
-        />
-      )}
-    </StyledDiv>
+          {isLoading ? (
+            <TableSkeleton columns={columns.length} />
+          ) : (
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      style={{ width: cell.column.columnDef.size ?? "auto" }}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+
+        {showPagination && (
+          <TablePagination
+            isLoading={isLoading}
+            pageMeta={pageMeta}
+            table={table}
+          />
+        )}
+      </StyledDiv>
+    </>
   );
 };
 
