@@ -1,5 +1,6 @@
 import Col from "@/components/Col";
 import Container from "@/components/Container";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Header from "@/components/Header";
 import Navbar from "@/components/NavBar";
 import Row from "@/components/Row";
@@ -19,7 +20,9 @@ export default function BaseLayout({ children }: Props) {
           <div className="dashboard-body">
             <Container>
               <Row>
-                <Col>{children}</Col>
+                <Col>
+                  <ErrorBoundary>{children}</ErrorBoundary>
+                </Col>
               </Row>
             </Container>
           </div>
