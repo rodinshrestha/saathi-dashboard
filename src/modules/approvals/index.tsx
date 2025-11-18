@@ -28,6 +28,14 @@ const ApprovalsModule = () => {
     fetchApprovalList();
   }, [fetchApprovalList]);
 
+  const getTableTitle = () => {
+    if (!approvalData?.data?.length) {
+      return "Pending Approvals";
+    }
+
+    return `Pending Approvals(${approvalData?.data?.length})`;
+  };
+
   return (
     <StyledDiv>
       <ModuleSectionWrapper
@@ -53,7 +61,7 @@ const ApprovalsModule = () => {
       />
 
       <Table
-        tableTitle={`Pending Approvals(${approvalData?.data?.length})`}
+        tableTitle={getTableTitle()}
         columns={ApprovalsTableColumns({
           setIsApproveModalOpen,
           setIsCancelModalOpen,

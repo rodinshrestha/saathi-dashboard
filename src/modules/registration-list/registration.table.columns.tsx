@@ -20,7 +20,7 @@ export const RegistrationTableColumns = ({
       header: "Registration ID",
     },
     {
-      accessorFn: (row) => row.user.name,
+      accessorFn: (row) => row.user?.name || "N/A",
       header: "Name",
     },
 
@@ -38,7 +38,7 @@ export const RegistrationTableColumns = ({
       header: "province",
     },
     {
-      accessorFn: (row) => formatDateToYMD(row.program.created_at),
+      accessorFn: (row) => formatDateToYMD(row?.program?.created_at),
       header: "Date",
     },
     {

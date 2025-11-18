@@ -27,12 +27,12 @@ export const ApprovalsTableColumns = ({
       header: "Registration ID",
     },
     {
-      accessorFn: (row) => row.user.name,
+      accessorFn: (row) => row.user?.name || "N/A",
       header: "Name",
       size: 100,
     },
     {
-      accessorFn: (row) => row.program.name,
+      accessorFn: (row) => row.program?.name || "N/A",
       header: "Program",
     },
     {
