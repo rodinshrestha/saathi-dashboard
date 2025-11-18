@@ -6,8 +6,7 @@ import useSWR from "swr";
 import BarChart from "@/components/BarChart";
 import BarGraph from "@/components/BarGraph";
 import MiniCard from "@/components/MiniCard";
-import { getBarChartData } from "@/utils/get-bar-chart-data";
-import { getBarGraphData } from "@/utils/get-bar-graph-data";
+import { getMetrixData } from "@/utils/get-metrix-data";
 
 import DashboardFundedByTable from "./components/DashboardFundedByTable";
 import DashboardRecentActivityTable from "./components/DashboardRecentActivityTable";
@@ -42,12 +41,12 @@ const DashboardPreventionTab = () => {
       </div>
       <BarChart
         label="Attendance per Project"
-        data={getBarChartData(prevention?.attendance_per_project || [])}
+        data={getMetrixData(prevention?.attendance_per_project || [])}
         isLoading={isLoading}
       />
       <BarGraph
         label="Participation by Organization"
-        data={getBarGraphData(prevention?.participation_by_organization || [])}
+        data={getMetrixData(prevention?.participation_by_organization || [])}
         isLoading={isLoading}
       />
       <DashboardRecentActivityTable

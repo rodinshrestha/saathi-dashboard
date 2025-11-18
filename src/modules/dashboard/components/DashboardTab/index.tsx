@@ -35,11 +35,15 @@ const DashboardTab = ({ selectedProgram }: Props) => {
       label: "Protection",
       content: <DashboardProtectionTab />,
     },
-  ];
+  ] as const;
 
   return (
     <StyledDiv className="dashboard-tab-wrapper">
-      <Tab tabs={tabList} defaultSelectedTab={selectedProgram as string} />
+      <Tab
+        tabs={tabList}
+        selectedProgram={selectedProgram as string}
+        pushToUrl
+      />
     </StyledDiv>
   );
 };

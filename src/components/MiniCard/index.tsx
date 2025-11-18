@@ -32,9 +32,11 @@ const MiniCard = ({
         <Typography as="p" className="mini-card-label">
           {label}
         </Typography>
-        <Typography as="p" className="mini-card-value">
-          {value}
-        </Typography>
+        {value && (
+          <Typography as="p" className="mini-card-value">
+            {value}
+          </Typography>
+        )}
       </div>
       <div className="mini-card-icon-wrapper">{Icon}</div>
     </StyledDiv>

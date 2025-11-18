@@ -16,10 +16,47 @@ type Props = {
   label?: string;
   data: BarChartDataType;
   isLoading?: boolean;
+  variant?: "random" | "cyan" | "green";
 };
 
-const BarGraph = ({ label, data, isLoading }: Props) => {
+const BarGraph = ({ label, data, isLoading, variant = "random" }: Props) => {
   const barGraphRef = React.useRef<HTMLCanvasElement>(null);
+
+  const bgColor = React.useMemo(() => {
+    let bgColor = ["#10B981"];
+
+    switch (variant) {
+      case "cyan":
+        bgColor = ["#4ECDC4"];
+        break;
+
+      case "green":
+        bgColor = ["#6BCB77"];
+        break;
+
+      default:
+        bgColor = [
+          "#10B981",
+          "#3B82F6",
+          "#F59E0B",
+          "#EF4444",
+          "#8B5CF6",
+          "#EC4899",
+          "#14B8A6",
+          "#F97316",
+          "#06B6D4",
+          "#84CC16",
+          "#6366F1",
+          "#A855F7",
+          "#22D3EE",
+          "#FB923C",
+          "#94A3B8",
+          "#10B981",
+        ];
+    }
+
+    return bgColor;
+  }, [variant]);
 
   const participationByOrgData = React.useMemo(
     () => ({
@@ -28,29 +65,12 @@ const BarGraph = ({ label, data, isLoading }: Props) => {
         {
           label: "Participants",
           data: data.value,
-          backgroundColor: [
-            "#10B981",
-            "#3B82F6",
-            "#F59E0B",
-            "#EF4444",
-            "#8B5CF6",
-            "#EC4899",
-            "#14B8A6",
-            "#F97316",
-            "#06B6D4",
-            "#84CC16",
-            "#6366F1",
-            "#A855F7",
-            "#22D3EE",
-            "#FB923C",
-            "#94A3B8",
-            "#10B981",
-          ],
+          backgroundColor: bgColor,
           borderWidth: 0,
         },
       ],
     }),
-    [data.labels, data.value]
+    [data.labels, data.value, bgColor]
   );
 
   React.useEffect(() => {

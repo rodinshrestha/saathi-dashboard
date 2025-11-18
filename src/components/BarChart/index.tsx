@@ -2,6 +2,7 @@
 import React from "react";
 
 import { Chart, registerables } from "chart.js";
+import clsx from "clsx";
 
 import { BarChartDataType } from "@/constant/barchart.types";
 
@@ -16,9 +17,10 @@ type Props = {
   data: BarChartDataType;
   label?: string;
   isLoading?: boolean;
+  className?: string;
 };
 
-const BarChart = ({ label, data, isLoading }: Props) => {
+const BarChart = ({ label, data, isLoading, className }: Props) => {
   const barChartRef = React.useRef<HTMLCanvasElement>(null);
 
   const attendanceData = React.useMemo(
@@ -80,7 +82,7 @@ const BarChart = ({ label, data, isLoading }: Props) => {
   }
 
   return (
-    <StyledDiv className="barchart-wrapper">
+    <StyledDiv className={clsx("barchart-wrapper", className)}>
       {label && (
         <Typography as="p" className="bar-chart-title">
           {label}

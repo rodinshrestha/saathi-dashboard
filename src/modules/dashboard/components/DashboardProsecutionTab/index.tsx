@@ -5,8 +5,7 @@ import useSWR from "swr";
 import BarChart from "@/components/BarChart";
 import BarGraph from "@/components/BarGraph";
 import MiniCard from "@/components/MiniCard";
-import { getBarChartData } from "@/utils/get-bar-chart-data";
-import { getBarGraphData } from "@/utils/get-bar-graph-data";
+import { getMetrixData } from "@/utils/get-metrix-data";
 
 import DashboardRecentActivityTable from "../DashboardPreventionTab/components/DashboardRecentActivityTable";
 
@@ -45,13 +44,13 @@ const DashboardProsecutionTab = () => {
 
       <BarChart
         label="Attendance per Project"
-        data={getBarChartData(prosecution?.attendance_per_project || [])}
+        data={getMetrixData(prosecution?.attendance_per_project || [])}
         isLoading={isLoading}
       />
 
       <BarGraph
         label="Participation by Organization"
-        data={getBarGraphData(prosecution?.participation_by_organization || [])}
+        data={getMetrixData(prosecution?.participation_by_organization || [])}
         isLoading={isLoading}
       />
 

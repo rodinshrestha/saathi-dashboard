@@ -9,6 +9,7 @@ const pulse = keyframes`
 // Wrapper
 const ChartSkeletonWrapper = styled.div`
   height: 480px;
+  min-width: 759px;
   padding: 24px;
   border-radius: 8px;
   background: #fff;

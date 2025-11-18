@@ -9,6 +9,7 @@ export const StyledDiv = styled.div`
     background-color: ${({ theme }) => theme.color.grey["300"]};
     border-radius: 12px;
     margin-bottom: 15px;
+
     .tab-header {
       flex: 1 1 50%;
       text-align: center;
@@ -17,10 +18,16 @@ export const StyledDiv = styled.div`
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
+
       &.active {
         background-color: ${({ theme }) =>
           theme.color.backgroundColor.lowContrast};
         border-radius: 14px;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.2;
       }
     }
   }
