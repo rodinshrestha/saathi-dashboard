@@ -297,7 +297,7 @@ const ProjectFormModal = ({
           </Button>
           <Button
             onClick={() => formik.handleSubmit()}
-            disabled={!formik.isValid || isLoading}
+            disabled={!formik.dirty || !formik.isValid || isLoading}
             loading={isLoading}
           >
             {isEdit ? "Update Project" : "Create Project"}
