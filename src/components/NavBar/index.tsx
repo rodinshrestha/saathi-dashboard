@@ -9,27 +9,23 @@ import { useSelectedLayoutSegments } from "next/navigation";
 import { getNavUrlPath } from "@/utils/get-nav-path";
 
 import Button from "../Button";
+import LogoutModal from "../LogoutModal";
 import Tooltip from "../Tooltip";
 
 import { navData } from "./data";
 import { StyledNavBar } from "./style";
 
 const Navbar = () => {
-  const [isExpand, setIsExpland] = React.useState(true);
+  const [isExpand, setIsExpland] = React.useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = React.useState(false);
   const segments = useSelectedLayoutSegments();
 
   return (
-    <StyledNavBar className={clsx("navbar-wrapper", { expanded: isExpand })}>
-      <div
-        className="navbar-expand-icon-wrapper"
-        onClick={() => setIsExpland((prev) => !prev)}
-      >
-        {isExpand ? (
-          <ArrowLeftFromLine size={16} />
-        ) : (
-          <ArrowRightFromLine size={16} />
-        )}
-      </div>
+    <StyledNavBar
+      className={clsx("navbar-wrapper", { expanded: isExpand })}
+      onMouseEnter={() => setIsExpland(true)}
+      onMouseLeave={() => setIsExpland(false)}
+    >
       <div className="navbar-header">Icon</div>
 
       <div className="navbar-list-wrapper">
@@ -54,12 +50,22 @@ const Navbar = () => {
           })}
         </div>
         <div className="navbar-bottom-wrapper">
-          <Button variant="outline" size="full-width" className="navbar-button">
+          <Button
+            variant="outline"
+            size="full-width"
+            className="navbar-button"
+            onClick={() => setIsLogoutModalOpen(true)}
+          >
             <LogOut size={16} />
             {isExpand && "Logout"}
           </Button>
         </div>
       </div>
+
+      <LogoutModal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+      />
     </StyledNavBar>
   );
 };
