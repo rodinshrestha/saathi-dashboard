@@ -59,7 +59,7 @@ const ShelterServiceForm = ({ formik }: Props) => {
           placeholder="Select option"
           label="Is this this your first time in shelter?"
           onChange={(e) =>
-            formik.setFieldValue("first_time_in_shelter", e.value)
+            formik.setFieldValue("first_time_in_shelter", e?.value)
           }
           value={formik.values.first_time_in_shelter}
           className="bg-color"
