@@ -14,7 +14,7 @@ type Props = {
   label: string;
   label_helper_text: string;
   feature: Array<string>;
-  link: string;
+  btnLabel: string;
 };
 
 const Card = ({
@@ -24,7 +24,7 @@ const Card = ({
   label,
   label_helper_text,
   feature,
-  link,
+  btnLabel,
 }: Props) => {
   return (
     <StyledDiv className={clsx("card-wrapper", id)}>
@@ -56,10 +56,10 @@ const Card = ({
       </div>
 
       <div className="card-feature-btn-wrapper">
-        <Link href={link}>
-          <span>Start Data Entry</span>
+        <div className="btn-link">
+          <span>{btnLabel}</span>
           <MoveRight size={18} />
-        </Link>
+        </div>
       </div>
     </StyledDiv>
   );

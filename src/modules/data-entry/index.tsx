@@ -66,7 +66,7 @@ const data = [
       "Child Intake Processing",
       "Family Reintegration",
     ],
-    link: "#",
+    link: "data-entry/protection-program-form",
   },
 ];
 
@@ -89,7 +89,7 @@ const DataEntry = () => {
                 label={item.label}
                 label_helper_text={item.label_helper_text}
                 feature={item.feature}
-                link={item.link}
+                btnLabel="Start Data Entry"
               />
             </Link>
           );

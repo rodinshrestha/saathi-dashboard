@@ -10,7 +10,8 @@ export const StyledDiv = styled.div`
     cursor: pointer;
     background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
 
-    &.prevention {
+    &.prevention,
+    &.child-profile-form {
       .icon-wrapper {
         background-color: rgba(16, 185, 129, 0.125);
       }
@@ -20,12 +21,13 @@ export const StyledDiv = styled.div`
         }
       }
       .card-feature-btn-wrapper {
-        a {
+        .btn-link {
           color: ${({ theme }) => theme.color.green["100"]};
         }
       }
     }
-    &.prosecution {
+    &.prosecution,
+    &.youth-profile-form {
       .icon-wrapper {
         background-color: #3b82f620;
       }
@@ -35,12 +37,13 @@ export const StyledDiv = styled.div`
         }
       }
       .card-feature-btn-wrapper {
-        a {
+        .btn-link {
           color: ${({ theme }) => theme.color.blue["300"]};
         }
       }
     }
-    &.response {
+    &.response,
+    &.child-intake-form {
       .icon-wrapper {
         background-color: #ff6b3520;
       }
@@ -50,12 +53,13 @@ export const StyledDiv = styled.div`
         }
       }
       .card-feature-btn-wrapper {
-        a {
+        .btn-link {
           color: ${({ theme }) => theme.color.orange["100"]};
         }
       }
     }
-    &.protection {
+    &.protection,
+    &.family-reintegration-form {
       .icon-wrapper {
         background-color: #ffd93d20;
       }
@@ -65,7 +69,7 @@ export const StyledDiv = styled.div`
         }
       }
       .card-feature-btn-wrapper {
-        a {
+        .btn-link {
           color: ${({ theme }) => theme.color.yellow["100"]};
         }
       }
@@ -149,11 +153,12 @@ export const StyledDiv = styled.div`
     .card-feature-btn-wrapper {
       padding-top: 15px;
 
-      a {
+      .btn-link {
         display: flex;
         justify-content: space-between;
         font-size: 14px;
         text-decoration: none;
+        cursor: pointer;
       }
     }
   }
