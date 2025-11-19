@@ -4,6 +4,7 @@ export const StyledDiv = styled.div`
   &.multi-step-form-wrapper {
     /* display: flex; */
     width: 100%;
+    padding-bottom: 50px;
 
     .multi-step-form-header-content {
       display: flex;
@@ -60,6 +61,8 @@ export const StyledDiv = styled.div`
       padding: 24px;
       border-radius: 8px;
       margin-top: 60px;
+      border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
+      box-shadow: ${({ theme }) => theme.color.boxShadow};
     }
 
     .multi-step-form-btn-wrapper {

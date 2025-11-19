@@ -1,4 +1,4 @@
-import ProtectionProgramList from "@/modules/ProtectionProgramList";
+import ProtectionProgramList from "@/modules/protection-program-list";
 
 const ProtectionProgramFormPage = () => {
   return <ProtectionProgramList />;

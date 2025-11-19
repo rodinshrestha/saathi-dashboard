@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -26,7 +25,7 @@ const data = [
       "Health Assessment",
       "Psychosocial Evaluation",
     ],
-    link: "data-entry/prevention-program-form",
+    link: "protection-program-form/child-program-form",
   },
   {
     id: "youth-profile-form",
@@ -40,7 +39,7 @@ const data = [
       "Performance Assessment",
       "Behaviour Evaluation",
     ],
-    link: "data-entry/prosecution-program-form",
+    link: "protection-program-form/youth-program-form",
   },
   {
     id: "child-intake-form",
@@ -54,7 +53,7 @@ const data = [
       "Violence & Perotection Assessment",
       "Family Information & Services",
     ],
-    link: "data-entry/response-program-form",
+    link: "protection-program-form/child-intake-program-form",
   },
   {
     id: "family-reintegration-form",

@@ -8,6 +8,7 @@ import { Select } from "@/components/Select";
 import TextArea from "@/components/TextArea";
 import Typography from "@/components/Typography";
 import { BOOLEAN_OPTIONS } from "@/constant/boolean-select-options.constants";
+import { GENDER_OPTION_LIST } from "@/constant/gender-options.constants";
 import { VIOLENCE_OPTIONS_LIST } from "@/constant/violence-options.constant";
 
 import { UNFPAFormType } from "../../unfpa.types";
@@ -64,21 +65,6 @@ const perpetratorRelationshipOptions = [
   { label: "Stranger", value: "stranger" },
   { label: "Employer", value: "employer" },
   { label: "Other", value: "other" },
-];
-
-const perpetratorGenderOptions = [
-  {
-    label: "Male",
-    value: "male",
-  },
-  {
-    label: "Female",
-    value: "female",
-  },
-  {
-    label: "Other",
-    value: "other",
-  },
 ];
 
 const policeCaseOptions = [
@@ -152,7 +138,7 @@ const IncidentDetailsForm = ({ formik }: Props) => {
         <Select
           name="perpetrator_gender"
           label="Perpetrator Gender"
-          options={perpetratorGenderOptions}
+          options={GENDER_OPTION_LIST}
           value={formik.values.perpetrator_gender}
           onChange={(e) => formik.setFieldValue("perpetrator_gender", e?.value)}
           className="bg-color"
