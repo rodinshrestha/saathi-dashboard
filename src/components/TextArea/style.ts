@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const TextAreaContainer = styled.div`
   display: flex;
-  gap: 5px;
+  gap: 8px;
   flex-direction: column;
 
   &.bg-color {

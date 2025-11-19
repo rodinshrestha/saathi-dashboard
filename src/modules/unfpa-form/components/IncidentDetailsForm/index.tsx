@@ -7,7 +7,8 @@ import InputField from "@/components/InputField";
 import { Select } from "@/components/Select";
 import TextArea from "@/components/TextArea";
 import Typography from "@/components/Typography";
-import { booleanSelectOptions } from "@/constant/boolean-select-options.constants";
+import { BOOLEAN_OPTIONS } from "@/constant/boolean-select-options.constants";
+import { VIOLENCE_OPTIONS_LIST } from "@/constant/violence-options.constant";
 
 import { UNFPAFormType } from "../../unfpa.types";
 
@@ -37,31 +38,6 @@ const incidentOptions = [
   {
     label: "Other",
     value: "other",
-  },
-];
-
-const violenceOptions = [
-  { label: "Physical", value: "physical" },
-  { label: "Sexual", value: "sexual" },
-  {
-    label: "Psychological",
-    value: "psychological",
-  },
-  {
-    label: "Economic",
-    value: "economic",
-  },
-  {
-    label: "Harmful Practice",
-    value: "harmful-practice",
-  },
-  {
-    label: "Cyber",
-    value: "cyber",
-  },
-  {
-    label: "Trafficking",
-    value: "trafficking",
   },
 ];
 
@@ -147,7 +123,7 @@ const IncidentDetailsForm = ({ formik }: Props) => {
         <Select
           name="type_of_violence"
           label="Type of Violence"
-          options={violenceOptions}
+          options={VIOLENCE_OPTIONS_LIST}
           value={formik.values.type_of_violence}
           onChange={(e) => formik.setFieldValue("type_of_violence", e?.value)}
           className="bg-color"
@@ -230,7 +206,7 @@ const IncidentDetailsForm = ({ formik }: Props) => {
         <Select
           name="previous_incidents_or_repeated_violence"
           label="Previous Incidents or Repeated Violence?"
-          options={booleanSelectOptions}
+          options={BOOLEAN_OPTIONS}
           value={formik.values.previous_incidents_or_repeated_violence}
           onChange={(e) =>
             formik.setFieldValue(

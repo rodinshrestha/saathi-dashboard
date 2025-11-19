@@ -1,6 +1,6 @@
 export type SaathiShelterProgramFormType = {
   name: string;
-  date_of_entry: string;
+  date_of_entry: Date | null;
   code_no: string;
   age_of_survivor: string;
   number_of_dependent_children: string;
@@ -12,7 +12,7 @@ export type SaathiShelterProgramFormType = {
   marital_status: string;
   pregnancy_status: string;
   disability_status: string;
-  impact_of_violence: string;
+  impact_of_violence: Array<string>;
   reason_for_comming_to_shelter: string;
   perpetrator_name: string;
   number_of_perpetrators: string;
@@ -26,10 +26,10 @@ export type SaathiShelterProgramFormType = {
   mental_status: string;
   referred_form: string;
   referred_to_by_saathi: string;
-  referred_date_of_entry: string;
-  date_of_discharge: string;
+  referred_date_of_entry: Date | null;
+  date_of_discharge: Date | null;
   duration_range: string;
-  service_provided: string;
+  service_provided: Array<string>;
   first_time_in_shelter: string;
   previous_stay_duration: string;
   immediate_support: string;

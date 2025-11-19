@@ -34,11 +34,7 @@ const TextArea = ({
 
   return (
     <TextAreaContainer
-      className={clsx(
-        { error: !!error },
-        "input-field-wrapper",
-        rest.className
-      )}
+      className={clsx({ error: !!error }, "text-area-wrapper", rest.className)}
     >
       {label && (
         <label htmlFor={inputId} className="input-label">
