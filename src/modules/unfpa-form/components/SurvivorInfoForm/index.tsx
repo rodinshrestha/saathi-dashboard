@@ -1,8 +1,15 @@
+import React from "react";
+
 import { FormikProps } from "formik";
+import { SingleValue } from "react-select";
 
 import InputField from "@/components/InputField";
-import { Select } from "@/components/Select";
+import { Option, Select } from "@/components/Select";
 import Typography from "@/components/Typography";
+import useToaster from "@/hooks/useToaster";
+import { convertDistrictList } from "@/modules/projects/utils/convert-district-list";
+import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
 
 import { UNFPAFormType } from "../../unfpa.types";
 
@@ -19,6 +26,26 @@ const citizenshipOrIdTypeOption = [
 ];
 
 const SurvivorInform = ({ formik }: Props) => {
+  const [districtList, setDistrictList] = React.useState<Array<Option>>([]);
+  const { provinceData } = useGlobalStore();
+
+  const { errorToast } = useToaster();
+
+  const handleOnProvinceChange = (item: SingleValue<Option>) => {
+    const { value = "" } = item || {};
+
+    if (!value) {
+      errorToast("Province value is empty");
+      return;
+    }
+    formik.setFieldValue("permanent_province_address", value);
+
+    const selectedDistrict =
+      provinceData.find((province) => province.id === value)?.districts || [];
+
+    setDistrictList(convertDistrictList(selectedDistrict));
+  };
+
   return (
     <StyledDiv>
       <Typography as="p" className="form-title">
@@ -47,22 +74,23 @@ const SurvivorInform = ({ formik }: Props) => {
         <Select
           name="permanent_province_address"
           label="Permanent Address - Province"
-          options={[{ label: "test", value: "test" }]}
+          options={convertProvinceList(provinceData)}
           value={formik.values.permanent_province_address}
-          onChange={(e) =>
-            formik.setFieldValue("permanent_province_address", e?.value)
-          }
+          onChange={handleOnProvinceChange}
           className="bg-color"
         />
 
         <Select
           name="permanent_district_address"
           label="Permanent Address - District"
-          options={[{ label: "test", value: "test" }]}
+          options={districtList}
           value={formik.values.permanent_district_address}
           onChange={(e) =>
             formik.setFieldValue("permanent_district_address", e?.value)
           }
+          disabled={!formik.values.permanent_province_address}
+          showTooltip={!formik.values.permanent_province_address}
+          tooltipMsg="Select Province first"
           className="bg-color"
         />
 
