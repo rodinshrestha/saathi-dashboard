@@ -117,6 +117,7 @@ const FamilyReintegrationForm = () => {
       </Link>
       <ModuleSectionWrapper
         title="family Reintegration Form"
+        titleHelperText="Children Program - Family Reunification Assessment"
         className="multi-form-title"
       />
       <MultiStepForm

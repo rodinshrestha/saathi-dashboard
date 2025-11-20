@@ -1,5 +1,3 @@
-import React from "react";
-
 import { FormikProps } from "formik";
 import { Plus, Trash } from "lucide-react";
 
@@ -7,7 +5,13 @@ import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import { Select } from "@/components/Select";
 import Typography from "@/components/Typography";
+import { AGE_RANGE_OPTIONS } from "@/constant/age-range-options.constants";
+import { DISABILITY_OPTIONS } from "@/constant/disability-options.constant";
+import { GENDER_OPTION_LIST } from "@/constant/gender-options.constants";
 import { PreventionProgramFormType } from "@/modules/prevention-program-form/prevention-program.types";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
+import { getEthnicityOptionList } from "@/utils/get-ethnicity-option-list";
+import { getOrganizationOptionList } from "@/utils/get-organization-option-list";
 
 import { StyledDiv } from "./style";
 type Props = {
@@ -15,6 +19,8 @@ type Props = {
 };
 
 const ParticipantsForm = ({ formik }: Props) => {
+  const { organizationData, ethnicityData } = useGlobalStore();
+
   const handleAddParticipants = () => {
     formik.setFieldValue("participant", [
       ...formik.values.participant,
@@ -58,7 +64,7 @@ const ParticipantsForm = ({ formik }: Props) => {
           Participant`s Name
         </Typography>
         <Typography as="p" className="participants-header-key flex-2">
-          Office/School
+          Organization
         </Typography>
         <Typography as="p" className="participants-header-key flex-2">
           Position
@@ -102,11 +108,11 @@ const ParticipantsForm = ({ formik }: Props) => {
               />
               <Select
                 placeholder="Select org.."
-                options={[{ label: "text", value: "text" }]}
-                value={x.office_school}
+                options={getOrganizationOptionList(organizationData)}
+                value={x.organization_id}
                 onChange={(e) =>
                   formik.setFieldValue(
-                    `participant[${i}].office_school`,
+                    `participant[${i}].organization_id`,
                     e?.value
                   )
                 }
@@ -135,7 +141,7 @@ const ParticipantsForm = ({ formik }: Props) => {
               />
               <Select
                 placeholder="Age"
-                options={[{ label: "text", value: "text" }]}
+                options={AGE_RANGE_OPTIONS}
                 value={x.age}
                 onChange={(e) =>
                   formik.setFieldValue(`participant[${i}].age`, e?.value)
@@ -144,7 +150,7 @@ const ParticipantsForm = ({ formik }: Props) => {
               />
               <Select
                 placeholder="Sex"
-                options={[{ label: "text", value: "text" }]}
+                options={GENDER_OPTION_LIST}
                 value={x.sex}
                 onChange={(e) =>
                   formik.setFieldValue(`participant[${i}].sex`, e?.value)
@@ -153,16 +159,19 @@ const ParticipantsForm = ({ formik }: Props) => {
               />
               <Select
                 placeholder="Select"
-                options={[{ label: "text", value: "text" }]}
-                value={x.ethnicity}
+                options={getEthnicityOptionList(ethnicityData)}
+                value={x.ethnicity_id}
                 onChange={(e) =>
-                  formik.setFieldValue(`participant[${i}].ethnicity`, e?.value)
+                  formik.setFieldValue(
+                    `participant[${i}].ethnicity_id`,
+                    e?.value
+                  )
                 }
                 className="bg-color flex-2"
               />
               <Select
                 placeholder="disability_type"
-                options={[{ label: "text", value: "text" }]}
+                options={DISABILITY_OPTIONS}
                 value={x.disability_type}
                 onChange={(e) =>
                   formik.setFieldValue(

@@ -49,7 +49,7 @@ const SaathiShelterProgramForm = () => {
       dependent_age_gender: "",
       province_id: "",
       district_id: "",
-      enthnicity: "",
+      enthnicity_id: "",
       type_of_violence: "",
       marital_status: "",
       pregnancy_status: "",

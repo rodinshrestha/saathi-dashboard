@@ -48,13 +48,13 @@ const ProsecutionProgramForm = () => {
       participant: [
         {
           participant_name: "",
-          office_school: "",
+          organization_id: "",
           position: "",
           phone_number: "",
           email: "",
           age: "",
           sex: "",
-          ethnicity: "",
+          ethnicity_id: "",
           disability_type: "",
         },
       ],

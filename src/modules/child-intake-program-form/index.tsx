@@ -239,6 +239,7 @@ const ChildIntakeProgramForm = () => {
       <ModuleSectionWrapper
         title="Child Intake Form"
         className="multi-form-title"
+        titleHelperText="Protection Children Program - Comprehensive Intake Assessment"
       />
       <MultiStepForm
         steps={step}

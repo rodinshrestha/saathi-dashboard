@@ -3,7 +3,7 @@ export type ParticipantType = {
   participant_name: string;
 
   /** Name of the office or school the participant belongs to */
-  office_school: string;
+  organization_id: string;
 
   /** Participant's job position or role */
   position: string;
@@ -21,7 +21,7 @@ export type ParticipantType = {
   sex: string;
 
   /** Participant’s ethnicity group */
-  ethnicity: string;
+  ethnicity_id: string;
 
   /** Type of disability, if any (empty string if none) */
   disability_type: string;

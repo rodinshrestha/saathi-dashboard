@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 import { FormikProps } from "formik";
 
@@ -7,10 +7,11 @@ import DatePicker from "@/components/DatePicker";
 import InputField from "@/components/InputField";
 import { Select } from "@/components/Select";
 import Typography from "@/components/Typography";
-import { ETHNICITY_OPTIONS } from "@/constant/ethnicity-options.constant";
 import { GENDER_OPTION_LIST } from "@/constant/gender-options.constants";
 import { REFERRED_OPTION_LIST } from "@/constant/referred-options.constant";
 import { RELIGION_OPTIONS } from "@/constant/religion-options.constant";
+import { useGlobalStore } from "@/store/useGlobalConfigStore";
+import { getEthnicityOptionList } from "@/utils/get-ethnicity-option-list";
 
 import { ChildIntakeProgramFormType } from "../../child-intake-program-form.types";
 
@@ -30,6 +31,7 @@ type Props = {
 };
 
 const ChildIntakeBasicInfo = ({ formik }: Props) => {
+  const { ethnicityData } = useGlobalStore();
   return (
     <StyledDiv>
       <Typography as="p" className="form-title">
@@ -153,7 +155,7 @@ const ChildIntakeBasicInfo = ({ formik }: Props) => {
         />
 
         <Select
-          options={ETHNICITY_OPTIONS}
+          options={getEthnicityOptionList(ethnicityData)}
           placeholder="Select ethnicity"
           label="Ethnic or Case Identity"
           onChange={(item) => formik.setFieldValue("ethnic", item?.value)}

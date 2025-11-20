@@ -20,6 +20,10 @@ export const StyledDiv = styled.div`
       display: flex;
       flex-direction: column;
       gap: 2px;
+
+      .body2 {
+        margin-bottom: 10px;
+      }
     }
 
     .section-btn-wrapper {

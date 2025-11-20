@@ -88,6 +88,7 @@ const ChildForm = () => {
       </Link>
       <ModuleSectionWrapper
         title="Child Profile Form"
+        titleHelperText="Children Program - Child Profile Registration"
         className="multi-form-title"
       />
       <MultiStepForm

@@ -1,8 +1,6 @@
-import React from "react";
-
 import { FormikProps } from "formik";
 
-import { Select } from "@/components/Select";
+import InputField from "@/components/InputField";
 import Typography from "@/components/Typography";
 
 import { SaathiShelterProgramFormType } from "../../saathi-shelter.types";
@@ -14,13 +12,13 @@ type Props = {
 };
 
 const ShelterDurationForm = ({ formik }: Props) => {
-  const durationOption = [
-    { label: "0-3months", value: "0-3months" },
-    { label: "4-6 months", value: "4-6months" },
-    { label: "7-12 months", value: "7-12months" },
-    { label: "13-24 months", value: "13-24months" },
-    { label: "Over 24 months", value: "over-24-months" },
-  ];
+  // const durationOption = [
+  //   { label: "0-3months", value: "0-3months" },
+  //   { label: "4-6 months", value: "4-6months" },
+  //   { label: "7-12 months", value: "7-12months" },
+  //   { label: "13-24 months", value: "13-24months" },
+  //   { label: "Over 24 months", value: "over-24-months" },
+  // ];
 
   return (
     <StyledDiv>
@@ -28,12 +26,12 @@ const ShelterDurationForm = ({ formik }: Props) => {
         Section 4: Duration of Stay
       </Typography>
       <div>
-        <Select
+        <InputField
           name="duration_range"
-          options={durationOption}
-          placeholder="Select duration"
-          label="Select Dueration range"
-          onChange={(e) => formik.setFieldValue("duration_range", e?.value)}
+          type="number"
+          placeholder="e.g 45"
+          label="Duration of stay (in days)"
+          onChange={formik.handleChange}
           value={formik.values.duration_range}
           className="bg-color"
         />

@@ -8,7 +8,7 @@ export type SaathiShelterProgramFormType = {
   dependent_age_gender: string;
   province_id: string;
   district_id: string;
-  enthnicity: string;
+  enthnicity_id: string;
   type_of_violence: string;
   marital_status: string;
   pregnancy_status: string;

@@ -104,6 +104,7 @@ const YouthProgramForm = () => {
       <ModuleSectionWrapper
         title="Youth Profile Form"
         className="multi-form-title"
+        titleHelperText="Children Program - Youth Settlement Program"
       />
       <MultiStepForm
         steps={step}

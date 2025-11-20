@@ -10,7 +10,6 @@ import { Option, Select } from "@/components/Select";
 import TextArea from "@/components/TextArea";
 import Typography from "@/components/Typography";
 import { DISABILITY_OPTIONS } from "@/constant/disability-options.constant";
-import { ETHNICITY_OPTIONS } from "@/constant/ethnicity-options.constant";
 import { MARITAL_OPTIONS_LIST } from "@/constant/marital-status.options.constant";
 import { PREGNANCY_OPTIONS_LIST } from "@/constant/pregnancy-options.constant";
 import { VIOLENCE_IMPACT_OPTIONS } from "@/constant/violence-impact-options.constant";
@@ -20,6 +19,7 @@ import { convertDistrictList } from "@/modules/projects/utils/convert-district-l
 import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
 import { initializeDistrictList } from "@/modules/projects/utils/initialize-district-list";
 import { useGlobalStore } from "@/store/useGlobalConfigStore";
+import { getEthnicityOptionList } from "@/utils/get-ethnicity-option-list";
 
 import { SaathiShelterProgramFormType } from "../../saathi-shelter.types";
 
@@ -31,7 +31,7 @@ type Props = {
 
 const ShelterSurvivorForm = ({ formik }: Props) => {
   const { errorToast } = useToaster();
-  const { provinceData, globalLoader } = useGlobalStore();
+  const { provinceData, globalLoader, ethnicityData } = useGlobalStore();
 
   const [districtList, setDistrictList] = React.useState<Array<Option>>(
     initializeDistrictList(provinceData, Number(formik.values.province_id))
@@ -140,11 +140,11 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
 
         <Select
           name="enthnicity"
-          options={ETHNICITY_OPTIONS}
+          options={getEthnicityOptionList(ethnicityData)}
           placeholder="Select ethnicity"
           label="Ethnicity"
           onChange={(item) => formik.setFieldValue("enthnicity", item?.value)}
-          value={formik.values.enthnicity}
+          value={formik.values.enthnicity_id}
           className="bg-color"
         />
 
