@@ -1,7 +1,19 @@
 "use client";
 
 import { useFormik } from "formik";
-import { ArrowLeft, FileSearch, Paperclip, User } from "lucide-react";
+import {
+  ArrowLeft,
+  Briefcase,
+  FileSearch,
+  FileText,
+  GraduationCap,
+  Heart,
+  MapPin,
+  Paperclip,
+  Shield,
+  User,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";
@@ -10,10 +22,13 @@ import MultiStepForm from "@/components/MultiStepForm";
 
 import { ChildIntakeProgramFormType } from "./child-intake-program-form.types";
 import ChildIntakeBasicInfo from "./components/ChildIntakeBasicInfo";
+import ChildIntakeCaseHistoryForm from "./components/ChildIntakeCaseHistoryForm";
 import ChildIntakeContactForm from "./components/ChildIntakeContactForm";
 import ChildIntakeEducationForm from "./components/ChildIntakeEducationForm";
+import ChildIntakeFamilyInfoForm from "./components/ChildIntakeFamilyInfoForm";
 import ChildIntakeMedicalForm from "./components/ChildIntakeMedicalForm";
 import ChildIntakeProtectionFrom from "./components/ChildIntakeProtectionForm";
+import ChildIntakeServiceForm from "./components/ChildIntakeServiceForm";
 import { StyledDiv } from "./style";
 
 const ChildIntakeProgramForm = () => {
@@ -27,7 +42,7 @@ const ChildIntakeProgramForm = () => {
       gender: "",
       date_of_birth_bs: null,
       date_of_birth_ad: null,
-      age: 0,
+      age: "",
       nationality: "",
       referred_from: "",
       referred_to: "",
@@ -72,7 +87,7 @@ const ChildIntakeProgramForm = () => {
       type_of_violence: [],
       perpetrator_name: "",
       perpetrator_relation_to_child: "",
-      perpetrator_age: 0,
+      perpetrator_age: "",
       perpetrator_occupation: "",
       perpetrator_address: "",
       family_background: "",
@@ -99,7 +114,7 @@ const ChildIntakeProgramForm = () => {
       mother_cause_of_death: "",
       mother_address: "",
       guardian_name: "",
-      guardian_age: 0,
+      guardian_age: "",
       guardian_relation_to_child: "",
       guardian_address: "",
       children_program: [],
@@ -139,26 +154,44 @@ const ChildIntakeProgramForm = () => {
     {
       id: "contact-address",
       label: "Conatct & Address",
-      icon: <FileSearch />,
+      icon: <MapPin />,
       component: <ChildIntakeContactForm formik={formik} />,
     },
     {
       id: "health-medical",
       label: "Health & Medical",
-      icon: <FileSearch />,
+      icon: <Heart />,
       component: <ChildIntakeMedicalForm formik={formik} />,
     },
     {
       id: "education",
       label: "Education",
-      icon: <FileSearch />,
+      icon: <GraduationCap />,
       component: <ChildIntakeEducationForm formik={formik} />,
     },
     {
       id: "protection",
       label: "Protection",
-      icon: <FileSearch />,
+      icon: <Shield />,
       component: <ChildIntakeProtectionFrom formik={formik} />,
+    },
+    {
+      id: "case-history",
+      label: "Case History",
+      icon: <FileText />,
+      component: <ChildIntakeCaseHistoryForm formik={formik} />,
+    },
+    {
+      id: "family-info",
+      label: "Family Info",
+      icon: <Users />,
+      component: <ChildIntakeFamilyInfoForm formik={formik} />,
+    },
+    {
+      id: "service",
+      label: "Service",
+      icon: <Briefcase />,
+      component: <ChildIntakeServiceForm formik={formik} />,
     },
     {
       id: "attachments",

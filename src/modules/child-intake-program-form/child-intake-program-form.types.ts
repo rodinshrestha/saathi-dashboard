@@ -24,7 +24,7 @@ export type ChildIntakeProgramFormType = {
   date_of_birth_ad: Date | null;
 
   /** Age of the child in years */
-  age: number;
+  age: string;
 
   /** Nationality of the child */
   nationality: string;
@@ -159,7 +159,7 @@ export type ChildIntakeProgramFormType = {
   perpetrator_relation_to_child: string;
 
   /** Age of the perpetrator */
-  perpetrator_age: number;
+  perpetrator_age: string;
 
   /** Occupation of the perpetrator */
   perpetrator_occupation: string;
@@ -240,7 +240,7 @@ export type ChildIntakeProgramFormType = {
   guardian_name: string;
 
   /** Guardian's age */
-  guardian_age: number;
+  guardian_age: string;
 
   /** Guardian's relationship to the child */
   guardian_relation_to_child: string;
