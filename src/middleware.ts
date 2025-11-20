@@ -30,11 +30,11 @@ export function middleware(request: NextRequest) {
   }
 
   // Handling unknown routes
-  if (token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
+  // if (token) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.url));
+  // }
 
-  return NextResponse.redirect(new URL("/", request.url));
+  // return NextResponse.redirect(new URL("/", request.url));
 }
 
 // Optional: only run middleware on "/" and "/dashboard/***" routes

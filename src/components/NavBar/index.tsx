@@ -2,13 +2,14 @@
 import React from "react";
 
 import clsx from "clsx";
-import { ArrowLeftFromLine, ArrowRightFromLine, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 
 import { getNavUrlPath } from "@/utils/get-nav-path";
 
 import Button from "../Button";
+import ImageWithFallback from "../ImageWithFallback";
 import LogoutModal from "../LogoutModal";
 import Tooltip from "../Tooltip";
 
@@ -26,7 +27,11 @@ const Navbar = () => {
       onMouseEnter={() => setIsExpland(true)}
       onMouseLeave={() => setIsExpland(false)}
     >
-      <div className="navbar-header">Icon</div>
+      <div className="navbar-header">
+        <div className="navbar-logo-wrapper">
+          <ImageWithFallback src="/images/logo.jpg" alt="logo" fill />
+        </div>
+      </div>
 
       <div className="navbar-list-wrapper">
         <div className="navbar-top-wrapper">

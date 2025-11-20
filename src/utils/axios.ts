@@ -5,6 +5,21 @@ import { ACCESS_TOKEN } from "@/constant/token.constant";
 
 import { getCookie, removeCookie } from "./cookie";
 
+const publicAxios = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true, // if you use cookies/auth tokens
+});
+
+publicAxios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 const authAxios = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/",
   headers: {
@@ -31,11 +46,11 @@ authAxios.interceptors.response.use(
     // Optional: handle global errors
     if (error.response?.status === 401) {
       removeCookie(ACCESS_TOKEN);
-      window.location.reload();
+      // window.location.reload();
       // handle logout or redirect logic
     }
     return Promise.reject(error);
   }
 );
 
-export { authAxios };
+export { authAxios, publicAxios };

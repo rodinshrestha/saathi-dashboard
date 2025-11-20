@@ -47,9 +47,18 @@ export const StyledNavBar = styled.nav`
     }
 
     .navbar-header {
-      height: 64px;
-      text-align: center;
-      color: ${({ theme }) => theme.color.textColor.highContrast};
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      .navbar-logo-wrapper {
+        height: 64px;
+        width: 120px;
+        position: relative;
+
+        img {
+          object-fit: contain;
+        }
+      }
     }
 
     .navbar-list-wrapper {

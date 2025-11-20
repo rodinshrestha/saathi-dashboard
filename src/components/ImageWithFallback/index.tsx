@@ -10,23 +10,9 @@ interface ImageWithFallbackProps extends Omit<ImageProps, "src"> {
 
 export default function ImageWithFallback({
   src,
-  fallbackSrc = "/images/fallback.png", // default fallback
+  // fallbackSrc = "/images/fallback.png", // default fallback
   alt,
   ...props
 }: ImageWithFallbackProps) {
-  const [imgSrc, setImgSrc] = React.useState(src);
-
-  return (
-    <Image
-      {...props}
-      src={imgSrc}
-      alt={alt}
-      onError={() => {
-        if (imgSrc !== fallbackSrc) {
-          setImgSrc(fallbackSrc);
-        }
-      }}
-      draggable={false}
-    />
-  );
+  return <Image {...props} src={src} alt={alt} draggable={false} />;
 }

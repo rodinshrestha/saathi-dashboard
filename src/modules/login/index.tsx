@@ -12,6 +12,7 @@ import { ACCESS_TOKEN } from "@/constant/token.constant";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
 import { setCookie } from "@/utils/cookie";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 
 import { loginSchema } from "./login.schema";
 import { StyledDiv } from "./style";
@@ -42,8 +43,8 @@ const LoginModule = () => {
           setCookie(ACCESS_TOKEN, token);
           router.push("/dashboard");
         })
-        .catch(() => {
-          errorToast("Failed");
+        .catch((err) => {
+          getApiResponseErrorToast(err);
         })
         .finally(() => {
           setIsLoading(false);
@@ -55,7 +56,7 @@ const LoginModule = () => {
     <StyledDiv>
       <div className="login-wrapper">
         <div className="login-logo-wrapper">
-          <ImageWithFallback src="/vercel.svg" alt="sathi-logo" fill />
+          <ImageWithFallback src="/images/logo.jpg" alt="sathi-logo" fill />
         </div>
 
         <div className="login-title-wrapper">
@@ -76,6 +77,7 @@ const LoginModule = () => {
             onBlur={formik.handleBlur}
             error={formik.errors.email}
             touched={formik.touched.email}
+            className="bg-color"
           />
           <InputField
             name="password"
@@ -87,6 +89,7 @@ const LoginModule = () => {
             onBlur={formik.handleBlur}
             error={formik.errors.password}
             touched={formik.touched.password}
+            className="bg-color"
           />
 
           <Button
@@ -94,6 +97,7 @@ const LoginModule = () => {
             type="submit"
             disabled={!formik.isValid || isLoading}
             loading={isLoading}
+            className="login-btn"
           >
             Sign In
           </Button>
