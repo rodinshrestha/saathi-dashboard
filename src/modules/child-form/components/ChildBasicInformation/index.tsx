@@ -49,12 +49,12 @@ const ChildBasicInformation = ({ formik }: Props) => {
         />
 
         <InputField
-          name="name"
+          name="full_name"
           label="Name"
           placeholder="Enter child full name"
           className="bg-color"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.full_name}
         />
 
         <InputField

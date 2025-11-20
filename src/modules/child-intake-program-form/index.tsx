@@ -1,10 +1,11 @@
 "use client";
 
+import React from "react";
+
 import { useFormik } from "formik";
 import {
   ArrowLeft,
   Briefcase,
-  FileSearch,
   FileText,
   GraduationCap,
   Heart,
@@ -19,6 +20,11 @@ import Link from "next/link";
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import { ChildIntakeProgramFormType } from "./child-intake-program-form.types";
 import ChildIntakeBasicInfo from "./components/ChildIntakeBasicInfo";
@@ -32,8 +38,12 @@ import ChildIntakeServiceForm from "./components/ChildIntakeServiceForm";
 import { StyledDiv } from "./style";
 
 const ChildIntakeProgramForm = () => {
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
+
   const formik = useFormik<ChildIntakeProgramFormType>({
     initialValues: {
+      program_id: 9,
       case_code: "",
       full_name: "",
       registration_number: "",
@@ -139,8 +149,24 @@ const ChildIntakeProgramForm = () => {
       staff_name: "",
       staff_position: "",
     },
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      setLoader(true);
+
+      const { registration_date, date_of_birth_bs, date_of_birth_ad, ...rest } =
+        values;
+
+      const body = {
+        registration_date: getConvertedDate(registration_date),
+        date_of_birth_bs: getConvertedDate(date_of_birth_bs),
+        date_of_birth_ad: getConvertedDate(date_of_birth_ad),
+        ...rest,
+      };
+
+      authAxios
+        .post("/survivors", convertResponseObj(body))
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -211,13 +237,13 @@ const ChildIntakeProgramForm = () => {
         Back to Form Selection
       </Link>
       <ModuleSectionWrapper
-        title="Saathi Shelter Survivor Intake Form"
+        title="Child Intake Form"
         className="multi-form-title"
       />
       <MultiStepForm
         steps={step}
         onSubmit={formik.handleSubmit}
-        loader={false}
+        loader={loader}
       />
     </StyledDiv>
   );

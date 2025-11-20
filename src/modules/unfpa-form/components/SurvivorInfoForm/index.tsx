@@ -35,9 +35,10 @@ const SurvivorInform = ({ formik }: Props) => {
           className="bg-color"
         />
         <InputField
-          name="contat_number"
+          name="contact_number"
           label="Contact Number (if safe)"
           placeholder="Phone Number"
+          type="number"
           onChange={formik.handleChange}
           value={formik.values.contact_number}
           className="bg-color"
@@ -89,7 +90,7 @@ const SurvivorInform = ({ formik }: Props) => {
           options={citizenshipOrIdTypeOption}
           value={formik.values.permanent_district_address}
           onChange={(e) =>
-            formik.setFieldValue("permanent_district_address", e?.value)
+            formik.setFieldValue("citizenship_or_id_type", e?.value)
           }
           className="bg-color"
         />

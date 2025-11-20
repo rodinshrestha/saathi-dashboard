@@ -52,12 +52,12 @@ const YouthBasicInfoForm = ({ formik }: Props) => {
           className="bg-color"
         />
         <InputField
-          name="name"
+          name="full_name"
           label="Name"
           placeholder="Enter youth`s full name"
           className="bg-color"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.full_name}
         />
         <InputField
           name="age"

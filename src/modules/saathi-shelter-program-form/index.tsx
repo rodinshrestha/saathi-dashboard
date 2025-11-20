@@ -18,6 +18,11 @@ import Link from "next/link";
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import ShelterAdditionalForm from "./components/ShelterAdditionalForm";
 import ShelterDurationForm from "./components/ShelterDurationForm";
@@ -30,16 +35,20 @@ import { SaathiShelterProgramFormType } from "./saathi-shelter.types";
 import { StyledDiv } from "./style";
 
 const SaathiShelterProgramForm = () => {
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
+
   const formik = useFormik<SaathiShelterProgramFormType>({
     initialValues: {
-      name: "",
+      program_id: 5,
+      first_name: "",
       date_of_entry: null,
       code_no: "",
       age_of_survivor: "",
       number_of_dependent_children: "",
       dependent_age_gender: "",
-      province: "",
-      district: "",
+      province_id: "",
+      district_id: "",
       enthnicity: "",
       type_of_violence: "",
       marital_status: "",
@@ -75,8 +84,28 @@ const SaathiShelterProgramForm = () => {
       current_status_of_survivor_and_dependents: "",
       other_remarks: "",
     },
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      setLoader(true);
+
+      const {
+        date_of_entry,
+        referred_date_of_entry,
+        date_of_discharge,
+        ...rest
+      } = values;
+
+      const body = {
+        date_of_entry: getConvertedDate(date_of_entry),
+        referred_date_of_entry: getConvertedDate(referred_date_of_entry),
+        date_of_discharge: getConvertedDate(date_of_discharge),
+        ...rest,
+      };
+
+      authAxios
+        .post("/survivors", convertResponseObj(body))
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -147,7 +176,7 @@ const SaathiShelterProgramForm = () => {
       <MultiStepForm
         steps={step}
         onSubmit={formik.handleSubmit}
-        loader={false}
+        loader={loader}
       />
     </StyledDiv>
   );

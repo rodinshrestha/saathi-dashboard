@@ -1,4 +1,7 @@
 export type ChildFormType = {
+  /** Progrmam unique number i.e child form */
+  program_id: number;
+
   /** Unique registration number of the child */
   registration_no: string;
 
@@ -6,7 +9,7 @@ export type ChildFormType = {
   registration_date: Date | null;
 
   /** Full name of the child */
-  name: string;
+  full_name: string;
 
   /** Age of the child */
   age: string;

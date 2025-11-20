@@ -1,12 +1,13 @@
 export type SaathiShelterProgramFormType = {
-  name: string;
+  program_id: 5;
+  first_name: string;
   date_of_entry: Date | null;
   code_no: string;
   age_of_survivor: string;
   number_of_dependent_children: string;
   dependent_age_gender: string;
-  province: string;
-  district: string;
+  province_id: string;
+  district_id: string;
   enthnicity: string;
   type_of_violence: string;
   marital_status: string;

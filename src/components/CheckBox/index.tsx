@@ -30,7 +30,6 @@ const CheckBox = ({
   onChange,
   ...rest
 }: InputProps) => {
-  const inputId = React.useId();
   const requiredLabelId = React.useId();
 
   const isError = !!error && touched;
@@ -67,12 +66,15 @@ const CheckBox = ({
             <div key={i} className="checkbox-data">
               <input
                 type="checkbox"
-                id={`checkbox-id-${i}`}
+                id={`checkbox-id-${option.value}`}
                 checked={selectedValues?.includes(option.value as string)}
                 onChange={() => handleToggle(option.value as string)}
                 {...rest}
               />
-              <label className="checkbox-label" htmlFor={`checkbox-id-${i}`}>
+              <label
+                className="checkbox-label"
+                htmlFor={`checkbox-id-${option.value}`}
+              >
                 {option.label}
               </label>
             </div>

@@ -1,4 +1,5 @@
 export type UNFPAFormType = {
+  program_id: 6;
   unique_case_id: string;
   registration_date: Date | null;
   case_type: string;
@@ -13,7 +14,7 @@ export type UNFPAFormType = {
   temporary_address: string;
   citizenship_or_id_type: string;
   citizenship_id_no: string;
-  dependent_children: number;
+  dependent_children: string;
   date_of_incident: Date | null;
   location_of_incident: string;
   type_of_violence: string;

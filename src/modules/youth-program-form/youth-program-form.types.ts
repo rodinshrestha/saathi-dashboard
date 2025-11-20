@@ -1,4 +1,7 @@
 export type YouthProgramFormType = {
+  /** Program id 8 i.e youth program */
+  program_id: 8;
+
   /** Unique registration number for the youth */
   registration_no: string;
 
@@ -6,10 +9,10 @@ export type YouthProgramFormType = {
   enter_date_at_saathi: Date | null;
 
   /** Full name of the youth */
-  name: string;
+  full_name: string;
 
   /** Age of the youth */
-  age: number;
+  age: string;
 
   /** Current grade or academic level */
   grade: string;

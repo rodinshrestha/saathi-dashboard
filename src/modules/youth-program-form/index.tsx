@@ -1,4 +1,6 @@
 "use client";
+import React from "react";
+
 import { useFormik } from "formik";
 import { ArrowLeft, FileSearch, Paperclip, User } from "lucide-react";
 import Link from "next/link";
@@ -6,6 +8,11 @@ import Link from "next/link";
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import YouthAssessmentForm from "./components/YouthAssessmentForm";
 import YouthBasicInfoForm from "./components/YouthBasicInfoForm";
@@ -13,12 +20,16 @@ import { StyledDiv } from "./style";
 import { YouthProgramFormType } from "./youth-program-form.types";
 
 const YouthProgramForm = () => {
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
+
   const formik = useFormik<YouthProgramFormType>({
     initialValues: {
+      program_id: 8,
       registration_no: "",
       enter_date_at_saathi: null,
-      name: "",
-      age: 0,
+      full_name: "",
+      age: "",
       grade: "",
       college_name: "",
       facuilty: "",
@@ -34,8 +45,29 @@ const YouthProgramForm = () => {
       college_result: "",
       overall_comments: "",
     },
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      setLoader(true);
+      const {
+        date_of_joining_college,
+        college_visit_date,
+        date_settled_in_youth_program,
+        ...rest
+      } = values;
+
+      const body = {
+        date_of_joining_college: getConvertedDate(date_of_joining_college),
+        college_visit_date: getConvertedDate(college_visit_date),
+        date_settled_in_youth_program: getConvertedDate(
+          date_settled_in_youth_program
+        ),
+        ...rest,
+      };
+
+      authAxios
+        .post("/survivors", convertResponseObj(body))
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -70,13 +102,13 @@ const YouthProgramForm = () => {
         Back to Form Selection
       </Link>
       <ModuleSectionWrapper
-        title="Saathi Shelter Survivor Intake Form"
+        title="Youth Profile Form"
         className="multi-form-title"
       />
       <MultiStepForm
         steps={step}
         onSubmit={formik.handleSubmit}
-        loader={false}
+        loader={loader}
       />
     </StyledDiv>
   );

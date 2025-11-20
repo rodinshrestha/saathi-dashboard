@@ -1,4 +1,6 @@
 "use client";
+import React from "react";
+
 import { useFormik } from "formik";
 import {
   ArrowLeft,
@@ -12,6 +14,11 @@ import Link from "next/link";
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate } from "@/utils/get-converted-date";
 
 import AdditionalInfoForm from "./components/AdditionalInfoForm";
 import GeneralInfoForm from "./components/GeneralInfoForm";
@@ -21,8 +28,11 @@ import { StyledDiv } from "./style";
 import { UNFPAFormType } from "./unfpa.types";
 
 const UnfpaForm = () => {
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
   const formik = useFormik<UNFPAFormType>({
     initialValues: {
+      program_id: 6,
       unique_case_id: "",
       registration_date: null,
       case_type: "",
@@ -37,7 +47,7 @@ const UnfpaForm = () => {
       temporary_address: "",
       citizenship_or_id_type: "",
       citizenship_id_no: "",
-      dependent_children: 0,
+      dependent_children: "",
       date_of_incident: null,
       location_of_incident: "",
       type_of_violence: "",
@@ -53,8 +63,22 @@ const UnfpaForm = () => {
       specify_details: "",
       additional_information_or_notes: "",
     },
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      setLoader(true);
+
+      const { registration_date, date_of_incident, ...rest } = values;
+
+      const body = {
+        registration_date: getConvertedDate(registration_date),
+        date_of_incident: getConvertedDate(date_of_incident),
+        ...rest,
+      };
+
+      authAxios
+        .post("/survivors", convertResponseObj(body))
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -101,13 +125,13 @@ const UnfpaForm = () => {
         Back to Program Selection
       </Link>
       <ModuleSectionWrapper
-        title="Prosecution Program - Data Entry"
+        title="UNFPA Supported SHelter Program Form"
         className="multi-form-title"
       />
       <MultiStepForm
         steps={step}
         onSubmit={formik.handleSubmit}
-        loader={false}
+        loader={loader}
       />
     </StyledDiv>
   );

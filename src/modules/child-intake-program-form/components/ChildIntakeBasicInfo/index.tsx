@@ -123,15 +123,6 @@ const ChildIntakeBasicInfo = ({ formik }: Props) => {
           value={formik.values.nationality}
         />
 
-        <InputField
-          name="nationality"
-          label="Nationality"
-          placeholder="e.g Nepali"
-          className="bg-color"
-          onChange={formik.handleChange}
-          value={formik.values.nationality}
-        />
-
         <Select
           options={REFERRED_OPTION_LIST}
           placeholder="Select referral source"

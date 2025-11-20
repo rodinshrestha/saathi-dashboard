@@ -148,6 +148,7 @@ const IncidentDetailsForm = ({ formik }: Props) => {
           name="perpetrator_age"
           label="Perpetrator Age"
           placeholder="Age"
+          type="number"
           onChange={formik.handleChange}
           value={formik.values.perpetrator_age}
           className="bg-color"

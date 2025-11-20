@@ -87,15 +87,6 @@ const ChildIntakeProtectionFrom = ({ formik }: Props) => {
           value={formik.values.perpetrator_name}
         />
 
-        <InputField
-          name="perpetrator_name"
-          label="Perpetrator Name"
-          placeholder="Enter name if known"
-          className="bg-color"
-          onChange={formik.handleChange}
-          value={formik.values.perpetrator_name}
-        />
-
         <Select
           options={relationToChildOptions}
           placeholder="Select"

@@ -1,4 +1,7 @@
 export type FamilyReintegrationFormType = {
+  /** Program id 10 i.e family reintergation */
+  program_id: 10;
+
   /** Date when reintegration happened */
   date_reintegration: Date | null;
 

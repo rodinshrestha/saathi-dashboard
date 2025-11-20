@@ -43,7 +43,9 @@ const ShelterReferralsForm = ({ formik }: Props) => {
           label="Date of Entry"
           placeholder="dd/mm/yyyy"
           className="bg-color"
-          onChange={(value) => formik.setFieldValue("date_of_entry", value)}
+          onChange={(value) =>
+            formik.setFieldValue("referred_date_of_entry", value)
+          }
           selected={formik.values.referred_date_of_entry}
         />
 

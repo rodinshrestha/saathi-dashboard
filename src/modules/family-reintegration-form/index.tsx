@@ -15,6 +15,10 @@ import Link from "next/link";
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import useToaster from "@/hooks/useToaster";
+import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 
 import FamilyReintegrationDetailsForm from "./components/FamilyReintegrationDetailsForm";
 import FamilyReintegrationHousingForm from "./components/FamilyReintegrationHousingForm";
@@ -24,8 +28,12 @@ import { FamilyReintegrationFormType } from "./family-reintegration.types";
 import { StyledDiv } from "./style";
 
 const FamilyReintegrationForm = () => {
+  const [loader, setLoader] = React.useState(false);
+  const { successToast } = useToaster();
+
   const formik = useFormik<FamilyReintegrationFormType>({
     initialValues: {
+      program_id: 10,
       date_reintegration: null,
       total_duration_of_service: "",
       address_during_reintegration: "",
@@ -53,8 +61,14 @@ const FamilyReintegrationForm = () => {
       coordination_and_referral_details: "",
       future_plan: "",
     },
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      setLoader(true);
+
+      authAxios
+        .post("/survivors", convertResponseObj(values))
+        .then(() => successToast("Project creeated"))
+        .catch((err) => getApiResponseErrorToast(err))
+        .finally(() => setLoader(false));
     },
   });
 
@@ -108,7 +122,7 @@ const FamilyReintegrationForm = () => {
       <MultiStepForm
         steps={step}
         onSubmit={formik.handleSubmit}
-        loader={false}
+        loader={loader}
       />
     </StyledDiv>
   );

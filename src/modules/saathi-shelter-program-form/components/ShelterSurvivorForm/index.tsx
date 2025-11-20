@@ -34,7 +34,7 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
   const { provinceData, globalLoader } = useGlobalStore();
 
   const [districtList, setDistrictList] = React.useState<Array<Option>>(
-    initializeDistrictList(provinceData, Number(formik.values.province))
+    initializeDistrictList(provinceData, Number(formik.values.province_id))
   );
 
   const handleProvinceChange = (item: SingleValue<Option>) => {
@@ -60,12 +60,12 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
 
       <div className="shelter-survivor-form-list-wrapper">
         <InputField
-          name="name"
+          name="first_name"
           label="Name"
           placeholder="Survivor name"
           className="bg-color"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.first_name}
         />
 
         <DatePicker
@@ -88,6 +88,7 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
           name="age_of_survivor"
           label="Age of Survivor"
           placeholder="Age"
+          type="number"
           className="bg-color"
           onChange={formik.handleChange}
           value={formik.values.age_of_survivor}
@@ -118,7 +119,7 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
           placeholder="province"
           label="Province"
           onChange={handleProvinceChange}
-          value={formik.values.province}
+          value={formik.values.province_id}
           disabled={globalLoader}
           isLoading={globalLoader}
           className="bg-color"
@@ -129,11 +130,11 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
           options={districtList}
           placeholder="Select district"
           label="District"
-          onChange={(item) => formik.setFieldValue("district", item?.value)}
-          value={formik.values.district}
-          showTooltip={!formik.values.province}
+          onChange={(item) => formik.setFieldValue("district_id", item?.value)}
+          value={formik.values.district_id}
+          showTooltip={!formik.values.province_id}
           tooltipMsg="First select the province"
-          disabled={!formik.values.province}
+          disabled={!formik.values.province_id}
           className="bg-color"
         />
 
