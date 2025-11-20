@@ -60,12 +60,12 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
 
       <div className="shelter-survivor-form-list-wrapper">
         <InputField
-          name="first_name"
+          name="full_name"
           label="Name"
           placeholder="Survivor name"
           className="bg-color"
           onChange={formik.handleChange}
-          value={formik.values.first_name}
+          value={formik.values.full_name}
         />
 
         <DatePicker

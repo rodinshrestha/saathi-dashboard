@@ -67,13 +67,9 @@ const Table = <T,>({
     table.setPageIndex(currentPage);
   }, [currentPage, table]);
 
-  console.log(Array.isArray(data), "@@@");
-
   const showError = !isLoading && data.length === 0;
 
   const noData = !Array.isArray(data);
-
-  console.log(noData, "@@@@");
 
   return (
     <>

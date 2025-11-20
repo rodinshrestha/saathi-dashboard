@@ -57,7 +57,7 @@ const ApprovalCancelModal = ({
     >
       <StyledDiv>
         <Typography as="p" className="cancel-registration-content">
-          {`Are you sure you want to send back registration ${selectedApprovalData?.registration_id} for ${selectedApprovalData?.user.name}? The submitter will be able to make corrections.`}
+          {`Are you sure you want to send back registration ${selectedApprovalData?.registration_id} for ${selectedApprovalData?.user?.full_name}? The submitter will be able to make corrections.`}
         </Typography>
 
         <div className="cancel-registration-btn-wrapper">

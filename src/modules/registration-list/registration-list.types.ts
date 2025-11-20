@@ -12,6 +12,9 @@ export type RegistrationListType = {
   /** Unique identifier for the registration record */
   id: number;
 
+  /** FIrst name */
+  full_name: string;
+
   /** Current status of the registration (e.g., pending, approved, rejected) */
   status: string;
 

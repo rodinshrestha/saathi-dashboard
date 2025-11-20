@@ -3,7 +3,7 @@ export type UserType = {
   id: number;
 
   /** Full name of the user */
-  name: string;
+  full_name: string;
 
   /** Email address of the user */
   email: string;

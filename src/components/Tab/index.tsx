@@ -38,8 +38,6 @@ const Tab = <T extends readonly Tab[]>({
 
   const { updateQueryParams } = useUpdateParams();
 
-  console.log(selectedProgram);
-
   const handleOnTabClick = (tab: Tab, disabled: boolean) => {
     // if (disabled) return;
 

@@ -7,11 +7,14 @@ import Table from "@/components/Table";
 
 import RegistrationViewModal from "./components/RegistrationViewModal";
 import useFetchRegistration from "./hooks/useFetchRegistration";
+import { RegistrationListType } from "./registration-list.types";
 import { RegistrationTableColumns } from "./registration.table.columns";
 import { StyledDiv } from "./style";
 
 const RegistrationList = () => {
   const [isViewModalOpen, setIsViewModalOpen] = React.useState(false);
+  const [selectedData, setSelectedData] =
+    React.useState<RegistrationListType | null>(null);
 
   const { registrationList, isLoading } = useFetchRegistration();
   return (
@@ -23,6 +26,7 @@ const RegistrationList = () => {
 
       <RegistrationViewModal
         onClose={() => setIsViewModalOpen(false)}
+        selectedData={selectedData}
         isOpen={isViewModalOpen}
       />
 
@@ -30,6 +34,7 @@ const RegistrationList = () => {
         tableTitle="All Registrations"
         columns={RegistrationTableColumns({
           setIsViewModalOpen,
+          setSelectedData,
         })}
         data={registrationList?.data || []}
         isLoading={isLoading}

@@ -27,7 +27,7 @@ export const ApprovalsTableColumns = ({
       header: "Registration ID",
     },
     {
-      accessorFn: (row) => row.user?.name || "N/A",
+      accessorFn: (row) => row?.full_name || "N/A",
       header: "Name",
       size: 100,
     },
@@ -44,7 +44,7 @@ export const ApprovalsTableColumns = ({
       header: "Province",
     },
     {
-      accessorFn: (row) => formatDateToYMD(row.submitted_at),
+      accessorFn: (row) => formatDateToYMD(row?.submitted_at),
       header: "Date Submitted",
     },
     {

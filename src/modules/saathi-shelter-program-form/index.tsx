@@ -41,7 +41,7 @@ const SaathiShelterProgramForm = () => {
   const formik = useFormik<SaathiShelterProgramFormType>({
     initialValues: {
       program_id: 5,
-      first_name: "",
+      full_name: "",
       date_of_entry: null,
       code_no: "",
       age_of_survivor: "",

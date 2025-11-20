@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
+  .loader-wrapper {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .review-details-wrapper {
     padding: 10px;
     background-color: ${({ theme }) =>

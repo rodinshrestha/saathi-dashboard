@@ -58,6 +58,7 @@ const ApprovalsModule = () => {
       <ApprovalViewModal
         isOpen={isViewModalOpen}
         onClose={() => setIsViewModalOpen(false)}
+        selectedApprovalData={selectedApprovalData}
       />
 
       <Table

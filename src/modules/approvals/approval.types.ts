@@ -17,6 +17,10 @@ export type ApprovalType = {
 
   /** Information about the user who submitted/handled the approval */
   user: UserType;
+
+  /**User full name */
+  full_name: string;
+
   /** Related project information */
   project: {
     /** Title of the project */

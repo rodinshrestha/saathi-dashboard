@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
+  .loader-wrapper {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .registration-wrapper {
     padding: 10px;
     border-radius: 8px;
@@ -22,6 +29,7 @@ export const StyledDiv = styled.div`
       display: flex;
       flex-direction: column;
       gap: 10px;
+      align-items: flex-start;
 
       .registration-personal-name-content {
         font-size: 18px;
@@ -39,6 +47,7 @@ export const StyledDiv = styled.div`
         font-weight: 500;
         padding: 4px 6px;
         border-radius: 8px;
+        text-transform: capitalize;
       }
     }
   }

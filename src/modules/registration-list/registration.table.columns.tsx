@@ -9,10 +9,14 @@ import { RegistrationListType } from "./registration-list.types";
 
 type Props = {
   setIsViewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedData: React.Dispatch<
+    React.SetStateAction<RegistrationListType | null>
+  >;
 };
 
 export const RegistrationTableColumns = ({
   setIsViewModalOpen,
+  setSelectedData,
 }: Props): ColumnDef<RegistrationListType>[] => {
   return [
     {
@@ -20,8 +24,8 @@ export const RegistrationTableColumns = ({
       header: "Registration ID",
     },
     {
-      accessorFn: (row) => row.user?.name || "N/A",
-      header: "Name",
+      accessorFn: (row) => row?.full_name || "N/A",
+      header: "Full Name",
     },
 
     {
@@ -49,8 +53,12 @@ export const RegistrationTableColumns = ({
       accessorKey: "action",
       header: "Actions",
       size: 300,
-      cell: () => (
-        <RegistrationTableAction setIsViewModalOpen={setIsViewModalOpen} />
+      cell: ({ row }) => (
+        <RegistrationTableAction
+          setIsViewModalOpen={setIsViewModalOpen}
+          setSelectedData={setSelectedData}
+          data={row.original}
+        />
       ),
     },
   ];
