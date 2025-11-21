@@ -17,6 +17,10 @@ export function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
+  if (pathname === "/login" && token) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   // 1️⃣ If user is on "/" (login page)
   if (pathname === "/") {
     if (token) {
