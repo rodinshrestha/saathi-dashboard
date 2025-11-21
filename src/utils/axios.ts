@@ -47,7 +47,7 @@ authAxios.interceptors.response.use(
     // Optional: handle global errors
     if (error.response?.status === 401) {
       removeCookie(ACCESS_TOKEN);
-      // window.location.reload();
+      window.location.reload();
       // handle logout or redirect logic
     }
     return Promise.reject(error);

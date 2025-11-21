@@ -43,7 +43,7 @@ const Tab = <T extends readonly Tab[]>({
     setActiveTab(tab.id);
 
     if (pushToUrl) {
-      // updateQueryParams("tab", tab.id);
+      updateQueryParams("tab", tab.id);
     }
   };
 

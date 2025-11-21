@@ -11,6 +11,7 @@ export const StyledDiv = styled.div`
   padding: 24px;
   border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
   box-shadow: ${({ theme }) => theme.color.boxShadow};
+  overflow: auto;
   .referal-summary-title {
     font-size: 16px;
     color: ${({ theme }) => theme.color.textColor.highContrast};
