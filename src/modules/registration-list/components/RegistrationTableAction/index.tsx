@@ -2,6 +2,9 @@ import React from "react";
 
 import { Eye, SquarePen } from "lucide-react";
 
+import NextLink from "@/components/NextLink";
+import { getProgramUrl } from "@/utils/get-program-url";
+
 import { RegistrationListType } from "../../registration-list.types";
 
 import { StyledDiv } from "./style";
@@ -24,10 +27,15 @@ const RegistrationTableAction = ({
     setIsViewModalOpen(true);
   };
 
+  const { id: programId } = data?.program || {};
+  const { id: userId } = data || {};
+
   return (
     <StyledDiv className="registration-table-action-wrapper">
       <Eye size={18} onClick={handleOnClick} />
-      <SquarePen size={18} />
+      <NextLink href={getProgramUrl(programId, userId)}>
+        <SquarePen size={18} />
+      </NextLink>
     </StyledDiv>
   );
 };

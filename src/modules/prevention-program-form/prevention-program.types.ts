@@ -1,3 +1,5 @@
+import { ProvinceType } from "@/types/province.types";
+
 export type ParticipantType = {
   /** Full name of the participant */
   participant_name: string;
@@ -36,7 +38,7 @@ export type PreventionProgramFormType = {
   organizer: string;
   start_date: Date | null;
   end_date: Date | null;
-  province_id: string;
+  province_id: string | ProvinceType;
   district_id: string;
   address: string;
   ward: string;

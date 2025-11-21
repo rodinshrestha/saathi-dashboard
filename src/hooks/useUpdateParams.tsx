@@ -1,7 +1,6 @@
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const useUpdateParams = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -16,8 +15,6 @@ const useUpdateParams = () => {
       "",
       newURl
     );
-
-    // router.push(`?${params.toString()}`);
   };
 
   return { updateQueryParams };

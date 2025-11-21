@@ -1,5 +1,6 @@
-export type PageType = {
-  searchParams: SearchParamsType;
+export type PagePropsType = {
+  searchParams: Promise<SearchParamsType>;
+  params: Promise<{ [key: string]: string }>;
 };
 
 export type SearchParamsType = {

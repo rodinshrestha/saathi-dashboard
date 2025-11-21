@@ -1,3 +1,5 @@
+import { ProvinceType } from "@/types/province.types";
+
 export type SaathiShelterProgramFormType = {
   program_id: 5;
   full_name: string;
@@ -6,7 +8,7 @@ export type SaathiShelterProgramFormType = {
   age_of_survivor: string;
   number_of_dependent_children: string;
   dependent_age_gender: string;
-  province_id: string;
+  province_id: string | ProvinceType;
   district_id: string;
   enthnicity_id: string;
   type_of_violence: string;

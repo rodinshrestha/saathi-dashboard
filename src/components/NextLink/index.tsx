@@ -7,7 +7,7 @@ type Props = {
 
 const NextLink = ({ children, className, ...props }: Props) => {
   return (
-    <Link {...props} className={className}>
+    <Link {...props} className={className} prefetch>
       {children}
     </Link>
   );

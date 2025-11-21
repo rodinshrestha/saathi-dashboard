@@ -9,7 +9,6 @@ import { usePathname } from "next/navigation";
 import Button from "../Button";
 import ImageWithFallback from "../ImageWithFallback";
 import LogoutModal from "../LogoutModal";
-import Tooltip from "../Tooltip";
 
 import { navData } from "./data";
 import { StyledNavBar } from "./style";
@@ -51,12 +50,8 @@ const Navbar = () => {
                 href={`/${item.slug}`}
                 prefetch
               >
-                <Icon
-                  active={isActive}
-                  tooltipId={!isExpand ? item.label : ""}
-                />
+                <Icon active={isActive} />
                 <span className="nav-item-label">{item.label}</span>
-                <Tooltip id={item.label} content={item.label} />
               </Link>
             );
           })}

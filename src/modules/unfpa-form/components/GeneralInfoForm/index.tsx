@@ -53,24 +53,6 @@ const GeneralInfoForm = ({ formik }: Props) => {
           onChange={formik.handleChange}
           value={formik.values.safe_house_shelter_name}
         />
-
-        <InputField
-          name="district"
-          label="District"
-          placeholder="District"
-          className="bg-color"
-          onChange={formik.handleChange}
-          value={formik.values.district}
-        />
-
-        <InputField
-          name="municipality"
-          label="Municipality"
-          placeholder="Municipality"
-          className="bg-color"
-          onChange={formik.handleChange}
-          value={formik.values.municipality}
-        />
       </div>
     </StyledDiv>
   );

@@ -1,0 +1,13 @@
+import { getSurvivorData } from "@/http/get-survivor-data";
+import PreventionProgramFormWrapper from "@/modules/prevention-program-form/components/PreventionProgramFormWrapper";
+
+type Props = {
+  id: string;
+};
+const ProsecutionProgramServerComponent = async ({ id }: Props) => {
+  const data = await getSurvivorData(id);
+
+  return <PreventionProgramFormWrapper data={data?.data} isUpdate />;
+};
+
+export default ProsecutionProgramServerComponent;

@@ -9,13 +9,15 @@ export const fetcher = async (url: `/${string}`) => {
   }
 
   const token = getCookie(ACCESS_TOKEN);
-
+  console.log(`${baseURL}${url}`);
   const res = await fetch(`${baseURL}${url}`, {
-    cache: "no-store",
+    next: { revalidate: 0 },
+    method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }); // always fresh
+
   if (!res.ok) throw new Error("Failed to fetch");
   return res.json();
 };

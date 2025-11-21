@@ -5,7 +5,7 @@ import { convertDistrictList } from "./convert-district-list";
 
 export const initializeDistrictList = (
   provinceData: Array<ProvinceType>,
-  selectedProvinceId?: number
+  selectedProvinceId?: number | string
 ): Array<Option> => {
   if (!selectedProvinceId) {
     return [];
