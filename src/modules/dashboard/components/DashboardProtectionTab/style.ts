@@ -18,7 +18,8 @@ export const StyledDiv = styled.div`
   }
 
   .two-graph-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
     gap: 20px 15px;
 

@@ -118,12 +118,13 @@ const DashboardResponseTab = () => {
           isLoading={isLoading}
           className="flex-1"
         />
-        <InformationByProject data={response} />
+        <InformationByProject data={response} isLoading={isLoading} />
 
         <ReferalSummary
           className="flex-1"
           referrals_from={response?.referral_summary?.referrals_from || []}
           referrals_to={response?.referral_summary?.referrals_to || []}
+          isLoading={isLoading}
           showDivider
         />
       </div>

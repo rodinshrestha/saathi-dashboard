@@ -2,6 +2,7 @@ import React from "react";
 
 import clsx from "clsx";
 
+import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Typography from "@/components/Typography";
 import { MetrixDataType } from "@/types/metrix-data.types";
 
@@ -13,6 +14,7 @@ type Props = {
   className?: string;
   showDivider?: boolean;
   variant?: "horizontal" | "vertical";
+  isLoading?: boolean;
 };
 
 const ReferalSummary = ({
@@ -21,7 +23,16 @@ const ReferalSummary = ({
   variant = "horizontal",
   referrals_from = [],
   referrals_to = [],
+  isLoading,
 }: Props) => {
+  if (isLoading) {
+    return (
+      <StyledDiv className="loader-wrapper">
+        <SpinnerLoader />
+      </StyledDiv>
+    );
+  }
+
   return (
     <StyledDiv className={clsx(className)}>
       <Typography as="p" className={"referal-summary-title"}>

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Typography from "@/components/Typography";
 
 import { DashboardProtectionData } from "../DashboardProtectionTab/dashboard-protection.types";
@@ -7,14 +8,23 @@ import { DashboardProtectionData } from "../DashboardProtectionTab/dashboard-pro
 import { StyledDiv } from "./style";
 type Props = {
   data?: DashboardProtectionData;
+  isLoading?: boolean;
 };
 
-const DashboardCoverage = ({ data }: Props) => {
+const DashboardCoverage = ({ data, isLoading }: Props) => {
   const { province_coverage = [] } = data || {};
 
-  if (!province_coverage.length) {
-    return null;
+  if (isLoading) {
+    return (
+      <StyledDiv className="loader-wrapper">
+        <SpinnerLoader />
+      </StyledDiv>
+    );
   }
+
+  // if (!province_coverage.length) {
+  //   return null;
+  // }
   return (
     <StyledDiv>
       <Typography as="p" className="dashboard-coverage-title">

@@ -18,12 +18,12 @@ export const StyledDiv = styled.div`
   }
 
   .two-graph-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
     gap: 20px 15px;
 
     .flex-1 {
-      flex: 0 0 calc(50% - 60px);
       min-width: 0;
       height: 400px;
       canvas {

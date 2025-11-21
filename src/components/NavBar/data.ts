@@ -9,7 +9,7 @@ export const navData = [
     id: 1,
     icon: dashboardIcon,
     label: "Dashboard",
-    slug: "",
+    slug: "/",
   },
   {
     id: 2,

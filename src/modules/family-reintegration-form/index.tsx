@@ -10,11 +10,11 @@ import {
   Paperclip,
   Users,
 } from "lucide-react";
-import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import NextLink from "@/components/NextLink";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
 import { convertResponseObj } from "@/utils/convert-responese-obj";
@@ -108,13 +108,13 @@ const FamilyReintegrationForm = () => {
 
   return (
     <StyledDiv>
-      <Link
-        href="/dashboard/data-entry/protection-program-form"
+      <NextLink
+        href="/data-entry/protection-program-form"
         className="multi-form-back-btn"
       >
         <ArrowLeft size={16} />
         Back to Protection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="family Reintegration Form"
         titleHelperText="Children Program - Family Reunification Assessment"

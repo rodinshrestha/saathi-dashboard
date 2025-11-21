@@ -57,8 +57,7 @@ export function Select<TMulti extends boolean = false>({
   const selectId = React.useId();
   const requiredLabelId = React.useId();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const selectedValue: any = Array.isArray(options)
+  const selectedValue = Array.isArray(options)
     ? options.find((x) => x.value === value)
     : null;
 

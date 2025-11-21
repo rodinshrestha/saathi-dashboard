@@ -2,6 +2,7 @@ import React from "react";
 
 import clsx from "clsx";
 
+import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Typography from "@/components/Typography";
 
 import { DashboardProtectionData } from "../DashboardProtectionTab/dashboard-protection.types";
@@ -10,9 +11,18 @@ import { StyledDiv } from "./style";
 
 type Props = {
   data?: DashboardProtectionData;
+  isLoading?: boolean;
 };
 
-const AdditionalMetrics = ({ data }: Props) => {
+const AdditionalMetrics = ({ data, isLoading }: Props) => {
+  if (isLoading) {
+    return (
+      <StyledDiv className="loader-wrapper">
+        <SpinnerLoader />
+      </StyledDiv>
+    );
+  }
+
   return (
     <StyledDiv className="flex-1">
       <Typography as="p" className="additional-metrix-title">

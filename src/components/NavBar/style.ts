@@ -27,6 +27,13 @@ export const StyledNavBar = styled.nav`
     &.expanded {
       --w: 248.5px;
 
+      .navbar-header {
+        .navbar-logo-wrapper {
+          width: 120px;
+          min-width: 120px;
+        }
+      }
+
       .nav-item-label {
         display: unset;
         white-space: nowrap;
@@ -52,7 +59,12 @@ export const StyledNavBar = styled.nav`
       margin-bottom: 30px;
       .navbar-logo-wrapper {
         height: 64px;
-        width: 120px;
+        min-width: 50px;
+        /* width: 120px; */
+        /* min-width: 120px; */
+        /* min-width: 85px !important; */
+        /* width: 85px !important; */
+
         position: relative;
 
         img {
@@ -72,13 +84,14 @@ export const StyledNavBar = styled.nav`
         gap: 5px;
 
         .nav-item {
+          box-sizing: border-box;
           display: flex;
           align-items: center;
           overflow: hidden;
-          gap: 16px;
           padding: 16px;
           cursor: pointer;
           border-radius: 8px;
+          width: 100%;
           color: ${({ theme }) => theme.color.textColor.highContrast};
           text-decoration: none;
           &:hover {
@@ -89,6 +102,11 @@ export const StyledNavBar = styled.nav`
           &.active {
             background-color: ${({ theme }) => theme.color.blue["100"]};
             color: ${({ theme }) => theme.color.white["100"]};
+          }
+
+          svg {
+            min-width: 55px;
+            margin-left: -18px;
           }
         }
       }

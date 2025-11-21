@@ -44,7 +44,6 @@ export const BarGraphSkeletonLoading = () => {
   return (
     <Wrapper>
       <YAxis />
-
       <Bar width="40%" />
       <Bar width="65%" />
       <Bar width="55%" />

@@ -9,6 +9,7 @@ import AttachmentForm from "@/components/AttachmentForm";
 import LocationDetailForm from "@/components/LocationDetailForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import NextLink from "@/components/NextLink";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
 import useFetchEventList from "@/hooks/useFetchEventList";
@@ -106,10 +107,10 @@ const PreventionProgramForm = () => {
 
   return (
     <StyledDiv>
-      <Link href="/dashboard/data-entry" className="multi-form-back-btn">
+      <NextLink href="/data-entry" className="multi-form-back-btn">
         <ArrowLeft size={16} />
         Back to Program Selection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="Prevention Program - Data Entry"
         className="multi-form-title"

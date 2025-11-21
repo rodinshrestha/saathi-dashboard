@@ -109,12 +109,13 @@ const DashboardProtectionTab = () => {
           className="flex-1"
         />
 
-        <AdditionalMetrics data={protection} />
+        <AdditionalMetrics data={protection} isLoading={isLoading} />
       </div>
-      <DashboardCoverage data={protection} />
+      <DashboardCoverage data={protection} isLoading={isLoading} />
       <ReferalSummary
         referrals_from={protection?.referral_summary?.referrals_from || []}
         referrals_to={protection?.referral_summary?.referrals_to || []}
+        isLoading={isLoading}
         variant="vertical"
       />
     </StyledDiv>

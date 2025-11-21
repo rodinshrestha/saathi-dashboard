@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
+  &.loader-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
   border: 1px solid ${({ theme }) => theme.color.borderColor};
   border-radius: 8px;
   background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};

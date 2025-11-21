@@ -2,6 +2,7 @@ import React from "react";
 
 import clsx from "clsx";
 
+import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Typography from "@/components/Typography";
 
 import { DashbordResponseData } from "../../dashboard-response.types";
@@ -10,9 +11,10 @@ import { StyledDiv } from "./style";
 
 type Props = {
   data?: DashbordResponseData;
+  isLoading?: boolean;
 };
 
-const InformationByProject = ({ data }: Props) => {
+const InformationByProject = ({ data, isLoading = true }: Props) => {
   const projectData = [
     {
       label: "UNFPA Supported Shelter Program",
@@ -39,6 +41,14 @@ const InformationByProject = ({ data }: Props) => {
       value: data?.mentalHealthPerpetrators || 0,
     },
   ];
+
+  if (isLoading) {
+    return (
+      <StyledDiv className="loader-wrapper">
+        <SpinnerLoader />
+      </StyledDiv>
+    );
+  }
 
   return (
     <StyledDiv className="flex-1">

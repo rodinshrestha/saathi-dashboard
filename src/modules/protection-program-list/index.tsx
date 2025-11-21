@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 import ChildIcon from "@/assets/svg/ChildIcon";
 import ChildIntakeIcon from "@/assets/svg/ChildIntakeIcon";
@@ -9,6 +8,7 @@ import FamilyIcon from "@/assets/svg/FamilyIcon";
 import YouthIcon from "@/assets/svg/YouthIcon";
 import Card from "@/components/Card";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
+import NextLink from "@/components/NextLink";
 
 import { StyledDiv } from "../approvals/style";
 
@@ -74,10 +74,10 @@ const data = [
 const ProtectionProgramList = () => {
   return (
     <StyledDiv>
-      <Link href="/dashboard/data-entry" className="multi-form-back-btn">
+      <NextLink href="/data-entry" className="multi-form-back-btn">
         <ArrowLeft size={16} />
         Back to Program Selection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="Protection Program"
         titleHelperText="Children Program - Select a from to begin data entry for child protection and youth settlement services"
@@ -86,7 +86,7 @@ const ProtectionProgramList = () => {
       <div className="protection-program-card-wrapper">
         {data.map((item) => {
           return (
-            <Link href={item.link} key={item.id} className="card-link">
+            <NextLink href={item.link} key={item.id} className="card-link">
               <Card
                 id={item.id}
                 icon={item.icon}
@@ -96,7 +96,7 @@ const ProtectionProgramList = () => {
                 feature={item.feature}
                 btnLabel="Start Form"
               />
-            </Link>
+            </NextLink>
           );
         })}
       </div>

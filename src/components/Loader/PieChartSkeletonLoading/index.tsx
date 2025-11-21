@@ -38,7 +38,8 @@ const InnerCircle = styled.div`
 `;
 
 const StyledDiv = styled.div`
-  min-width: 759px; /* adjust size */
+  min-width: 759px;
+  width: 100%;
   min-height: 450px;
   background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
   display: flex;
@@ -48,6 +49,8 @@ const StyledDiv = styled.div`
   box-shadow: ${({ theme }) => theme.color.boxShadow};
   border-radius: 8px;
   padding: 0 24px;
+  box-sizing: border-box;
+  flex: 1;
 `;
 
 type DoughnutSkeletonProps = {

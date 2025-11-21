@@ -41,7 +41,7 @@ const LoginModule = () => {
           }
 
           setCookie(ACCESS_TOKEN, token);
-          router.push("/dashboard");
+          router.push("/");
         })
         .catch((err) => {
           getApiResponseErrorToast(err);

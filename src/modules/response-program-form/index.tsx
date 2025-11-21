@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
+import NextLink from "@/components/NextLink";
 import Typography from "@/components/Typography";
 
 import { StyledDiv } from "./style";
@@ -9,10 +9,10 @@ import { StyledDiv } from "./style";
 const ResponseProgramForm = () => {
   return (
     <StyledDiv>
-      <Link href="/dashboard/data-entry" className="multi-form-back-btn">
+      <NextLink href="/data-entry" className="multi-form-back-btn">
         <ArrowLeft size={16} />
         Back to Program Selection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="Response Program - Select Form"
         className="multi-form-title"
@@ -22,7 +22,7 @@ const ResponseProgramForm = () => {
       </Typography>
 
       <div className="program-form-selection-wrapper">
-        <Link
+        <NextLink
           href="response-program-form/saathi-shelter-program-form"
           className="program-selection-content"
         >
@@ -35,9 +35,9 @@ const ResponseProgramForm = () => {
             including survivor information, perpetrator details, and support
             services.
           </Typography>
-        </Link>
+        </NextLink>
 
-        <Link
+        <NextLink
           href="response-program-form/unfpa-shelter-program-form"
           className="program-selection-content"
         >
@@ -49,7 +49,7 @@ const ResponseProgramForm = () => {
             Registration from for UNFPA supported shelter programs including
             incident details, survivor information, and case management.
           </Typography>
-        </Link>
+        </NextLink>
       </div>
     </StyledDiv>
   );

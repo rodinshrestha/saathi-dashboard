@@ -9,11 +9,11 @@ import {
   Paperclip,
   User,
 } from "lucide-react";
-import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import NextLink from "@/components/NextLink";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
 import { convertResponseObj } from "@/utils/convert-responese-obj";
@@ -117,13 +117,13 @@ const UnfpaForm = () => {
 
   return (
     <StyledDiv className="unfa-form-wrapper">
-      <Link
-        href="/dashboard/data-entry/response-program-form"
+      <NextLink
+        href="/data-entry/response-program-form"
         className="multi-form-back-btn"
       >
         <ArrowLeft size={16} />
         Back to Program Selection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="UNFPA Supported SHelter Program Form"
         className="multi-form-title"

@@ -9,7 +9,7 @@ const pulse = keyframes`
 // Wrapper
 const ChartSkeletonWrapper = styled.div`
   height: 480px;
-  min-width: 759px;
+  /* min-width: 759px; */
   padding: 24px;
   border-radius: 8px;
   background: #fff;
@@ -29,15 +29,24 @@ const SkeletonBar = styled.div<{ height: string }>`
   animation: ${pulse} 1.4s infinite ease-in-out;
 `;
 
+const StyledDiv = styled.div`
+  min-height: 480px;
+  /* min-width: 759px; */
+  box-sizing: border-box;
+  flex: 0 0 calc(50% - 20px);
+`;
+
 export const BarChartSkeletonLoading = () => {
   return (
-    <ChartSkeletonWrapper>
-      <SkeletonBar height="30%" />
-      <SkeletonBar height="55%" />
-      <SkeletonBar height="60%" />
-      <SkeletonBar height="20%" />
-      <SkeletonBar height="35%" />
-      <SkeletonBar height="80%" />
-    </ChartSkeletonWrapper>
+    <StyledDiv>
+      <ChartSkeletonWrapper>
+        <SkeletonBar height="30%" />
+        <SkeletonBar height="55%" />
+        <SkeletonBar height="60%" />
+        <SkeletonBar height="20%" />
+        <SkeletonBar height="35%" />
+        <SkeletonBar height="80%" />
+      </ChartSkeletonWrapper>
+    </StyledDiv>
   );
 };

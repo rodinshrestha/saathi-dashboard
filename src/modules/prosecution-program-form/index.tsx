@@ -3,12 +3,12 @@ import React from "react";
 
 import { useFormik } from "formik";
 import { ArrowLeft, FileText, MapPin, Paperclip, Users } from "lucide-react";
-import Link from "next/link";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import LocationDetailForm from "@/components/LocationDetailForm";
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
 import MultiStepForm from "@/components/MultiStepForm";
+import NextLink from "@/components/NextLink";
 import ParticipantsForm from "@/components/ParticipantsForm";
 import ProjectProfileForm from "@/components/ProjectProfileForm";
 import useFetchEventList from "@/hooks/useFetchEventList";
@@ -107,10 +107,10 @@ const ProsecutionProgramForm = () => {
 
   return (
     <StyledDiv>
-      <Link href="/dashboard/data-entry" className="multi-form-back-btn">
+      <NextLink href="/data-entry" className="multi-form-back-btn">
         <ArrowLeft size={16} />
         Back to Program Selection
-      </Link>
+      </NextLink>
       <ModuleSectionWrapper
         title="Prosecution Program - Data Entry"
         className="multi-form-title"
