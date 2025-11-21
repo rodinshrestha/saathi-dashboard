@@ -30,6 +30,10 @@ const RegistrationTableAction = ({
   const { id: programId } = data?.program || {};
   const { id: userId } = data || {};
 
+  if (!programId) {
+    debugger;
+  }
+
   return (
     <StyledDiv className="registration-table-action-wrapper">
       <Eye size={18} onClick={handleOnClick} />

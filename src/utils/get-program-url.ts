@@ -30,7 +30,7 @@ export const getProgramUrl = (programId: number, userId: number) => {
 
   const route = routeObj.get(programId);
 
-  if (route) {
+  if (!route) {
     throw new Error("Route id not found");
   }
 
