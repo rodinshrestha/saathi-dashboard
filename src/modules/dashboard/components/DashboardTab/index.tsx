@@ -1,3 +1,4 @@
+"use client";
 import Tab from "@/components/Tab";
 import { SelectValueTypes } from "@/types/select.types";
 

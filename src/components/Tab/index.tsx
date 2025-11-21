@@ -5,7 +5,6 @@ import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 
 import useUpdateParams from "@/hooks/useUpdateParams";
-import { getSelectedTab } from "@/utils/get-selected-tab";
 
 import { StyledDiv } from "./style";
 
@@ -44,7 +43,7 @@ const Tab = <T extends readonly Tab[]>({
     setActiveTab(tab.id);
 
     if (pushToUrl) {
-      updateQueryParams("tab", tab.id);
+      // updateQueryParams("tab", tab.id);
     }
   };
 
