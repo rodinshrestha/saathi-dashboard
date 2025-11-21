@@ -9,10 +9,13 @@ import { getMetrixData } from "@/utils/get-metrix-data";
 
 import DashboardRecentActivityTable from "../DashboardPreventionTab/components/DashboardRecentActivityTable";
 
+import { DashboardProsecutionType } from "./dashboard-prosecution.types";
 import { StyledDiv } from "./style";
 
 const DashboardProsecutionTab = () => {
-  const { data, isLoading } = useSWR("/dashboard?program=prosecution");
+  const { data, isLoading } = useSWR<DashboardProsecutionType>(
+    "/dashboard?program=prosecution"
+  );
 
   const { prosecution } = data?.data || {};
 

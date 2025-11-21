@@ -9,7 +9,7 @@ import { StyledDiv } from "./style";
 
 type Props = {
   label: string;
-  value: string | number;
+  value?: string | number;
   variant?: "green" | "blue" | "orange" | "yellow";
   icon: React.ReactNode;
   isLoading?: boolean;

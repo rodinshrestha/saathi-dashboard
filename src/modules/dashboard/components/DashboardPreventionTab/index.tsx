@@ -10,10 +10,11 @@ import { getMetrixData } from "@/utils/get-metrix-data";
 
 import DashboardFundedByTable from "./components/DashboardFundedByTable";
 import DashboardRecentActivityTable from "./components/DashboardRecentActivityTable";
+import { DashboardPreventionType } from "./dashboard-prevention.types";
 import { StyledDiv } from "./style";
 
 const DashboardPreventionTab = () => {
-  const { data, isLoading } = useSWR("/dashboard");
+  const { data, isLoading } = useSWR<DashboardPreventionType>("/dashboard");
 
   const { prevention } = data?.data || {};
 
