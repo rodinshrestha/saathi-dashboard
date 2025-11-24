@@ -67,7 +67,7 @@ const RegistrationViewModal = ({ isOpen, onClose, selectedData }: Props) => {
                   as="h3"
                   className="registration-personal-name-content"
                 >
-                  {data?.full_name || "N/A"}
+                  {data?.full_name || "-"}
                 </Typography>
                 <Typography as="p" className="registration-personal-id-content">
                   REG-2024-001

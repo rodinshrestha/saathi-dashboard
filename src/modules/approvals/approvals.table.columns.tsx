@@ -27,20 +27,20 @@ export const ApprovalsTableColumns = ({
       header: "Registration ID",
     },
     {
-      accessorFn: (row) => row?.full_name || "N/A",
+      accessorFn: (row) => row?.full_name || "-",
       header: "Name",
       size: 100,
     },
     {
-      accessorFn: (row) => row.program?.name || "N/A",
+      accessorFn: (row) => row.program?.name || "-",
       header: "Program",
     },
     {
-      accessorFn: (row) => row.project?.project_title || "N/A",
+      accessorFn: (row) => row.project?.project_title || "-",
       header: "Project",
     },
     {
-      accessorFn: (row) => row.province?.name || "N/A",
+      accessorFn: (row) => row.province?.name || "-",
       header: "Province",
     },
     {
