@@ -49,7 +49,7 @@ const LocationDetailForm = ({ formik }: Props) => {
         <Select
           label="Province"
           options={convertProvinceList(provinceData)}
-          value={formik.values.province_id}
+          value={formik.values.province_id as string}
           onChange={handleProvinceChange}
           className="bg-color"
         />

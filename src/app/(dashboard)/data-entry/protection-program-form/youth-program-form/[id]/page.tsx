@@ -1,5 +1,6 @@
-import React from "react";
+import { Suspense } from "react";
 
+import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
@@ -16,7 +17,9 @@ const YouthProgramUpdatePage = async ({ params }: PagePropsType) => {
         sectionSubTitle="Children Program - Youth Settlement Program"
       />
 
-      <YouthProgramServerComponent id={param.id} />
+      <Suspense fallback={<PageSpinnerLoader />}>
+        <YouthProgramServerComponent id={param.id} />
+      </Suspense>
     </>
   );
 };

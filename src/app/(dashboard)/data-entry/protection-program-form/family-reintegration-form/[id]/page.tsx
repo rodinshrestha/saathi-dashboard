@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 
+import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
@@ -15,7 +16,7 @@ const FamilyReintegrationFormUpdate = async ({ params }: PagePropsType) => {
         sectionTitle="family Reintegration Form"
         sectionSubTitle="Children Program - Family Reunification Assessment"
       />
-      <Suspense fallback={<p>loading...</p>}>
+      <Suspense fallback={<PageSpinnerLoader />}>
         <FamilyReintegrationServerComponent id={param.id} />
       </Suspense>
     </>

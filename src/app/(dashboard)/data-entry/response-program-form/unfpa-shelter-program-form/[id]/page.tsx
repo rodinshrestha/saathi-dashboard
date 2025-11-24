@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
@@ -15,7 +16,7 @@ const page = async ({ params }: PagePropsType) => {
         sectionTitle="UNFPA Supported Shelter Program Form"
         linkLabel=" Back to Program Selection"
       />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<PageSpinnerLoader />}>
         <UnfpaServerComponent id={param?.id} />
       </Suspense>
     </>

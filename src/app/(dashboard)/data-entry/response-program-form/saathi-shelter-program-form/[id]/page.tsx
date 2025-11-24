@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
@@ -15,7 +16,7 @@ const ShelterProgramUpdatePage = async ({ params }: PagePropsType) => {
         linkLabel="Back to Form Selection"
         sectionTitle="Saathi Shelter Survivor Intake Form"
       />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<PageSpinnerLoader />}>
         <ShelterServerComponentForm id={param?.id} />
       </Suspense>
     </>

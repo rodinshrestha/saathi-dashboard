@@ -119,7 +119,7 @@ const ShelterSurvivorForm = ({ formik }: Props) => {
           placeholder="province"
           label="Province"
           onChange={handleProvinceChange}
-          value={formik.values.province_id}
+          value={formik.values.province_id as string}
           disabled={globalLoader}
           isLoading={globalLoader}
           className="bg-color"

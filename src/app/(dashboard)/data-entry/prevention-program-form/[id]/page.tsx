@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
@@ -14,7 +15,7 @@ const PreventionProgramUpdatePage = async ({ params }: PagePropsType) => {
         linkLabel="back to Program Selection"
         sectionTitle="Prevention Program - Data Entry"
       />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<PageSpinnerLoader />}>
         <ProsecutionProgramServerComponent id={param.id} />
       </Suspense>
     </>
