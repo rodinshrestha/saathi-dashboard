@@ -1,5 +1,7 @@
+import { getCookie } from "./cookie";
+
 export const isDarkMode = () => {
   if (typeof window === "undefined") return;
 
-  return localStorage.getItem("mode") === "dark";
+  return getCookie("mode") === "dark";
 };

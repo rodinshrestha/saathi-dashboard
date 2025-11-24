@@ -76,7 +76,7 @@ const ApprovalViewModal = ({
               <div className="review-detail-avatar-wrapper">JD</div>
               <div className="review-personal-details-content">
                 <Typography as="h3" className="review-personal-name-content">
-                  {data?.full_name || "N/A"}
+                  {data?.full_name || "-"}
                 </Typography>
                 <Typography as="p" className="review-personal-id-content">
                   Registration ID: REG-2024-002

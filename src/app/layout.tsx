@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { ToastContainer } from "react-toastify";
 
 import StyledComponentsRegistry from "@/lib/registry";
@@ -10,17 +11,19 @@ export const metadata: Metadata = {
   description: "Dashboard created by next app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const mode = (await cookies()).get("mode")?.value;
+
   return (
     <html lang="en">
       <body className={` antialiased`}>
         <StyledComponentsRegistry>
           <SwrConfigProviders>
-            <StyledProviders>
+            <StyledProviders mode={mode}>
               <ToastContainer theme="colored" />
               {children}
             </StyledProviders>
