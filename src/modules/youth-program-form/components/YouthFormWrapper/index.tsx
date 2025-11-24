@@ -3,6 +3,7 @@ import React from "react";
 
 import { useFormik } from "formik";
 import { FileSearch, Paperclip, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import MultiStepForm from "@/components/MultiStepForm";
@@ -23,6 +24,8 @@ type Props = {
 
 const YouthFormWrapper = ({ data, isUpdate }: Props) => {
   const [loader, setLoader] = React.useState(false);
+
+  const router = useRouter();
   const { successToast, errorToast } = useToaster();
 
   const formik = useFormik<YouthProgramFormType>({
@@ -75,13 +78,14 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
       authAxios[method](endPoint, convertResponseObj(body))
-        .then(() =>
+        .then(() => {
           successToast(
             isUpdate
               ? "project update successfull"
               : "Project created successfull"
-          )
-        )
+          );
+          router.push("/registration-list");
+        })
         .catch((err) => getApiResponseErrorToast(err))
         .finally(() => setLoader(false));
     },

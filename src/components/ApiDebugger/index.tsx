@@ -2,13 +2,16 @@
 import { useSearchParams } from "next/navigation";
 import { JSONTree } from "react-json-tree";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ApiDebugger({ data }: any) {
+type Props = {
+  data: unknown;
+};
+
+export default function ApiDebugger({ data }: Props) {
   const params = useSearchParams();
 
   const isDebugger = params.get("debugger");
 
-  if (!data.length || isDebugger !== "true") {
+  if (!data || isDebugger !== "true") {
     return null;
   }
 

@@ -3,6 +3,7 @@ import React from "react";
 
 import { useFormik } from "formik";
 import { FileText, MapPin, Paperclip, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import LocationDetailForm from "@/components/LocationDetailForm";
@@ -29,6 +30,7 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
   const { fetchEventData, eventData } = useFetchEventList();
   const [loader, setLoader] = React.useState(false);
   const { successToast, errorToast } = useToaster();
+  const router = useRouter();
 
   React.useEffect(() => {
     fetchEventData(1); // 1 means prevention program
@@ -71,13 +73,14 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
       authAxios[method](endPoint, body)
-        .then(() =>
+        .then(() => {
           successToast(
             isUpdate
               ? "project update successfull"
               : "Project created successfull"
-          )
-        )
+          );
+          router.push("/registration-list");
+        })
         .catch((err) => getApiResponseErrorToast(err))
         .finally(() => setLoader(false));
     },

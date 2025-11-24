@@ -1,3 +1,4 @@
+import ApiDebugger from "@/components/ApiDebugger";
 import { getSurvivorData } from "@/http/get-survivor-data";
 import YouthFormWrapper from "@/modules/youth-program-form/components/YouthFormWrapper";
 
@@ -7,7 +8,12 @@ type Props = {
 const YouthProgramServerComponent = async ({ id }: Props) => {
   const data = await getSurvivorData(id);
 
-  return <YouthFormWrapper data={data?.data} isUpdate />;
+  return (
+    <>
+      <ApiDebugger data={data?.data} />
+      <YouthFormWrapper data={data?.data} isUpdate />
+    </>
+  );
 };
 
 export default YouthProgramServerComponent;

@@ -1,3 +1,4 @@
+import ApiDebugger from "@/components/ApiDebugger";
 import { getSurvivorData } from "@/http/get-survivor-data";
 import SaathiShelterProgramFormWrapper from "@/modules/saathi-shelter-program-form/components/SaathiShelterProgramFormWrapper";
 
@@ -7,7 +8,12 @@ type Props = {
 const ShelterServerComponentForm = async ({ id }: Props) => {
   const data = await getSurvivorData(id);
 
-  return <SaathiShelterProgramFormWrapper data={data?.data} isUpdate />;
+  return (
+    <>
+      <ApiDebugger data={data?.data} />
+      <SaathiShelterProgramFormWrapper data={data?.data} isUpdate />
+    </>
+  );
 };
 
 export default ShelterServerComponentForm;

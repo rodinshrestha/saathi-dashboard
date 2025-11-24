@@ -3,6 +3,7 @@ import React from "react";
 import clsx from "clsx";
 import { Eye, EyeClosed } from "lucide-react";
 
+import { SpinnerLoader } from "../Loader/SpinnerLoader";
 import Tooltip from "../Tooltip";
 import Typography from "../Typography";
 
@@ -13,6 +14,7 @@ type InputProps = {
   error?: string;
   touched?: boolean;
   requiredField?: boolean;
+  loader?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const InputField = ({
@@ -22,6 +24,7 @@ const InputField = ({
   autoComplete,
   type,
   requiredField,
+  loader,
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -53,6 +56,7 @@ const InputField = ({
         </label>
       )}
       <div className="input-wrapper">
+        {loader && <SpinnerLoader />}
         <input
           type={
             type === "password" ? (showPassword ? "text" : "password") : type

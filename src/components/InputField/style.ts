@@ -31,6 +31,20 @@ export const InputContainer = styled.div`
   .input-wrapper {
     width: 100%;
     position: relative;
+    .spinner-loader-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 48%;
+      .spinner-loader {
+        width: 15px;
+        height: 15px;
+        border-width: 2px;
+        position: absolute;
+      }
+    }
     input {
       box-sizing: border-box;
       border-radius: 8px;
@@ -47,6 +61,8 @@ export const InputContainer = styled.div`
       }
       &:disabled {
         cursor: not-allowed;
+        background-color: #f3f3f5 !important;
+        opacity: 0.5;
       }
     }
     .password-toggle-icon {

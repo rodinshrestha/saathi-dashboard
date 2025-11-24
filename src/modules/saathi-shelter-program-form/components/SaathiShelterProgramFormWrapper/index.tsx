@@ -12,6 +12,7 @@ import {
   User,
   Users,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import MultiStepForm from "@/components/MultiStepForm";
@@ -39,6 +40,8 @@ type Props = {
 
 const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
   const [loader, setLoader] = React.useState(false);
+
+  const router = useRouter();
   const { successToast, errorToast } = useToaster();
 
   const formik = useFormik<SaathiShelterProgramFormType>({
@@ -114,7 +117,14 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
       authAxios[method](endPoint, convertResponseObj(body))
-        .then(() => successToast("Project creeated"))
+        .then(() => {
+          successToast(
+            isUpdate
+              ? "project update successfull"
+              : "Project created successfull"
+          );
+          router.push("/registration-list");
+        })
         .catch((err) => getApiResponseErrorToast(err))
         .finally(() => setLoader(false));
     },

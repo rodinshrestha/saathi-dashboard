@@ -4,7 +4,7 @@ import PageSpinnerLoader from "@/components/Loader/PageSpinnerLoader";
 import MultiStepFormSectionTitle from "@/components/MultiStepFormSectionTitle";
 import { PagePropsType } from "@/types/page.types";
 
-import ProsecutionProgramServerComponent from "../../prosecution-program-form/[id]/ProsecutionProgramServerComponent";
+import PreventionProgramServerComponent from "./PreventionProgramServerComponent";
 
 const PreventionProgramUpdatePage = async ({ params }: PagePropsType) => {
   const param = await params;
@@ -16,7 +16,7 @@ const PreventionProgramUpdatePage = async ({ params }: PagePropsType) => {
         sectionTitle="Prevention Program - Data Entry"
       />
       <Suspense fallback={<PageSpinnerLoader />}>
-        <ProsecutionProgramServerComponent id={param.id} />
+        <PreventionProgramServerComponent id={param.id} />
       </Suspense>
     </>
   );

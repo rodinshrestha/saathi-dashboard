@@ -1,3 +1,4 @@
+import ApiDebugger from "@/components/ApiDebugger";
 import { getSurvivorData } from "@/http/get-survivor-data";
 import ChildIntakeFormWrapper from "@/modules/child-intake-program-form/components/ChildIntakeFormWrapper";
 
@@ -7,7 +8,12 @@ type Props = {
 const IntakeProgramServerComponent = async ({ id }: Props) => {
   const data = await getSurvivorData(id);
 
-  return <ChildIntakeFormWrapper data={data?.data} isUpdate />;
+  return (
+    <>
+      <ApiDebugger data={data?.data} />
+      <ChildIntakeFormWrapper data={data?.data} isUpdate />
+    </>
+  );
 };
 
 export default IntakeProgramServerComponent;

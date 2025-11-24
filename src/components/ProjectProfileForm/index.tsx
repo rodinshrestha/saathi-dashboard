@@ -22,8 +22,10 @@ type Props = {
 
 const ProjectProfileForm = ({ formik, eventData }: Props) => {
   const [projectTitle, setProjectTitle] = React.useState("");
+  const [loader, setLoader] = React.useState(false);
 
   const handleEventChange = (e: SingleValue<Option>) => {
+    setLoader(true);
     const value = e?.value;
     formik.setFieldValue("event_id", value);
     formik.setFieldValue("project_id", value);
@@ -36,6 +38,9 @@ const ProjectProfileForm = ({ formik, eventData }: Props) => {
       })
       .catch((err) => {
         getApiResponseErrorToast(err);
+      })
+      .finally(() => {
+        setLoader(false);
       });
   };
 
@@ -51,6 +56,7 @@ const ProjectProfileForm = ({ formik, eventData }: Props) => {
           placeholder="Auto-populated from event"
           className="bg-color"
           value={projectTitle}
+          loader={loader}
           disabled
           readOnly
         />

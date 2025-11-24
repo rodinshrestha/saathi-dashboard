@@ -3,6 +3,7 @@ import React from "react";
 
 import { useFormik } from "formik";
 import { CircleAlert, FileText, Paperclip, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import AttachmentForm from "@/components/AttachmentForm";
 import MultiStepForm from "@/components/MultiStepForm";
@@ -29,6 +30,7 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
   const [loader, setLoader] = React.useState(false);
 
   const { successToast, errorToast } = useToaster();
+  const router = useRouter();
 
   const formik = useFormik<UNFPAFormType>({
     initialValues: {
@@ -83,11 +85,14 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
       authAxios[method](endPoint, convertResponseObj(body))
-        .then(() =>
+        .then(() => {
           successToast(
-            isUpdate ? "Form Updated succesfull" : "Form Created succesfull"
-          )
-        )
+            isUpdate
+              ? "project update successfull"
+              : "Project created successfull"
+          );
+          router.push("/registration-list");
+        })
         .catch((err) => getApiResponseErrorToast(err))
         .finally(() => setLoader(false));
     },
