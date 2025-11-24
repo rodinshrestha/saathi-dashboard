@@ -13,22 +13,24 @@ import { ACCESS_TOKEN } from "@/constant/token.constant";
 // ];
 
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get(ACCESS_TOKEN)?.value; // get your token from cookies
-
+  const token = request.cookies.get(ACCESS_TOKEN)?.value;
   const pathname = request.nextUrl.pathname;
 
-  if (pathname === "/login" && token) {
+  const isLoginPage = pathname === "/login";
+  const isPublic = isLoginPage; // you can add more public routes later
+
+  // 🟥 1) User has NO token → Allow only public routes
+  if (!token && !isPublic) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // 🟩 2) User HAS token but tries to go to /login → redirect to homepage
+  if (token && isLoginPage) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // 1️⃣ If user is on "/" (login page)
-  if (pathname === "/") {
-    if (token) {
-      // user is already logged in, redirect to dashboard
-      return NextResponse.next();
-    }
-    return NextResponse.redirect(new URL("/login", request.url)); // allow access to login
-  }
+  // 🟦 3) Otherwise allow request
+  return NextResponse.next();
 }
 
 // Optional: only run middleware on page routes
