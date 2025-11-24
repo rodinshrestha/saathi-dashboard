@@ -43,7 +43,7 @@ export const StyledDiv = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.skeletonBgColor.highContrast};
   gap: 10px;
   padding: 24px;
   border-radius: 8px;
@@ -60,9 +60,9 @@ export const StyledDiv = styled.div`
     border-radius: var(--rounded-base, 0.75rem);
     background: linear-gradient(
       90deg,
-      #e2e5e7 0px,
+      ${({ theme }) => theme.color.skeletonBgColor.highContrast} 0px,
       #f5f5f5 80px,
-      #e2e5e7 160px
+      ${({ theme }) => theme.color.skeletonBgColor.highContrast} 160px
     );
     animation: ${shimmer} 10s infinite linear;
     display: flex;
@@ -88,7 +88,12 @@ const Skeleton = styled.div<{
   height: ${({ h }) => h || "16px"};
   margin-top: ${({ mt }) => mt || "0"};
   border-radius: ${({ r }) => r || "8px"};
-  background: linear-gradient(90deg, #e2e5e7 0px, #f5f5f5 80px, #e2e5e7 160px);
+  background: linear-gradient(
+    90deg,
+    ${({ theme }) => theme.color.skeletonBgColor.highContrast} 0px,
+    ${({ theme }) => theme.color.skeletonBgColor.lowContrast} 80px,
+    ${({ theme }) => theme.color.skeletonBgColor.highContrast} 160px
+  );
   background-size: 400px 100%;
   animation: ${shimmer} 1.6s infinite linear;
 `;

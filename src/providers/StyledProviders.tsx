@@ -22,12 +22,13 @@ export const useTheme = () => React.useContext(ThemeContext);
 
 type Props = {
   children: React.ReactNode;
+  mode?: string;
 };
 
-export default function StyledProviders({ children }: Props) {
+export default function StyledProviders({ children, mode }: Props) {
   const [isDark, setIsDark] = React.useState(
     // window.matchMedia("(prefers-color-scheme: dark)").matches
-    false
+    mode === "dark" || isDarkMode() || false
   );
 
   const toggleTheme = () => setIsDark((prev) => !prev);

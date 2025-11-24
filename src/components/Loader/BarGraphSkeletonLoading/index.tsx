@@ -9,7 +9,7 @@ const pulse = keyframes`
 const Wrapper = styled.div`
   height: 600px;
   padding: 24px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.color.skeletonBgColor.highContrast};
   border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
   box-shadow: ${({ theme }) => theme.color.boxShadow};
   border-radius: 8px;
@@ -26,7 +26,7 @@ const YAxis = styled.div`
   bottom: 1rem;
   left: 1.5rem;
   width: 2px;
-  background: #d4d4d4;
+  background: ${({ theme }) => theme.color.skeletonBgColor.lowContrast};
 `;
 
 /* A horizontal bar skeleton */

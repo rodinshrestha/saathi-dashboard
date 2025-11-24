@@ -20,7 +20,8 @@ const DoughnutSkeletonWrapper = styled.div`
   width: 324px; /* adjust size */
   height: 200px;
   border-radius: 50%;
-  background: #e0e0e0; /* skeleton base color */
+  background: ${({ theme }) =>
+    theme.color.skeletonBgColor.highContrast}; /* skeleton base color */
   position: relative;
   overflow: hidden;
   animation: ${pulse} 1.5s infinite ease-in-out;
@@ -30,7 +31,9 @@ const InnerCircle = styled.div`
   width: 60%; /* controls thickness of doughnut */
   height: 60%;
   border-radius: 50%;
-  background: #fff; /* matches background to create hollow effect */
+  background: ${({ theme }) =>
+    theme.color.skeletonBgColor
+      .lowContrast}; /* matches background to create hollow effect */
   position: absolute;
   top: 50%;
   left: 50%;

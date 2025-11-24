@@ -42,7 +42,7 @@ export const darkPrimaryColor: typeof lightPrimaryColor = {
     highContrast: "#ffffff08",
   },
   skeletonBgColor: {
-    highContrast: "#A9A9A9",
+    highContrast: "#2c2c2c",
     lowContrast: "#999999",
   },
   cardBgColor: {

@@ -12,7 +12,7 @@ const ChartSkeletonWrapper = styled.div`
   /* min-width: 759px; */
   padding: 24px;
   border-radius: 8px;
-  background: #fff;
+  background: ${({ theme }) => theme.color.skeletonBgColor.highContrast};
   display: flex;
   align-items: flex-end;
   gap: 12px;
@@ -24,7 +24,7 @@ const ChartSkeletonWrapper = styled.div`
 const SkeletonBar = styled.div<{ height: string }>`
   flex: 1;
   border-radius: 6px;
-  background: #e5e7eb;
+  background: ${({ theme }) => theme.color.skeletonBgColor.lowContrast};
   height: ${({ height }) => height};
   animation: ${pulse} 1.4s infinite ease-in-out;
 `;
