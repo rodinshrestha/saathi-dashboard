@@ -73,6 +73,15 @@ export const StyledDiv = styled.div`
         width: 120px;
         display: flex;
         justify-content: space-between;
+
+        &.prev-btn {
+          &:disabled {
+            opacity: 0.5;
+            background-color: #fff;
+            border-color: rgba(0, 0, 0, 0.1);
+            color: oklch(0.145 0 0);
+          }
+        }
       }
     }
   }

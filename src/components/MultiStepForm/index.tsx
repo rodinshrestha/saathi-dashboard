@@ -71,6 +71,7 @@ const MultiStepForm = ({ steps, onSubmit, loader }: MultiStepForm) => {
           variant="outline"
           onClick={() => setCurrentStep((s) => s - 1)}
           disabled={currentStep === 1}
+          className="prev-btn"
         >
           <MoveLeft /> Previous
         </Button>

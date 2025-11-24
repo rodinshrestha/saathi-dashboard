@@ -59,6 +59,9 @@ const LocationDetailForm = ({ formik }: Props) => {
           options={districtList}
           value={formik.values.district_id}
           onChange={(e) => formik.setFieldValue("district_id", e?.value)}
+          showTooltip={!formik.values.province_id}
+          disabled={!formik.values.province_id}
+          tooltipMsg="First select the province"
           className="bg-color"
         />
 

@@ -23,7 +23,7 @@ const ParticipantsForm = ({ formik }: Props) => {
 
   const handleAddParticipants = () => {
     formik.setFieldValue("participant", [
-      ...formik.values.participant,
+      ...formik.values.participants,
       {
         participant_name: "",
         office_school: "",
@@ -39,7 +39,7 @@ const ParticipantsForm = ({ formik }: Props) => {
   };
 
   const handleRemoveParticipants = (index: number) => {
-    const updated = [...formik.values.participant];
+    const updated = [...formik.values.participants];
     updated.splice(index, 1);
     formik.setFieldValue("participant", updated);
   };
@@ -93,7 +93,7 @@ const ParticipantsForm = ({ formik }: Props) => {
       </div>
 
       <div className="participants-table-wrapper">
-        {formik.values.participant.map((x, i) => {
+        {formik.values.participants.map((x, i) => {
           return (
             <div key={i} className="participant-table-data">
               <Typography as="p" className="participant-table-index">

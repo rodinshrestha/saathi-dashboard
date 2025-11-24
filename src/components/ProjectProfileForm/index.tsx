@@ -106,6 +106,7 @@ const ProjectProfileForm = ({ formik, eventData }: Props) => {
           className="bg-color"
           selected={formik.values.end_date}
           onChange={(value) => formik.setFieldValue("end_date", value)}
+          minDate={formik.values.start_date}
         />
       </div>
     </StyledDiv>

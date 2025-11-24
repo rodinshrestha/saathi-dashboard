@@ -43,7 +43,7 @@ export type PreventionProgramFormType = {
   address: string;
   ward: string;
   event_venue: string;
-  participant: ParticipantType[];
+  participants: ParticipantType[];
   profile_picture: string;
   // supporting_documents: string[];
 };

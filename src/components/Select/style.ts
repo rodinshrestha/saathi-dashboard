@@ -53,5 +53,11 @@ export const StyledDiv = styled.div`
         }
       }
     }
+
+    &.react-select--is-disabled {
+      cursor: not-allowed;
+      background-color: #f3f3f5 !important;
+      opacity: 0.5;
+    }
   }
 `;

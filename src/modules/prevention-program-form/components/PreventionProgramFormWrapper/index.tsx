@@ -51,7 +51,7 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       address: data?.address || "",
       ward: data?.ward || "",
       event_venue: data?.event_venue || "",
-      participant: getParticipantsValue(data?.participant),
+      participants: getParticipantsValue(data?.participants),
       profile_picture: "",
       // supporting_documents: [],
     },
