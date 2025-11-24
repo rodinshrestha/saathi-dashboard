@@ -100,7 +100,7 @@ const ParticipantsForm = ({ formik }: Props) => {
                 {i + 1}
               </Typography>
               <InputField
-                name={`participant[${i}].participant_name`}
+                name={`participants[${i}].participant_name`}
                 placeholder="Name"
                 value={x.participant_name}
                 onChange={formik.handleChange}
@@ -112,28 +112,28 @@ const ParticipantsForm = ({ formik }: Props) => {
                 value={x.organization_id}
                 onChange={(e) =>
                   formik.setFieldValue(
-                    `participant[${i}].organization_id`,
+                    `participants[${i}].organization_id`,
                     e?.value
                   )
                 }
                 className="bg-color flex-2"
               />
               <InputField
-                name={`participant[${i}].position`}
+                name={`participants[${i}].position`}
                 placeholder="Position"
                 value={x.position}
                 onChange={formik.handleChange}
                 className="bg-color flex-2"
               />
               <InputField
-                name={`participant[${i}].phone_number`}
+                name={`participants[${i}].phone_number`}
                 placeholder="Name"
                 value={x.phone_number}
                 onChange={formik.handleChange}
                 className="bg-color flex-2"
               />
               <InputField
-                name={`participant[${i}].email`}
+                name={`participants[${i}].email`}
                 placeholder="Email"
                 value={x.email}
                 onChange={formik.handleChange}
@@ -144,7 +144,7 @@ const ParticipantsForm = ({ formik }: Props) => {
                 options={AGE_RANGE_OPTIONS}
                 value={x.age}
                 onChange={(e) =>
-                  formik.setFieldValue(`participant[${i}].age`, e?.value)
+                  formik.setFieldValue(`participants[${i}].age`, e?.value)
                 }
                 className="bg-color flex-2"
               />
@@ -153,7 +153,7 @@ const ParticipantsForm = ({ formik }: Props) => {
                 options={GENDER_OPTION_LIST}
                 value={x.sex}
                 onChange={(e) =>
-                  formik.setFieldValue(`participant[${i}].sex`, e?.value)
+                  formik.setFieldValue(`participants[${i}].sex`, e?.value)
                 }
                 className="bg-color flex-2"
               />
@@ -163,7 +163,7 @@ const ParticipantsForm = ({ formik }: Props) => {
                 value={x.ethnicity_id}
                 onChange={(e) =>
                   formik.setFieldValue(
-                    `participant[${i}].ethnicity_id`,
+                    `participants[${i}].ethnicity_id`,
                     e?.value
                   )
                 }
@@ -175,7 +175,7 @@ const ParticipantsForm = ({ formik }: Props) => {
                 value={x.disability_type}
                 onChange={(e) =>
                   formik.setFieldValue(
-                    `participant[${i}].disability_type`,
+                    `participants[${i}].disability_type`,
                     e?.value
                   )
                 }
