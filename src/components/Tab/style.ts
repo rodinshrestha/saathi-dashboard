@@ -6,11 +6,9 @@ export const StyledDiv = styled.div`
     display: flex;
     gap: 5px;
     padding: 3px;
-    background-color: ${({ theme }) =>
-      theme.color.backgroundColor.highContrast};
+    background-color: ${({ theme }) => theme.color.grey["300"]};
     border-radius: 12px;
     margin-bottom: 15px;
-    border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
 
     .tab-header {
       flex: 1 1 50%;

@@ -13,7 +13,11 @@ export const StyledDiv = styled.div`
   border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
   background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
   box-shadow: ${({ theme }) => theme.color.boxShadow};
+  min-width: 0;
   canvas {
+    width: 100% !important;
+    min-width: 0 !important;
+    display: block;
     height: 550px !important;
   }
 `;

@@ -11,13 +11,20 @@ export const StyledDiv = styled.div`
     border: 1px solid ${({ theme }) => theme.color.borderColor.highContrast};
     background-color: ${({ theme }) => theme.color.backgroundColor.lowContrast};
     box-shadow: ${({ theme }) => theme.color.boxShadow};
+
+    /* 🔥 MAIN FIX */
+    min-width: 0;
+
     canvas {
+      /* 🔥 ALLOW SHRINK */
+      width: 100% !important;
+      min-width: 0 !important;
+      display: block;
       height: 350px !important;
     }
 
     .bar-chart-title {
       font-size: 16px;
-      color: ${({ theme }) => theme.color.textColor.highContrast};
       margin-bottom: 40px;
     }
   }
