@@ -47,6 +47,7 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       event_venue: "",
       participants: [
         {
+          id: null,
           name: "",
           organization_id: "",
           position: "",

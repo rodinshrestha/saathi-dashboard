@@ -1,6 +1,9 @@
 import { ProvinceType } from "@/types/province.types";
 
 export type ParticipantType = {
+  /** Participant id */
+  id: null | number;
+
   /** Full name of the participant */
   name: string;
 

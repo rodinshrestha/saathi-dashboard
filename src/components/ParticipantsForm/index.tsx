@@ -25,6 +25,7 @@ const ParticipantsForm = ({ formik }: Props) => {
     formik.setFieldValue("participants", [
       ...formik.values.participants,
       {
+        id: null,
         name: "",
         organization_id: "",
         position: "",
