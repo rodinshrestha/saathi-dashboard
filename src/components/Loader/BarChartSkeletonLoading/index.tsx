@@ -24,7 +24,7 @@ const ChartSkeletonWrapper = styled.div`
 const SkeletonBar = styled.div<{ height: string }>`
   flex: 1;
   border-radius: 6px;
-  background: #e5e7eb;
+  background: ${({ theme }) => theme.color.skeletonBgColor.highContrast};
   height: ${({ height }) => height};
   animation: ${pulse} 1.4s infinite ease-in-out;
 `;
