@@ -1,13 +1,13 @@
 import { ParticipantType } from "@/modules/prevention-program-form/prevention-program.types";
 
-const pariticipantInitialValue = [
+const pariticipantInitialValue: Array<ParticipantType> = [
   {
-    participant_name: "",
+    name: "",
     organization_id: "",
     position: "",
-    phone_number: "",
+    phone: "",
     email: "",
-    age: "",
+    age_range: "",
     sex: "",
     ethnicity_id: "",
     disability_type: "",

@@ -47,12 +47,12 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       event_venue: "",
       participants: [
         {
-          participant_name: "",
+          name: "",
           organization_id: "",
           position: "",
-          phone_number: "",
+          phone: "",
           email: "",
-          age: "",
+          age_range: "",
           sex: "",
           ethnicity_id: "",
           disability_type: "",

@@ -22,17 +22,17 @@ const ParticipantsForm = ({ formik }: Props) => {
   const { organizationData, ethnicityData } = useGlobalStore();
 
   const handleAddParticipants = () => {
-    formik.setFieldValue("participant", [
+    formik.setFieldValue("participants", [
       ...formik.values.participants,
       {
-        participant_name: "",
-        office_school: "",
+        name: "",
+        organization_id: "",
         position: "",
-        phone_number: "",
+        phone: "",
         email: "",
-        age: "",
+        age_range: "",
         sex: "",
-        ethnicity: "",
+        ethnicity_id: "",
         disability_type: "",
       },
     ]);
@@ -41,7 +41,7 @@ const ParticipantsForm = ({ formik }: Props) => {
   const handleRemoveParticipants = (index: number) => {
     const updated = [...formik.values.participants];
     updated.splice(index, 1);
-    formik.setFieldValue("participant", updated);
+    formik.setFieldValue("participants", updated);
   };
 
   return (
@@ -100,9 +100,9 @@ const ParticipantsForm = ({ formik }: Props) => {
                 {i + 1}
               </Typography>
               <InputField
-                name={`participants[${i}].participant_name`}
+                name={`participants[${i}].name`}
                 placeholder="Name"
-                value={x.participant_name}
+                value={x.name}
                 onChange={formik.handleChange}
                 className="bg-color flex-2"
               />
@@ -126,9 +126,9 @@ const ParticipantsForm = ({ formik }: Props) => {
                 className="bg-color flex-2"
               />
               <InputField
-                name={`participants[${i}].phone_number`}
+                name={`participants[${i}].phone`}
                 placeholder="Name"
-                value={x.phone_number}
+                value={x.phone}
                 onChange={formik.handleChange}
                 className="bg-color flex-2"
               />
@@ -142,9 +142,9 @@ const ParticipantsForm = ({ formik }: Props) => {
               <Select
                 placeholder="Age"
                 options={AGE_RANGE_OPTIONS}
-                value={x.age}
+                value={x.age_range}
                 onChange={(e) =>
-                  formik.setFieldValue(`participants[${i}].age`, e?.value)
+                  formik.setFieldValue(`participants[${i}].age_range`, e?.value)
                 }
                 className="bg-color flex-2"
               />

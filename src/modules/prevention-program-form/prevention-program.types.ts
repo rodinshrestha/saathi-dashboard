@@ -2,7 +2,7 @@ import { ProvinceType } from "@/types/province.types";
 
 export type ParticipantType = {
   /** Full name of the participant */
-  participant_name: string;
+  name: string;
 
   /** Name of the office or school the participant belongs to */
   organization_id: string;
@@ -11,13 +11,13 @@ export type ParticipantType = {
   position: string;
 
   /** Participant’s contact phone number */
-  phone_number: string;
+  phone: string;
 
   /** Participant’s email address */
   email: string;
 
   /** Participant’s age */
-  age: string;
+  age_range: string;
 
   /** Participant’s sex (e.g., Male/Female/Other) */
   sex: string;
