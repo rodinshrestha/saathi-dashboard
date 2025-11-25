@@ -1,3 +1,4 @@
+import { AttachmentTypes } from "@/types/attachment.types";
 import { ProvinceType } from "@/types/province.types";
 
 export type ParticipantType = {
@@ -47,5 +48,6 @@ export type PreventionProgramFormType = {
   ward: string;
   event_venue: string;
   participants: ParticipantType[];
-  // supporting_documents: string[];
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

@@ -14,11 +14,13 @@ import useFetchEventList from "@/hooks/useFetchEventList";
 import useToaster from "@/hooks/useToaster";
 import { ProvinceType } from "@/types/province.types";
 import { authAxios } from "@/utils/axios";
-import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { getParticipantsValue } from "@/utils/get-participants-value";
 import { getProvinceId } from "@/utils/get-province-id";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { PreventionProgramFormType } from "../../prevention-program.types";
 
@@ -53,14 +55,15 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       ward: data?.ward || "",
       event_venue: data?.event_venue || "",
       participants: getParticipantsValue(data?.participants),
-      // supporting_documents: [],
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: () => {
-      const { start_date, end_date, ...rest } = formik.values;
+      const { start_date, end_date, attachments, ...rest } = formik.values;
       setLoader(true);
       const body = {
         start_date: getConvertedDate(start_date),
         end_date: getConvertedDate(end_date),
+        attachments: sanitizeAttachmentsFile(attachments),
         ...rest,
       };
 
@@ -72,9 +75,13 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      const respObj = convertResponseObj(body);
+      const formData = objectToFormData(body);
 
-      authAxios[method](endPoint, respObj)
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -106,6 +113,12 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       label: " Participants",
       icon: <Users />,
       component: <ParticipantsForm formik={formik} />,
+    },
+    {
+      id: "attachments",
+      label: "Attachments",
+      icon: <Paperclip />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
   return (

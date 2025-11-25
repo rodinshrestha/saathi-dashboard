@@ -189,7 +189,7 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm formik={formik} />,
+      component: <AttachmentForm formik={formik} showProfile />,
     },
   ];
   return (

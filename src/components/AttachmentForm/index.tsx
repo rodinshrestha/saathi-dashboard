@@ -16,15 +16,17 @@ import { StyledDiv } from "./style";
 
 type Props<T> = {
   formik: FormikProps<T>;
+  showProfile?: boolean;
 };
 
 const AttachmentForm = <
   T extends {
-    profile_picture: File | string | null;
+    profile_picture?: File | string | null;
     attachments: AttachmentTypes;
   },
 >({
   formik,
+  showProfile,
 }: Props<T>) => {
   const [profilePictureErrorList, setProfilePictureErrorList] = React.useState({
     type: "",
@@ -86,60 +88,61 @@ const AttachmentForm = <
         </Typography>
       </div>
 
-      <div className="attachment-profile-wrapper">
-        <Typography as="p" className="attachment-profile-content">
-          <Camera size={16} />
-          Profile Picture
-        </Typography>
+      {showProfile && (
+        <div className="attachment-profile-wrapper">
+          <Typography as="p" className="attachment-profile-content">
+            <Camera size={16} />
+            Profile Picture
+          </Typography>
 
-        <div className="attachment-profile-content-wrapper">
-          <div className="profile-icon-wrapper">
-            {profile_picture ? (
-              <Image
-                src={getProfilePictureUrl(profile_picture)}
-                alt="profle picture"
-                fill
-              />
-            ) : (
-              <User size={48} />
-            )}
-          </div>
-          <div className="profile-content-wrapper">
-            <label
-              className="profile-upload-btn-wrapper"
-              htmlFor="profile-picture-upload"
-            >
-              <input
-                name="file_upload"
-                type="file"
-                id="profile-picture-upload"
-                accept="image/*"
-                className="attachment-profile-upload-btn"
-                onChange={handleProfilePicture}
-              />
-              <Camera size={16} />
-              {profile_picture ? "Update" : "Upload"} Photo
-            </label>
+          <div className="attachment-profile-content-wrapper">
+            <div className="profile-icon-wrapper">
+              {profile_picture ? (
+                <Image
+                  src={getProfilePictureUrl(profile_picture)}
+                  alt="profle picture"
+                  fill
+                />
+              ) : (
+                <User size={48} />
+              )}
+            </div>
+            <div className="profile-content-wrapper">
+              <label
+                className="profile-upload-btn-wrapper"
+                htmlFor="profile-picture-upload"
+              >
+                <input
+                  name="file_upload"
+                  type="file"
+                  id="profile-picture-upload"
+                  accept="image/*"
+                  className="attachment-profile-upload-btn"
+                  onChange={handleProfilePicture}
+                />
+                <Camera size={16} />
+                {profile_picture ? "Update" : "Upload"} Photo
+              </label>
 
-            <Typography as="p" className="profile-upload-instruction-text">
-              Recommended: Square image, at least 400x400px <br /> JPG, PNG, or
-              GIF • Max 5MB
-            </Typography>
+              <Typography as="p" className="profile-upload-instruction-text">
+                Recommended: Square image, at least 400x400px <br /> JPG, PNG,
+                or GIF • Max 2MB
+              </Typography>
 
-            {showProfilePictureError && (
-              <ul className="profile-picture-error-wrapper">
-                {profilePictureErrorList.fileSize && (
-                  <li>{profilePictureErrorList.fileSize}</li>
-                )}
-                {profilePictureErrorList.type && (
-                  <li>{profilePictureErrorList.type}</li>
-                )}
-              </ul>
-            )}
+              {showProfilePictureError && (
+                <ul className="profile-picture-error-wrapper">
+                  {profilePictureErrorList.fileSize && (
+                    <li>{profilePictureErrorList.fileSize}</li>
+                  )}
+                  {profilePictureErrorList.type && (
+                    <li>{profilePictureErrorList.type}</li>
+                  )}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       <SupportingDocuments formik={formik} />
     </StyledDiv>
   );

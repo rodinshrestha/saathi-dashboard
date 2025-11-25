@@ -23,7 +23,7 @@ const SupportingDocuments = <T extends { attachments: AttachmentTypes }>({
     const fileData = files.reduce(
       (acc, file) => {
         if (file?.size > FILE_SIZE) {
-          return [...acc, { file, error: "File size must be less than 2mb" }];
+          return [...acc, { file, error: "File size must be less than 2MB" }];
         }
 
         const isAllowed =
@@ -99,7 +99,7 @@ const SupportingDocuments = <T extends { attachments: AttachmentTypes }>({
             <span>or drag and drop</span>
           </Typography>
           <Typography as="p" className="supporting-upload-file-size-info">
-            PNG, JPG, PDF, DOC up to 5MB per file • Multiple files allowed
+            PNG, JPG, PDF, DOC up to 2MB per file • Multiple files allowed
           </Typography>
         </label>
       </div>

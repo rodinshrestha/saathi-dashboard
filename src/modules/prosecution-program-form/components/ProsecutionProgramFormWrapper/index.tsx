@@ -2,8 +2,10 @@
 import React from "react";
 
 import { useFormik } from "formik";
-import { FileText, MapPin, Users } from "lucide-react";
+import { FileText, MapPin, Paperclip, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 
+import AttachmentForm from "@/components/AttachmentForm";
 import LocationDetailForm from "@/components/LocationDetailForm";
 import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
@@ -14,6 +16,10 @@ import { PreventionProgramFormType } from "@/modules/prevention-program-form/pre
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
+import { getParticipantsValue } from "@/utils/get-participants-value";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 type Props = {
   data?: PreventionProgramFormType & { id: string };
@@ -24,6 +30,7 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
   const { fetchEventData, eventData } = useFetchEventList();
   const [loader, setLoader] = React.useState(false);
   const { successToast, errorToast } = useToaster();
+  const router = useRouter();
 
   React.useEffect(() => {
     fetchEventData(2); // 2 means prosecution program
@@ -32,40 +39,29 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
   const formik = useFormik<PreventionProgramFormType>({
     initialValues: {
       program_id: 2,
-      project_id: "",
-      event_id: "",
-      activity_code: "",
-      fund_code: "",
-      organizer: "",
-      start_date: null,
-      end_date: null,
-      province_id: "",
-      district_id: "",
-      address: "",
-      ward: "",
-      event_venue: "",
-      participants: [
-        {
-          id: null,
-          name: "",
-          organization_id: "",
-          position: "",
-          phone: "",
-          email: "",
-          age_range: "",
-          sex: "",
-          ethnicity_id: "",
-          disability_type: "",
-        },
-      ],
-      // supporting_documents: [],
+      project_id: data?.project_id || "",
+      event_id: data?.event_id || "",
+      activity_code: data?.activity_code || "",
+      fund_code: data?.fund_code || "",
+      organizer: data?.organizer || "",
+      start_date: data?.start_date || null,
+      end_date: data?.end_date || null,
+      province_id: data?.province_id || "",
+      district_id: data?.district_id || "",
+      address: data?.address || "",
+      ward: data?.ward || "",
+      event_venue: data?.event_venue || "",
+      participants: getParticipantsValue(data?.participants),
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: () => {
-      const { start_date, end_date, ...rest } = formik.values;
+      const { start_date, end_date, attachments, ...rest } = formik.values;
       setLoader(true);
       const body = {
         start_date: getConvertedDate(start_date),
         end_date: getConvertedDate(end_date),
+        attachments: sanitizeAttachmentsFile(attachments),
+
         ...rest,
       };
 
@@ -77,14 +73,21 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, body)
-        .then(() =>
+      const formData = objectToFormData(body);
+
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then(() => {
           successToast(
             isUpdate
               ? "project update successfull"
               : "Project created successfull"
-          )
-        )
+          );
+          router.push("/registration-list");
+        })
         .catch((err) => getApiResponseErrorToast(err))
         .finally(() => setLoader(false));
     },
@@ -108,6 +111,12 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       label: " Participants",
       icon: <Users />,
       component: <ParticipantsForm formik={formik} />,
+    },
+    {
+      id: "attachments",
+      label: "Attachments",
+      icon: <Paperclip />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
 

@@ -139,7 +139,7 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm formik={formik} />,
+      component: <AttachmentForm formik={formik} showProfile />,
     },
   ];
 
