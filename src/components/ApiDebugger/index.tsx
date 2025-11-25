@@ -1,17 +1,16 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import { JSONTree } from "react-json-tree";
+
+import { useDebuggerStore } from "@/store/useDebuggerStore";
 
 type Props = {
   data: unknown;
 };
 
 export default function ApiDebugger({ data }: Props) {
-  const params = useSearchParams();
+  const { apiDebugger } = useDebuggerStore();
 
-  const isDebugger = params.get("debugger");
-
-  if (!data) {
+  if (!apiDebugger) {
     return null;
   }
 
