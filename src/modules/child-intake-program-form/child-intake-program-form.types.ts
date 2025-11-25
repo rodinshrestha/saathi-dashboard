@@ -1,3 +1,5 @@
+import { AttachmentTypes } from "@/types/attachment.types";
+
 export type ChildIntakeProgramFormType = {
   /** Pogram id 9 i.e child intake form */
   program_id: 9;
@@ -313,4 +315,10 @@ export type ChildIntakeProgramFormType = {
 
   /** Position of the staff */
   staff_position: string;
+
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

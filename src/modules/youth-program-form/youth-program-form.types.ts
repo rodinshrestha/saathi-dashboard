@@ -1,3 +1,5 @@
+import { AttachmentTypes } from "@/types/attachment.types";
+
 export type YouthProgramFormType = {
   /** Program id 8 i.e youth program */
   program_id: 8;
@@ -55,4 +57,10 @@ export type YouthProgramFormType = {
 
   /** Overall comments or assessment */
   overall_comments: string;
+
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

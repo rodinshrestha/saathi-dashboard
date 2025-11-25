@@ -20,9 +20,11 @@ import AttachmentForm from "@/components/AttachmentForm";
 import MultiStepForm from "@/components/MultiStepForm";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
-import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { ChildIntakeProgramFormType } from "../../child-intake-program-form.types";
 import ChildIntakeBasicInfo from "../ChildIntakeBasicInfo";
@@ -159,17 +161,25 @@ const ChildIntakeFormWrapper = ({ data, isUpdate }: Props) => {
       scholarship_details: data?.scholarship_details || "",
       staff_name: data?.staff_name || "",
       staff_position: data?.staff_position || "",
+      profile_picture: data?.profile_picture || null,
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: (values) => {
       setLoader(true);
 
-      const { registration_date, date_of_birth_bs, date_of_birth_ad, ...rest } =
-        values;
+      const {
+        registration_date,
+        date_of_birth_bs,
+        date_of_birth_ad,
+        attachments,
+        ...rest
+      } = values;
 
       const body = {
         registration_date: getConvertedDate(registration_date),
         date_of_birth_bs: getConvertedDate(date_of_birth_bs),
         date_of_birth_ad: getConvertedDate(date_of_birth_ad),
+        attachments: sanitizeAttachmentsFile(attachments),
         ...rest,
       };
 
@@ -181,7 +191,13 @@ const ChildIntakeFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, convertResponseObj(body))
+      const formData = objectToFormData(body);
+
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -248,7 +264,7 @@ const ChildIntakeFormWrapper = ({ data, isUpdate }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
 

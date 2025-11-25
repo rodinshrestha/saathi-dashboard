@@ -9,7 +9,6 @@ export const fetcher = async (url: `/${string}`) => {
   }
 
   const token = getCookie(ACCESS_TOKEN);
-  console.log(`${baseURL}${url}`);
   const res = await fetch(`${baseURL}${url}`, {
     next: { revalidate: 0 },
     method: "GET",

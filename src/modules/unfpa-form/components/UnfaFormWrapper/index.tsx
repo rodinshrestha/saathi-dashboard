@@ -10,10 +10,12 @@ import MultiStepForm from "@/components/MultiStepForm";
 import useToaster from "@/hooks/useToaster";
 import { ProvinceType } from "@/types/province.types";
 import { authAxios } from "@/utils/axios";
-import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { getProvinceId } from "@/utils/get-province-id";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { UNFPAFormType } from "../../unfpa.types";
 import AdditionalInfoForm from "../AdditionalInfoForm";
@@ -64,15 +66,19 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
       specify_details: data?.specify_details || "",
       additional_information_or_notes:
         data?.additional_information_or_notes || "",
+      profile_picture: data?.profile_picture || null,
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: (values) => {
       setLoader(true);
 
-      const { registration_date, date_of_incident, ...rest } = values;
+      const { registration_date, date_of_incident, attachments, ...rest } =
+        values;
 
       const body = {
         registration_date: getConvertedDate(registration_date),
         date_of_incident: getConvertedDate(date_of_incident),
+        attachments: sanitizeAttachmentsFile(attachments),
         ...rest,
       };
 
@@ -81,10 +87,16 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
         return;
       }
 
+      const formData = objectToFormData(body);
+
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, convertResponseObj(body))
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -127,7 +139,7 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
 

@@ -14,6 +14,7 @@ import useFetchEventList from "@/hooks/useFetchEventList";
 import useToaster from "@/hooks/useToaster";
 import { ProvinceType } from "@/types/province.types";
 import { authAxios } from "@/utils/axios";
+import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { getParticipantsValue } from "@/utils/get-participants-value";
@@ -52,7 +53,6 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       ward: data?.ward || "",
       event_venue: data?.event_venue || "",
       participants: getParticipantsValue(data?.participants),
-      profile_picture: "",
       // supporting_documents: [],
     },
     onSubmit: () => {
@@ -72,7 +72,9 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, body)
+      const respObj = convertResponseObj(body);
+
+      authAxios[method](endPoint, respObj)
         .then(() => {
           successToast(
             isUpdate
@@ -104,12 +106,6 @@ const PreventionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       label: " Participants",
       icon: <Users />,
       component: <ParticipantsForm formik={formik} />,
-    },
-    {
-      id: "attachments",
-      label: "Attachments",
-      icon: <Paperclip />,
-      component: <AttachmentForm />,
     },
   ];
   return (

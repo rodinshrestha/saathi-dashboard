@@ -2,9 +2,8 @@
 import React from "react";
 
 import { useFormik } from "formik";
-import { FileText, MapPin, Paperclip, Users } from "lucide-react";
+import { FileText, MapPin, Users } from "lucide-react";
 
-import AttachmentForm from "@/components/AttachmentForm";
 import LocationDetailForm from "@/components/LocationDetailForm";
 import MultiStepForm from "@/components/MultiStepForm";
 import ParticipantsForm from "@/components/ParticipantsForm";
@@ -59,7 +58,6 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
           disability_type: "",
         },
       ],
-      profile_picture: "",
       // supporting_documents: [],
     },
     onSubmit: () => {
@@ -110,12 +108,6 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
       label: " Participants",
       icon: <Users />,
       component: <ParticipantsForm formik={formik} />,
-    },
-    {
-      id: "attachments",
-      label: "Attachments",
-      icon: <Paperclip />,
-      component: <AttachmentForm />,
     },
   ];
 

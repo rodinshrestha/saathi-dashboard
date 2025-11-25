@@ -105,44 +105,4 @@ export const StyledDiv = styled.div`
       }
     }
   }
-
-  .supporting-document-wrapper {
-    margin-top: 40px;
-    .supporting-document-title {
-      display: flex;
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    .supporting-upload-area {
-      margin-top: 20px;
-      height: 164px;
-      width: 100%;
-      border: 2px dashed ${({ theme }) => theme.color.borderColor.highContrast};
-    }
-  }
-
-  .upload-area-instruction-list-wrapper {
-    margin-top: 20px;
-    border-radius: 8px;
-    padding: 12px;
-    background-color: ${({ theme }) =>
-      theme.color.backgroundColor.highContrast};
-    color: ${({ theme }) => theme.color.textColor.lowContrast};
-    border: 1px solid ${({ theme }) => theme.color.blue["400"]};
-
-    .upload-instruction-title {
-      color: inherit;
-      font-size: 12px;
-    }
-
-    .upload-instruction-content-wrapper {
-      font-size: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding-inline-start: 18px;
-      margin-bottom: 0;
-    }
-  }
 `;

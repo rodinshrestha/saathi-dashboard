@@ -1,3 +1,5 @@
+import { AttachmentTypes } from "@/types/attachment.types";
+
 export type FamilyReintegrationFormType = {
   /** Program id 10 i.e family reintergation */
   program_id: 10;
@@ -79,4 +81,10 @@ export type FamilyReintegrationFormType = {
 
   /** Future plan for the child/youth */
   future_plan: string;
+
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

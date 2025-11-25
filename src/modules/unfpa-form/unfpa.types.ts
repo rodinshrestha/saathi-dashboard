@@ -1,3 +1,4 @@
+import { AttachmentTypes } from "@/types/attachment.types";
 import { ProvinceType } from "@/types/province.types";
 
 export type UNFPAFormType = {
@@ -84,4 +85,10 @@ export type UNFPAFormType = {
 
   /* Additional notes or remarks about the case */
   additional_information_or_notes: string;
+
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

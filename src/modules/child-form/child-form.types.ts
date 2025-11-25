@@ -1,3 +1,5 @@
+import { AttachmentTypes } from "@/types/attachment.types";
+
 export type ChildFormType = {
   /** Progrmam unique number i.e child form */
   program_id: number;
@@ -40,4 +42,10 @@ export type ChildFormType = {
 
   /** Summary of overall assessment */
   overall_assessment: string;
+
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };

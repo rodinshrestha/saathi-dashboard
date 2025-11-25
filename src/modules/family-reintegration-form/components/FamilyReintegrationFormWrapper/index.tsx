@@ -9,8 +9,10 @@ import AttachmentForm from "@/components/AttachmentForm";
 import MultiStepForm from "@/components/MultiStepForm";
 import useToaster from "@/hooks/useToaster";
 import { authAxios } from "@/utils/axios";
-import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { FamilyReintegrationFormType } from "../../family-reintegration.types";
 import FamilyReintegrationDetailsForm from "../FamilyReintegrationDetailsForm";
@@ -60,6 +62,8 @@ const FamilyReintegrationFormWrapper = ({ data, isUpdate }: Props) => {
       coordination_and_referral_details:
         data?.coordination_and_referral_details || "",
       future_plan: data?.future_plan || "",
+      profile_picture: data?.profile_picture || null,
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: (values) => {
       setLoader(true);
@@ -69,10 +73,23 @@ const FamilyReintegrationFormWrapper = ({ data, isUpdate }: Props) => {
         return;
       }
 
+      const { attachments, ...rest } = values;
+
+      const body = {
+        attachments: sanitizeAttachmentsFile(attachments),
+        ...rest,
+      };
+
+      const formData = objectToFormData(body);
+
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, convertResponseObj(values))
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -116,7 +133,7 @@ const FamilyReintegrationFormWrapper = ({ data, isUpdate }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
   return (

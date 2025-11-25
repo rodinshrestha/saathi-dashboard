@@ -12,6 +12,9 @@ import { authAxios } from "@/utils/axios";
 import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { YouthProgramFormType } from "../../youth-program-form.types";
 import YouthAssessmentForm from "../YouthAssessmentForm";
@@ -50,6 +53,8 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
       behaviour_and_attitude: data?.behaviour_and_attitude || "",
       college_result: data?.college_result || "",
       overall_comments: data?.overall_comments || "",
+      profile_picture: data?.profile_picture || null,
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: (values) => {
       setLoader(true);
@@ -57,6 +62,7 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
         date_of_joining_college,
         college_visit_date,
         date_settled_in_youth_program,
+        attachments,
         ...rest
       } = values;
 
@@ -66,6 +72,7 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
         date_settled_in_youth_program: getConvertedDate(
           date_settled_in_youth_program
         ),
+        attachments: sanitizeAttachmentsFile(attachments),
         ...rest,
       };
 
@@ -77,7 +84,13 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, convertResponseObj(body))
+      const formData = objectToFormData(body);
+
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -108,7 +121,7 @@ const YouthFormWrapper = ({ data, isUpdate }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
   return (

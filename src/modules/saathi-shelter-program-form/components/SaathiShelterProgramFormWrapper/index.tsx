@@ -19,10 +19,12 @@ import MultiStepForm from "@/components/MultiStepForm";
 import useToaster from "@/hooks/useToaster";
 import { ProvinceType } from "@/types/province.types";
 import { authAxios } from "@/utils/axios";
-import { convertResponseObj } from "@/utils/convert-responese-obj";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { getProvinceId } from "@/utils/get-province-id";
+import { initializeAttachmentsData } from "@/utils/initialize-attachments-data";
+import { objectToFormData } from "@/utils/object-to-form-data";
+import { sanitizeAttachmentsFile } from "@/utils/sanitize-attachments-file";
 
 import { SaathiShelterProgramFormType } from "../../saathi-shelter.types";
 import ShelterAdditionalForm from "../ShelterAdditionalForm";
@@ -90,6 +92,8 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
       current_status_of_survivor_and_dependents:
         data?.current_status_of_survivor_and_dependents || "",
       other_remarks: data?.other_remarks || "",
+      profile_picture: data?.profile_picture || null,
+      attachments: initializeAttachmentsData(data?.attachments),
     },
     onSubmit: (values) => {
       setLoader(true);
@@ -98,6 +102,7 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
         date_of_entry,
         referred_date_of_entry,
         date_of_discharge,
+        attachments,
         ...rest
       } = values;
 
@@ -105,6 +110,7 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
         date_of_entry: getConvertedDate(date_of_entry),
         referred_date_of_entry: getConvertedDate(referred_date_of_entry),
         date_of_discharge: getConvertedDate(date_of_discharge),
+        attachments: sanitizeAttachmentsFile(attachments),
         ...rest,
       };
 
@@ -116,7 +122,13 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
       const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, convertResponseObj(body))
+      const formData = objectToFormData(body);
+
+      authAxios[method](endPoint, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
         .then(() => {
           successToast(
             isUpdate
@@ -177,7 +189,7 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate }: Props) => {
       id: "attachments",
       label: "Attachments",
       icon: <Paperclip />,
-      component: <AttachmentForm />,
+      component: <AttachmentForm formik={formik} />,
     },
   ];
   return (

@@ -1,32 +1,36 @@
 import React from "react";
 
-import { Camera, FileText, Upload, User } from "lucide-react";
+import { FormikProps } from "formik";
+import { Camera, Upload, User } from "lucide-react";
 import Image from "next/image";
 
 import { FILE_SIZE } from "@/constant/file-size.constant";
 import useToaster from "@/hooks/useToaster";
+import { AttachmentTypes } from "@/types/attachment.types";
+import { getProfilePictureUrl } from "@/utils/get-profile-picture-url";
 
+import SupportingDocuments from "../SupportingDocuments";
 import Typography from "../Typography";
 
 import { StyledDiv } from "./style";
 
-type ProfilePictureType = {
-  id: string;
-  name: string;
-  type: string;
-  size: number;
-  preview?: string;
+type Props<T> = {
+  formik: FormikProps<T>;
 };
 
-const AttachmentForm = () => {
-  const [profilePicture, setProfilePicture] =
-    React.useState<ProfilePictureType | null>(null);
+const AttachmentForm = <
+  T extends {
+    profile_picture: File | string | null;
+    attachments: AttachmentTypes;
+  },
+>({
+  formik,
+}: Props<T>) => {
   const [profilePictureErrorList, setProfilePictureErrorList] = React.useState({
     type: "",
     fileSize: "",
   });
 
-  const profilePictureId = React.useId();
   const { errorToast } = useToaster();
 
   const handleProfilePicture = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,17 +66,13 @@ const AttachmentForm = () => {
       }));
     }
 
-    setProfilePicture({
-      id: profilePictureId,
-      name: file.name,
-      type: file.type,
-      size: file.size,
-      preview: URL.createObjectURL(file),
-    });
+    formik.setFieldValue("profile_picture", file);
   };
 
   const showProfilePictureError =
     profilePictureErrorList.fileSize || profilePictureErrorList.type;
+
+  const { profile_picture } = formik?.values;
 
   return (
     <StyledDiv>
@@ -94,8 +94,12 @@ const AttachmentForm = () => {
 
         <div className="attachment-profile-content-wrapper">
           <div className="profile-icon-wrapper">
-            {profilePicture?.preview ? (
-              <Image src={profilePicture.preview} alt="profle picture" fill />
+            {profile_picture ? (
+              <Image
+                src={getProfilePictureUrl(profile_picture)}
+                alt="profle picture"
+                fill
+              />
             ) : (
               <User size={48} />
             )}
@@ -106,6 +110,7 @@ const AttachmentForm = () => {
               htmlFor="profile-picture-upload"
             >
               <input
+                name="file_upload"
                 type="file"
                 id="profile-picture-upload"
                 accept="image/*"
@@ -113,7 +118,7 @@ const AttachmentForm = () => {
                 onChange={handleProfilePicture}
               />
               <Camera size={16} />
-              {profilePicture?.size ? "Update" : "Upload"} Photo
+              {profile_picture ? "Update" : "Upload"} Photo
             </label>
 
             <Typography as="p" className="profile-upload-instruction-text">
@@ -135,28 +140,7 @@ const AttachmentForm = () => {
         </div>
       </div>
 
-      <div className="supporting-document-wrapper">
-        <Typography as="p" className="supporting-document-title">
-          <FileText size={16} />
-          Supporting Documents
-        </Typography>
-
-        <div className="supporting-upload-area"></div>
-
-        <div className="upload-area-instruction-list-wrapper">
-          <Typography as="p" className="upload-instruction-title">
-            Supported file types:
-          </Typography>
-          <ul className="upload-instruction-content-wrapper">
-            <li>Images: JPG, PNG, GIF</li>
-            <li>Documents: PDF, DOC, DOCX, TXT</li>
-            <li>
-              Legal Documents: Birth certifcates, referral letters, court
-              doucments
-            </li>
-          </ul>
-        </div>
-      </div>
+      <SupportingDocuments formik={formik} />
     </StyledDiv>
   );
 };

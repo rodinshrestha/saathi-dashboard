@@ -11,7 +11,7 @@ export default function ApiDebugger({ data }: Props) {
 
   const isDebugger = params.get("debugger");
 
-  if (!data || isDebugger !== "true") {
+  if (!data) {
     return null;
   }
 

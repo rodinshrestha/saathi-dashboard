@@ -1,3 +1,4 @@
+import { AttachmentTypes } from "@/types/attachment.types";
 import { ProvinceType } from "@/types/province.types";
 
 export type SaathiShelterProgramFormType = {
@@ -44,4 +45,9 @@ export type SaathiShelterProgramFormType = {
   counseling_to_police: string;
   current_status_of_survivor_and_dependents: string;
   other_remarks: string;
+  /** Profile picture */
+  profile_picture: File | string | null;
+
+  /** Attachments */
+  attachments: AttachmentTypes;
 };
