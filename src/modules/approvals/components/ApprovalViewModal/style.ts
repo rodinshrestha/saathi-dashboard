@@ -72,5 +72,30 @@ export const StyledDiv = styled.div`
     margin-top: 30px;
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
+
+    .btn {
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      cursor: pointer;
+      svg {
+        margin-right: 10px;
+      }
+    }
+
+    .approve-btn {
+      background-color: oklch(0.627 0.194 149.214);
+      border-color: oklch(0.627 0.194 149.214);
+
+      &:hover {
+        background-color: ${({ theme }) => theme.color.green["200"]};
+        border-color: ${({ theme }) => theme.color.green["200"]};
+      }
+    }
+
+    .send-back-btn {
+      color: ${({ theme }) => theme.color.orange["100"]};
+    }
   }
 `;

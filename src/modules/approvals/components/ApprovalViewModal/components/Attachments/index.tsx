@@ -1,45 +1,39 @@
 import React from "react";
 
 import DocumentBlock from "@/components/DocumentBlock";
+import Typography from "@/components/Typography";
+import { DoucmentAttachmentType } from "@/modules/registration-list/components/RegistrationViewModal/components/RegistrationAttachmentBlock";
+import { getFileSize } from "@/utils/get-file-size";
 
 import { StyledDiv } from "./style";
 
-const documentList = [
-  {
-    name: "ID_Document.pdf",
-    size: "PDF • 245 KB",
-    url: "#",
-    id: 1,
-    fileType: "pdf",
-  },
-  {
-    name: "Registration_Form.pdf",
-    size: "PDF • 186 KB",
-    url: "#",
-    id: 2,
-    fileType: "pdf",
-  },
-  {
-    name: "Photo_ID.jpg",
-    size: "Image • 523 KB",
-    url: "#",
-    id: 3,
-    fileType: "pdf",
-  },
-];
+type Props<T> = {
+  data?: T;
+};
 
-const Attachments = () => {
+const Attachments = <T extends { attachments: Array<DoucmentAttachmentType> }>({
+  data,
+}: Props<T>) => {
+  const { attachments = [] } = data || {};
+
+  if (!attachments || !attachments.length) {
+    return (
+      <StyledDiv className="empty-attachment-wrapper">
+        <Typography as="p">There is no any file</Typography>
+      </StyledDiv>
+    );
+  }
   return (
     <StyledDiv>
-      {documentList.map((document, i) => {
+      {attachments.map((attachment) => {
         return (
           <DocumentBlock
-            name={document.name}
-            size={document.size}
-            key={i}
-            url={document.url}
-            id={document.id}
-            fileType={document.fileType}
+            name={attachment.file_name}
+            size={getFileSize(attachment.file_size)}
+            fileType={attachment.file_type}
+            url={attachment.file_path}
+            key={attachment.id}
+            id={attachment.id}
           />
         );
       })}

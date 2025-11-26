@@ -20,19 +20,6 @@ import Attachments from "./components/Attachments";
 import PersonalInformation from "./components/PersonalInformation";
 import { StyledDiv } from "./style";
 
-const tabList = [
-  {
-    id: "personal-information",
-    label: "Personal Information",
-    content: <PersonalInformation />,
-  },
-  {
-    id: "attachments",
-    label: "Attachments",
-    content: <Attachments />,
-  },
-];
-
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -47,6 +34,7 @@ const ApprovalViewModal = ({
   const [status, setStatus] = React.useState<LoadingType>(IDLE);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = React.useState<any>(null);
+  const ref = React.useRef(null);
 
   React.useEffect(() => {
     const { id } = selectedApprovalData || {};
@@ -67,9 +55,22 @@ const ApprovalViewModal = ({
       });
   }, [selectedApprovalData]);
 
+  const tabList = [
+    {
+      id: "personal-information",
+      label: "Personal Information",
+      content: <PersonalInformation />,
+    },
+    {
+      id: "attachments",
+      label: "Attachments",
+      content: <Attachments data={data} />,
+    },
+  ];
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} headerTitle="Review Registration">
-      <StyledDiv>
+      <StyledDiv ref={ref}>
         {[IDLE, PENDING].includes(status) ? (
           <div className="loader-wrapper">
             <SpinnerLoader />
@@ -116,8 +117,23 @@ const ApprovalViewModal = ({
 
             <div className="approval-btn-wrapper">
               <Button variant="outline" onClick={onClose}>
-                close
+                Close
               </Button>
+              {/* <Button
+                variant="outline"
+                onClick={() => setIsSendBackModalOpen(true)}
+                className="send-back-btn"
+              >
+                <CircleX size={16} />
+                Send Back
+              </Button>
+              <Button
+                onClick={() => setIsApproveModalOpen(true)}
+                className="approve-btn"
+              >
+                <CircleCheckBig size={15} />
+                Approve
+              </Button> */}
             </div>
           </>
         )}

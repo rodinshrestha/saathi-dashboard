@@ -6,7 +6,7 @@ import { getFileSize } from "@/utils/get-file-size";
 
 import { StyledDiv } from "./style";
 
-type DoucmentAttachmentType = {
+export type DoucmentAttachmentType = {
   file_name: string;
   file_size: number;
   file_type: string;
