@@ -1,6 +1,6 @@
 "use client";
 import Tab from "@/components/Tab";
-import { SelectValueTypes } from "@/types/select.types";
+import { DashboardFilterType } from "@/types/dashboard-filter.types";
 
 import DashboardPreventionTab from "../DashboardPreventionTab";
 import DashboardProsecutionTab from "../DashboardProsecutionTab";
@@ -10,10 +10,10 @@ import DashboardResponseTab from "../DashboardResponseTab";
 import { StyledDiv } from "./style";
 
 type Props = {
-  selectedProgram: SelectValueTypes;
+  dashboardFilter: DashboardFilterType;
 };
 
-const DashboardTab = ({ selectedProgram }: Props) => {
+const DashboardTab = ({ dashboardFilter }: Props) => {
   const tabList = [
     {
       id: "prevention",
@@ -40,11 +40,7 @@ const DashboardTab = ({ selectedProgram }: Props) => {
 
   return (
     <StyledDiv className="dashboard-tab-wrapper">
-      <Tab
-        tabs={tabList}
-        selectedProgram={selectedProgram as string}
-        pushToUrl
-      />
+      <Tab tabs={tabList} pushToUrl />
     </StyledDiv>
   );
 };

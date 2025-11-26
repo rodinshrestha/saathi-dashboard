@@ -6,11 +6,13 @@ import { X, Download, SearchIcon } from "lucide-react";
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import { Select } from "@/components/Select";
-import TableSearch from "@/components/Table/components/TableSearch";
 import Typography from "@/components/Typography";
+import useUpdateParams from "@/hooks/useUpdateParams";
 import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
 import { useGlobalStore } from "@/store/useGlobalConfigStore";
-import { SelectValueTypes } from "@/types/select.types";
+import { DashboardFilterType } from "@/types/dashboard-filter.types";
+import { getConvertedDate } from "@/utils/get-converted-date";
+import { getProgramListOption } from "@/utils/get-program-option-list";
 
 import { StyledDiv } from "./style";
 
@@ -23,51 +25,76 @@ const programOption = [
 ];
 
 type Props = {
-  setSelectedProgram: React.Dispatch<React.SetStateAction<SelectValueTypes>>;
-  selectedProgram: SelectValueTypes;
+  dashboardFilter: DashboardFilterType;
+  setDashboardFilter: React.Dispatch<React.SetStateAction<DashboardFilterType>>;
 };
 
-const DashboardFilter = ({ setSelectedProgram, selectedProgram }: Props) => {
-  const { provinceData } = useGlobalStore();
+const DashboardFilter = ({ dashboardFilter, setDashboardFilter }: Props) => {
+  const { provinceData, projectData } = useGlobalStore();
+  const { updateMultipleQueryParams } = useUpdateParams();
+
+  const onHandleSerach = () => {
+    updateMultipleQueryParams(dashboardFilter);
+  };
 
   return (
     <StyledDiv>
       <Typography as="body2">Filter</Typography>
 
       <div className="dashboard-filter-wrapper">
-        <TableSearch label="Search" />
         <DatePicker
-          label="Time Period"
+          label="Start Date"
           placeholder="Select date range"
-          onChange={() => {}}
-          selected={null}
+          onChange={(value) =>
+            setDashboardFilter((prev) => ({
+              ...prev,
+              start_date: getConvertedDate(value as Date),
+            }))
+          }
+          selected={dashboardFilter.start_date as Date}
+          className="bg-color"
+        />
+        <DatePicker
+          label="End Date"
+          placeholder="Select date range"
+          onChange={(value) =>
+            setDashboardFilter((prev) => ({
+              ...prev,
+              end_date: getConvertedDate(value as Date),
+            }))
+          }
+          selected={dashboardFilter.end_date as Date}
           className="bg-color"
         />
         <Select
           label="Province"
           options={convertProvinceList(provinceData)}
-          onChange={() => {}}
-          value=""
+          onChange={(e) =>
+            setDashboardFilter((prev) => ({ ...prev, province: e?.value }))
+          }
+          value={dashboardFilter.province as string}
           className="bg-color"
         />
         <Select
           label="Program"
           options={programOption}
-          onChange={(e) => {
-            setSelectedProgram(e?.value);
-          }}
-          value={selectedProgram as string | number}
+          onChange={(e) =>
+            setDashboardFilter((prev) => ({ ...prev, program: e?.value }))
+          }
+          value={dashboardFilter.program as string}
           className="bg-color"
         />
         <Select
           label="Project"
-          options={programOption}
-          onChange={() => {}}
-          value=""
+          options={getProgramListOption(projectData)}
+          onChange={(e) =>
+            setDashboardFilter((prev) => ({ ...prev, project: e?.value }))
+          }
+          value={dashboardFilter.project as string}
           className="bg-color"
         />
 
-        <Button>
+        <Button onClick={onHandleSerach}>
           <SearchIcon size={18} />
           Search
         </Button>

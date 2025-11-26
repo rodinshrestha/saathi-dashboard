@@ -2,6 +2,7 @@ import React from "react";
 
 import { getEthnicity } from "@/http/get-ethnicity";
 import { getOrganizationList } from "@/http/get-organization-list";
+import { getProjectList } from "@/http/get-project-list";
 import { getProvince } from "@/http/get-province-list";
 import { getServicesList } from "@/http/get-services-list";
 import { useGlobalStore } from "@/store/useGlobalConfigStore";
@@ -17,6 +18,7 @@ const useFetchGlobalData = () => {
       getOrganizationList(),
       getEthnicity(),
       getServicesList(),
+      getProjectList(),
     ])
       .then((res) => {
         const [
@@ -24,18 +26,21 @@ const useFetchGlobalData = () => {
           organizationReponse,
           ethnicityResponse,
           servicesResponse,
+          projectResponse,
         ] = res || [];
 
         const provinceData = provinceResponse?.data?.data || [];
         const organizationData = organizationReponse?.data?.data || [];
         const ethnicityData = ethnicityResponse?.data?.data || [];
         const servicesData = servicesResponse?.data?.data || [];
+        const projectData = projectResponse?.data?.data || [];
 
         setGlobalData({
           provinceData,
           organizationData,
           ethnicityData,
           servicesData,
+          projectData,
         });
         setGlobalLoader(false);
       })

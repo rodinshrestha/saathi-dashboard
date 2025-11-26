@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 import { FolderOpen, MapPin, UsersRound } from "lucide-react";
 import useSWR from "swr";
 
@@ -62,4 +64,4 @@ const DashboardPreventionTab = () => {
   );
 };
 
-export default DashboardPreventionTab;
+export default React.memo(DashboardPreventionTab);

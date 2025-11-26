@@ -1,16 +1,26 @@
 "use client";
 import React from "react";
 
+import { useSearchParams } from "next/navigation";
+
 import ModuleSectionWrapper from "@/components/ModuleSectionWrapper";
-import { SelectValueTypes } from "@/types/select.types";
+import { DashboardFilterType } from "@/types/dashboard-filter.types";
 
 import DashboardFilter from "./components/DashboardFilter";
 import DashboardTab from "./components/DashboardTab";
 import { StyledDiv } from "./style";
 
 const Dasbhoard = () => {
-  const [selectedProgram, setSelectedProgram] =
-    React.useState<SelectValueTypes>("");
+  const searchParams = useSearchParams();
+
+  const [dashboardFilter, setDashboardFilter] =
+    React.useState<DashboardFilterType>({
+      start_date: null,
+      end_date: null,
+      province: "",
+      program: searchParams.get("program") || "all-program",
+      project: "",
+    });
 
   return (
     <StyledDiv>
@@ -20,11 +30,11 @@ const Dasbhoard = () => {
       />
 
       <DashboardFilter
-        setSelectedProgram={setSelectedProgram}
-        selectedProgram={selectedProgram}
+        dashboardFilter={dashboardFilter}
+        setDashboardFilter={setDashboardFilter}
       />
 
-      <DashboardTab selectedProgram={selectedProgram} />
+      <DashboardTab dashboardFilter={dashboardFilter} />
     </StyledDiv>
   );
 };

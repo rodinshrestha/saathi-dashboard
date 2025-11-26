@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { Clock, FileText, House } from "lucide-react";
 import useSWR from "swr";
@@ -132,4 +133,4 @@ const DashboardResponseTab = () => {
   );
 };
 
-export default DashboardResponseTab;
+export default React.memo(DashboardResponseTab);

@@ -21,9 +21,9 @@ export const StyledDiv = styled.div`
 
     .date-picker {
       box-sizing: border-box;
-      border-radius: 8px;
+      border-radius: 5px;
       background-color: ${({ theme }) => theme.color.cardBgColor.highContrast};
-      padding: 8px 12px;
+      padding: 10px;
       font-size: 14px;
       border: 1px solid transparent;
       width: 100%;

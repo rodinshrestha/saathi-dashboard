@@ -26,22 +26,20 @@ export const StyledDiv = styled.div`
       margin-bottom: 10px;
     }
 
-    .table-search-wrapper {
-      .search-wrapper {
-        border: none;
-      }
-    }
-
     .date-picker-wrapper {
-      flex: 0 0 16%;
+      /* flex: 0 0 16%; */
+      flex: 1;
     }
 
     .select-field-wrapper {
-      flex: 0 0 15%;
+      /* flex: 0 0 15%; */
+      flex: 1;
     }
 
     .btn {
-      flex: 0 0 16%;
+      /* flex: 0 0 16%; */
+      flex: 1;
+
       svg {
         margin-right: 10px;
       }

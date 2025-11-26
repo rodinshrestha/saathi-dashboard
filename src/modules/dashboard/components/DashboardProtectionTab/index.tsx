@@ -122,4 +122,4 @@ const DashboardProtectionTab = () => {
   );
 };
 
-export default DashboardProtectionTab;
+export default React.memo(DashboardProtectionTab);
