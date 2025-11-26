@@ -1,6 +1,9 @@
 import React from "react";
 
+import clsx from "clsx";
+
 import Button from "@/components/Button";
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Modal from "@/components/Modal";
 import Tab from "@/components/Tab";
@@ -9,6 +12,7 @@ import { IDLE, PENDING, REJECTED, RESOLVED } from "@/constant/loading.state";
 import { LoadingType } from "@/types/loading.types";
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getNameShell } from "@/utils/get-name-shell";
 
 import { ApprovalType } from "../../approval.types";
 
@@ -73,7 +77,21 @@ const ApprovalViewModal = ({
         ) : (
           <>
             <div className="review-details-wrapper">
-              <div className="review-detail-avatar-wrapper">JD</div>
+              <div
+                className={clsx("review-detail-avatar-wrapper", {
+                  "bg-color": !data?.profile_picture,
+                })}
+              >
+                {data?.profile_picture ? (
+                  <ImageWithFallback
+                    src={data.profile_picture}
+                    alt="profile_picture"
+                    fill
+                  />
+                ) : (
+                  getNameShell(data?.full_name)
+                )}
+              </div>
               <div className="review-personal-details-content">
                 <Typography as="h3" className="review-personal-name-content">
                   {data?.full_name || "-"}

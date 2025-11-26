@@ -18,11 +18,20 @@ export const StyledDiv = styled.div`
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background-color: ${({ theme }) => theme.color.blue["100"]};
       display: flex;
       align-items: center;
       justify-content: center;
       color: ${({ theme }) => theme.color.white["100"]};
+      text-transform: uppercase;
+      position: relative;
+      &.bg-color {
+        background-color: ${({ theme }) => theme.color.blue["100"]};
+      }
+
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
 
     .registration-personal-details-content {

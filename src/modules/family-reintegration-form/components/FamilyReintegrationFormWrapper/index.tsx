@@ -25,7 +25,7 @@ type Props = {
   isUpdate?: boolean;
 };
 
-const FamilyReintegrationFormWrapper = ({ data, isUpdate }: Props) => {
+const FamilyReintegrationFormWrapper = ({ data, isUpdate = false }: Props) => {
   const [loader, setLoader] = React.useState(false);
 
   const router = useRouter();
@@ -80,16 +80,16 @@ const FamilyReintegrationFormWrapper = ({ data, isUpdate }: Props) => {
         ...rest,
       };
 
-      const formData = objectToFormData(body);
+      const formData = objectToFormData(body, isUpdate);
 
-      const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      authAxios
+        .post(endPoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then(() => {
           successToast(
             isUpdate

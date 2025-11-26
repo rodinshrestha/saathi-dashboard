@@ -41,7 +41,7 @@ type Props = {
   isUpdate?: boolean;
 };
 
-const ChildIntakeFormWrapper = ({ data, isUpdate }: Props) => {
+const ChildIntakeFormWrapper = ({ data, isUpdate = false }: Props) => {
   const [loader, setLoader] = React.useState(false);
 
   const { successToast, errorToast } = useToaster();
@@ -188,16 +188,16 @@ const ChildIntakeFormWrapper = ({ data, isUpdate }: Props) => {
         return;
       }
 
-      const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      const formData = objectToFormData(body);
+      const formData = objectToFormData(body, isUpdate);
 
-      authAxios[method](endPoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      authAxios
+        .post(endPoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then(() => {
           successToast(
             isUpdate

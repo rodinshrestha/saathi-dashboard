@@ -1,5 +1,8 @@
 import React from "react";
 
+import clsx from "clsx";
+
+import ImageWithFallback from "@/components/ImageWithFallback";
 import { SpinnerLoader } from "@/components/Loader/SpinnerLoader";
 import Modal from "@/components/Modal";
 import Typography from "@/components/Typography";
@@ -7,6 +10,7 @@ import { IDLE, PENDING, REJECTED, RESOLVED } from "@/constant/loading.state";
 import { LoadingType } from "@/types/loading.types";
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorObj } from "@/utils/get-api-response-error";
+import { getNameShell } from "@/utils/get-name-shell";
 
 import { RegistrationListType } from "../../registration-list.types";
 
@@ -61,7 +65,21 @@ const RegistrationViewModal = ({ isOpen, onClose, selectedData }: Props) => {
         ) : (
           <>
             <div className="registration-wrapper">
-              <div className="registration-avatar-wrapper">JD</div>
+              <div
+                className={clsx("registration-avatar-wrapper", {
+                  "bg-color": !data?.profile_picture,
+                })}
+              >
+                {data?.profile_picture ? (
+                  <ImageWithFallback
+                    src={data.profile_picture}
+                    alt="profile_picture"
+                    fill
+                  />
+                ) : (
+                  getNameShell(data?.full_name)
+                )}
+              </div>
               <div className="registration-personal-details-content">
                 <Typography
                   as="h3"

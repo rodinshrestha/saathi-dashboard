@@ -87,16 +87,16 @@ const UnfaFormWrapper = ({ data, isUpdate = false }: Props) => {
         return;
       }
 
-      const formData = objectToFormData(body);
+      const formData = objectToFormData(body, isUpdate);
 
-      const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      authAxios[method](endPoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      authAxios
+        .post(endPoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then(() => {
           successToast(
             isUpdate

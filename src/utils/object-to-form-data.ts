@@ -1,6 +1,7 @@
 export function objectToFormData(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   obj: Record<string, any>,
+  isUpdate: boolean,
   form: FormData = new FormData(),
   parentKey?: string
 ): FormData {
@@ -22,18 +23,22 @@ export function objectToFormData(
         if (item instanceof File) {
           form.append(arrayKey, item);
         } else {
-          objectToFormData(item, form, arrayKey);
+          objectToFormData(item, isUpdate, form, arrayKey);
         }
       });
       continue;
     }
 
     if (value !== null && typeof value === "object") {
-      objectToFormData(value, form, formKey);
+      objectToFormData(value, isUpdate, form, formKey);
       continue;
     }
 
     form.append(formKey, value ?? "");
+  }
+  // ⭐ Add _method ONLY for top-level call (no parentKey)
+  if (!parentKey && isUpdate) {
+    form.append("_method", "PUT");
   }
 
   return form;

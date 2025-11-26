@@ -26,7 +26,7 @@ type Props = {
   isUpdate?: boolean;
 };
 
-const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
+const ProsecutionProgramFormWrapper = ({ data, isUpdate = false }: Props) => {
   const { fetchEventData, eventData } = useFetchEventList();
   const [loader, setLoader] = React.useState(false);
   const { successToast, errorToast } = useToaster();
@@ -70,16 +70,16 @@ const ProsecutionProgramFormWrapper = ({ data, isUpdate }: Props) => {
         return;
       }
 
-      const method = isUpdate ? "put" : "post";
       const endPoint = isUpdate ? `/survivors/${data?.id}` : "/survivors";
 
-      const formData = objectToFormData(body);
+      const formData = objectToFormData(body, isUpdate);
 
-      authAxios[method](endPoint, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      authAxios
+        .post(endPoint, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then(() => {
           successToast(
             isUpdate
