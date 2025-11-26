@@ -47,7 +47,6 @@ const TablePagination = <T,>({ pageMeta, table, isLoading }: Props<T>) => {
       <div className="per-page-wrapper">
         <select
           onChange={handleOnPerPageChange}
-          defaultValue={5}
           value={currentPerPage}
           className="table-per-page"
         >

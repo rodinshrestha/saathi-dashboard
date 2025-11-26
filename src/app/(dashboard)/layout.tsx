@@ -28,7 +28,8 @@ export default async function BaseLayout({ children }: Props) {
             <Container>
               <Row>
                 <Col>
-                  <ErrorBoundary>{children}</ErrorBoundary>
+                  {/* <ErrorBoundary>{children}</ErrorBoundary> */}
+                  {children}
                 </Col>
               </Row>
             </Container>

@@ -9,6 +9,7 @@ import useToaster from "@/hooks/useToaster";
 import { AttachmentTypes } from "@/types/attachment.types";
 import { getProfilePictureUrl } from "@/utils/get-profile-picture-url";
 
+import ImageWithFallback from "../ImageWithFallback";
 import SupportingDocuments from "../SupportingDocuments";
 import Typography from "../Typography";
 
@@ -98,7 +99,7 @@ const AttachmentForm = <
           <div className="attachment-profile-content-wrapper">
             <div className="profile-icon-wrapper">
               {profile_picture ? (
-                <Image
+                <ImageWithFallback
                   src={getProfilePictureUrl(profile_picture)}
                   alt="profle picture"
                   fill

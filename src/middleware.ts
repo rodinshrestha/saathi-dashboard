@@ -35,5 +35,5 @@ export function middleware(request: NextRequest) {
 
 // Optional: only run middleware on page routes
 export const config = {
-  matcher: ["/((?!api|_next/static|favicon.ico).*)"],
+  matcher: ["/((?!api|_next|favicon.ico|.*\\.[a-zA-Z0-9]+).*)"],
 };

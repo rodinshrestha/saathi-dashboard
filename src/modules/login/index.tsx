@@ -56,7 +56,7 @@ const LoginModule = () => {
     <StyledDiv>
       <div className="login-wrapper">
         <div className="login-logo-wrapper">
-          <ImageWithFallback src="/images/logo.jpg" alt="sathi-logo" fill />
+          <ImageWithFallback src="/images/new-logo.png" alt="sathi-logo" fill />
         </div>
 
         <div className="login-title-wrapper">
