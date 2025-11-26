@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 
 import { IDLE, PENDING, REJECTED, RESOLVED } from "@/constant/loading.state";
 import { PER_PAGE } from "@/constant/pagination.constant";
+import { useDebuggerStore } from "@/store/useDebuggerStore";
 import { LoadingType } from "@/types/loading.types";
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
@@ -23,12 +24,15 @@ const getRegistrationListUrl = (
 };
 
 const useFetchRegistration = () => {
+  const { tablePerPage } = useDebuggerStore();
+
   const [status, setStatus] = React.useState<LoadingType>(IDLE);
   const [registrationList, setRegistrationList] =
     React.useState<RegistrationListResponseType | null>(null);
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const perPage = Number(searchParams.get("per_page")) || PER_PAGE;
+  const perPage =
+    Number(searchParams.get("per_page")) || tablePerPage || PER_PAGE;
   const searchterm = searchParams.get("search");
 
   React.useEffect(() => {

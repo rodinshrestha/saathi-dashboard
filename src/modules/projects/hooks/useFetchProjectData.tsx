@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { PENDING, REJECTED, RESOLVED } from "@/constant/loading.state";
 import { PER_PAGE } from "@/constant/pagination.constant";
+import { useDebuggerStore } from "@/store/useDebuggerStore";
 import { authAxios } from "@/utils/axios";
 import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
 
@@ -25,9 +26,11 @@ const getProjectApiURl = (
 
 const useFetchProjectData = () => {
   const { setProjectData, setProjectDataLoader } = useProjectStore();
+  const { tablePerPage } = useDebuggerStore();
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const perPage = Number(searchParams.get("per_page")) || PER_PAGE;
+  const perPage =
+    Number(searchParams.get("per_page")) || tablePerPage || PER_PAGE;
   const searchterm = searchParams.get("search");
 
   const fetchProjectData = React.useCallback(async () => {

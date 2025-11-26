@@ -43,7 +43,9 @@ export const StyledDiv = styled.div`
     display: none;
 
     &.expand {
-      display: unset;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       min-height: 100px;
     }
 

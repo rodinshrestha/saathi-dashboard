@@ -7,7 +7,11 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import Header from "@/components/Header";
 import Navbar from "@/components/NavBar";
 import Row from "@/components/Row";
-import { DEBUGGER } from "@/constant/debugger.constant";
+import {
+  DEBUGGER,
+  DEBUGGER_TABLE_PER_PAGE,
+} from "@/constant/debugger.constant";
+import { PER_PAGE } from "@/constant/pagination.constant";
 import BaseProvider from "@/providers/BaseProvider";
 
 type Props = {
@@ -15,7 +19,12 @@ type Props = {
 };
 
 export default async function BaseLayout({ children }: Props) {
-  const apiDebugger = (await cookies()).get(DEBUGGER)?.value === "true";
+  const apiDebuggerCookieValue =
+    (await cookies()).get(DEBUGGER)?.value === "true";
+
+  const tablePerPageCookieValue = (await cookies()).get(
+    DEBUGGER_TABLE_PER_PAGE
+  )?.value;
 
   return (
     <BaseProvider>
@@ -23,13 +32,15 @@ export default async function BaseLayout({ children }: Props) {
         <Navbar />
         <main className="dashboard-main">
           <Header />
-          <Debugger apiDebugger={apiDebugger} />
+          <Debugger
+            apiDebuggerCookieValue={apiDebuggerCookieValue}
+            tablePerPageCookieValue={tablePerPageCookieValue}
+          />
           <div className="dashboard-body">
             <Container>
               <Row>
                 <Col>
-                  {/* <ErrorBoundary>{children}</ErrorBoundary> */}
-                  {children}
+                  <ErrorBoundary>{children}</ErrorBoundary>
                 </Col>
               </Row>
             </Container>

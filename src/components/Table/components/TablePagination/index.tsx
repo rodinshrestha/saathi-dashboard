@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { PER_PAGE } from "@/constant/pagination.constant";
 import { usePagination } from "@/hooks/usePagination";
+import { useDebuggerStore } from "@/store/useDebuggerStore";
 import { MetaType } from "@/types/api-respone.types";
 
 import { StyledDiv, PageButton } from "./style";
@@ -18,9 +19,11 @@ type Props<T> = {
 const TablePagination = <T,>({ pageMeta, table, isLoading }: Props<T>) => {
   const searchParams = useSearchParams();
   const { setPage, setPerPage } = usePagination();
+  const { tablePerPage } = useDebuggerStore();
 
   const currentPage = Number(searchParams.get("page")) || 1;
-  const currentPerPage = Number(searchParams.get("per_page")) || PER_PAGE;
+  const currentPerPage =
+    Number(searchParams.get("per_page")) || tablePerPage || PER_PAGE;
 
   const { total = 0, last_page = 0 } = pageMeta || {};
 
