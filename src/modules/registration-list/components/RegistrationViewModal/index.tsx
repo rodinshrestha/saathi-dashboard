@@ -102,7 +102,7 @@ const RegistrationViewModal = ({ isOpen, onClose, selectedData }: Props) => {
             <div>
               <RegistrationInformationBlock />
               <RegistrationProgramBLock />
-              <RegistrationAttachmentBlock />
+              <RegistrationAttachmentBlock data={data} />
             </div>
           </>
         )}

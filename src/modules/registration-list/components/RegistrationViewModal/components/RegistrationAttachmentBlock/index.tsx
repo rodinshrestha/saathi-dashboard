@@ -2,25 +2,48 @@ import React from "react";
 
 import DocumentBlock from "@/components/DocumentBlock";
 import Typography from "@/components/Typography";
+import { getFileSize } from "@/utils/get-file-size";
 
 import { StyledDiv } from "./style";
 
-const documentList = [
-  { name: "ID_Document.pdf", size: "PDF • 245 KB" },
-  { name: "Registration_Form.pdf", size: "PDF • 186 KB" },
-  { name: "Photo_ID.jpg", size: "Image • 523 KB" },
-];
+type DoucmentAttachmentType = {
+  file_name: string;
+  file_size: number;
+  file_type: string;
+  file_path: string;
+  id: number;
+};
 
-const RegistrationAttachmentBlock = () => {
+type Props<T> = {
+  data?: T;
+};
+
+const RegistrationAttachmentBlock = <
+  T extends { attachments: Array<DoucmentAttachmentType> },
+>({
+  data,
+}: Props<T>) => {
+  const { attachments = [] } = data || {};
+
+  if (!attachments || !attachments.length) {
+    return null;
+  }
   return (
     <StyledDiv>
       <Typography as="h3" className="information-block-title">
         Attachments
       </Typography>
       <div className="registration-document-wrapper">
-        {documentList.map((document, i) => {
+        {attachments.map((attachment) => {
           return (
-            <DocumentBlock name={document.name} size={document.size} key={i} />
+            <DocumentBlock
+              name={attachment.file_name}
+              size={getFileSize(attachment.file_size)}
+              fileType={attachment.file_type}
+              url={attachment.file_path}
+              key={attachment.id}
+              id={attachment.id}
+            />
           );
         })}
       </div>

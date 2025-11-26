@@ -23,6 +23,11 @@ export const StyledDiv = styled.div`
         justify-content: center;
         background-color: ${({ theme }) => theme.color.grey["300"]};
         border-radius: 0.25rem;
+        position: relative;
+
+        img {
+          object-fit: cover;
+        }
       }
 
       .document-content-wrapper {
@@ -33,10 +38,16 @@ export const StyledDiv = styled.div`
         .document-content-id {
           font-size: 14px;
           color: ${({ theme }) => theme.color.textColor.highContrast};
+          &::first-letter {
+            text-transform: uppercase;
+          }
         }
         .document-size-value {
           font-size: 12px;
           color: ${({ theme }) => theme.color.textColor.lowContrast};
+          &::first-letter {
+            text-transform: uppercase;
+          }
         }
       }
     }
