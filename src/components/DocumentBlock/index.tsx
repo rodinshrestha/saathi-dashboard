@@ -41,7 +41,7 @@ const DocumentBlock = ({ name, size, fileType, url, id }: Props) => {
         },
       })
       .then((res) => {
-        successToast("File has been downloaded");
+        successToast(`${name} has been downloaded`);
         getDownloadLink(res, name);
       })
       .catch((err) => {
