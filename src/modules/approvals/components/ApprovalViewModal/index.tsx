@@ -86,6 +86,7 @@ const ApprovalViewModal = ({
                   <ImageWithFallback
                     src={data.profile_picture}
                     alt="profile_picture"
+                    showMagnifier
                     fill
                   />
                 ) : (

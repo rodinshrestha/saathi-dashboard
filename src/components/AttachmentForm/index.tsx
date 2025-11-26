@@ -2,7 +2,6 @@ import React from "react";
 
 import { FormikProps } from "formik";
 import { Camera, Upload, User } from "lucide-react";
-import Image from "next/image";
 
 import { FILE_SIZE } from "@/constant/file-size.constant";
 import useToaster from "@/hooks/useToaster";
@@ -102,6 +101,7 @@ const AttachmentForm = <
                 <ImageWithFallback
                   src={getProfilePictureUrl(profile_picture)}
                   alt="profle picture"
+                  showMagnifier
                   fill
                 />
               ) : (
