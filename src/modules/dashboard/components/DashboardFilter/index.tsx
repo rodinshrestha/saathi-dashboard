@@ -6,14 +6,19 @@ import { mutate } from "swr";
 
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
+import CircleProgress from "@/components/Loader/CircleProgressBar";
 import { Select } from "@/components/Select";
 import { useTabStore } from "@/components/Tab/tab.store";
 import Typography from "@/components/Typography";
+import useToaster from "@/hooks/useToaster";
 import useUpdateParams from "@/hooks/useUpdateParams";
 import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
 import { useGlobalStore } from "@/store/useGlobalConfigStore";
 import { DashboardFilterType } from "@/types/dashboard-filter.types";
-import { getConvertedDate } from "@/utils/get-converted-date";
+import { authAxios } from "@/utils/axios";
+import { getApiResponseErrorToast } from "@/utils/get-api-response-error-toast";
+import { getConvertedDate, getCurrentDate } from "@/utils/get-converted-date";
+import { getDownloadLink } from "@/utils/get-download-link";
 import { getProgramListOption } from "@/utils/get-program-option-list";
 
 import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
@@ -39,10 +44,14 @@ const DashboardFilter = ({
   setDashboardFilter,
   setSelectedProgramTab,
 }: Props) => {
+  const [progress, setProgress] = React.useState(0);
+  const [isDownloading, setIsDownloading] = React.useState(false);
+
   const { provinceData, projectData } = useGlobalStore();
   const { updateMultipleQueryParams, clearAllQueryParams } = useUpdateParams();
   const { getDashboardAPiUrl } = useDashboardApiUrl();
   const { activeTabValue } = useTabStore();
+  const { successToast } = useToaster();
 
   const onHandleSerach = () => {
     updateMultipleQueryParams(dashboardFilter);
@@ -65,6 +74,32 @@ const DashboardFilter = ({
 
     clearAllQueryParams();
     mutate((key: string) => key.startsWith("/dashboard"));
+  };
+
+  const handleOnExport = () => {
+    setIsDownloading(true);
+    const fileName = `data-${getCurrentDate()}.pdf`;
+    authAxios
+      .get(`export/pdf`, {
+        responseType: "blob",
+        onDownloadProgress: (event) => {
+          if (event.total) {
+            const percent = (event.loaded / event.total) * 100;
+            setProgress(percent);
+          }
+        },
+      })
+      .then((res) => {
+        successToast("file has been downloaded");
+        getDownloadLink(res, fileName);
+      })
+      .catch((err) => {
+        getApiResponseErrorToast(err);
+      })
+      .finally(() => {
+        setProgress(0);
+        setIsDownloading(false);
+      });
   };
 
   return (
@@ -135,9 +170,19 @@ const DashboardFilter = ({
           <X size={14} />
           Clear Filter
         </Button>
-        <Button variant="outline">
-          <Download size={14} />
-          Export Data
+        <Button
+          variant="outline"
+          disabled={isDownloading}
+          onClick={handleOnExport}
+        >
+          {isDownloading ? (
+            <CircleProgress progress={progress} size={30} />
+          ) : (
+            <>
+              <Download size={14} />
+              Export Data
+            </>
+          )}
         </Button>
       </div>
     </StyledDiv>
