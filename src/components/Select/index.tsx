@@ -61,8 +61,6 @@ export function Select<TMulti extends boolean = false>({
     ? options.find((x) => x.value === value)
     : null;
 
-  console.log(selectedValue, "@@@");
-
   const isError = !!error && touched;
 
   return (
@@ -84,7 +82,8 @@ export function Select<TMulti extends boolean = false>({
         </label>
       )}
       <Tooltip content="Required Field" id={requiredLabelId} />
-      <ReactSelect<Option, TMulti>
+
+      <ReactSelect
         name={name}
         inputId={selectId}
         isMulti={isMulti}

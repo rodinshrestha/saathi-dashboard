@@ -53,5 +53,6 @@ export const useGlobalStore = create<GlobalConfigStore>((set) => ({
       servicesData,
       projectData,
     })),
-  setGlobalLoader: (loader) => set((state) => ({ ...state, loader })),
+  setGlobalLoader: (loader) =>
+    set((state) => ({ ...state, globalLoader: loader })),
 }));

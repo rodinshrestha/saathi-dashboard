@@ -47,7 +47,7 @@ const DashboardFilter = ({
   const [progress, setProgress] = React.useState(0);
   const [isDownloading, setIsDownloading] = React.useState(false);
 
-  const { provinceData, projectData } = useGlobalStore();
+  const { provinceData, projectData, globalLoader } = useGlobalStore();
   const { updateMultipleQueryParams, clearAllQueryParams } = useUpdateParams();
   const { getDashboardAPiUrl } = useDashboardApiUrl();
   const { activeTabValue } = useTabStore();
@@ -55,8 +55,8 @@ const DashboardFilter = ({
 
   const onHandleSerach = () => {
     updateMultipleQueryParams(dashboardFilter);
-    if (dashboardFilter?.program) {
-      setSelectedProgramTab(dashboardFilter.program as string);
+    if (dashboardFilter?.program_id) {
+      setSelectedProgramTab(dashboardFilter.program_id as string);
     }
 
     mutate(getDashboardAPiUrl(activeTabValue));
@@ -66,9 +66,9 @@ const DashboardFilter = ({
     setDashboardFilter({
       start_date: null,
       end_date: null,
-      province: "",
-      program: "all-program",
-      project: "",
+      province_id: "",
+      program_id: "all-program",
+      project_id: "",
     });
     setSelectedProgramTab("all-program");
 
@@ -135,27 +135,27 @@ const DashboardFilter = ({
           label="Province"
           options={convertProvinceList(provinceData)}
           onChange={(e) =>
-            setDashboardFilter((prev) => ({ ...prev, province: e?.value }))
+            setDashboardFilter((prev) => ({ ...prev, province_id: e?.value }))
           }
-          value={dashboardFilter.province as string}
+          value={dashboardFilter.province_id as string}
           className="bg-color"
         />
         <Select
           label="Program"
           options={programOption}
           onChange={(e) =>
-            setDashboardFilter((prev) => ({ ...prev, program: e?.value }))
+            setDashboardFilter((prev) => ({ ...prev, program_id: e?.value }))
           }
-          value={dashboardFilter.program as string}
+          value={dashboardFilter.program_id as string}
           className="bg-color"
         />
         <Select
           label="Project"
           options={getProgramListOption(projectData)}
           onChange={(e) =>
-            setDashboardFilter((prev) => ({ ...prev, project: e?.value }))
+            setDashboardFilter((prev) => ({ ...prev, project_id: e?.value }))
           }
-          value={dashboardFilter.project as string}
+          value={dashboardFilter.project_id as string}
           className="bg-color"
         />
 

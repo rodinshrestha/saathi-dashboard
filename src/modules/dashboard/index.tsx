@@ -18,11 +18,11 @@ const Dasbhoard = () => {
 
   const [dashboardFilter, setDashboardFilter] =
     React.useState<DashboardFilterType>({
-      start_date: null,
-      end_date: null,
-      province: "",
-      program: searchParams.get("program") || "all-program",
-      project: "",
+      start_date: searchParams.get("start_date") || null,
+      end_date: searchParams.get("end_date") || null,
+      province_id: searchParams.get("province_id") || "",
+      program_id: searchParams.get("program") || "all-program",
+      project_id: searchParams.get("project_id") || "",
     });
 
   return (

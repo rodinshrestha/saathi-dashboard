@@ -46,8 +46,6 @@ const useFetchGlobalData = () => {
       })
       .catch((err) => {
         getApiResponseErrorToast(err);
-      })
-      .finally(() => {
         setGlobalLoader(false);
       });
   }, [setGlobalData, setGlobalLoader]);
