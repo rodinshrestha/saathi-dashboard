@@ -27,7 +27,7 @@ export const StyledDiv = styled.div`
         theme.color.backgroundColor.lowContrast};
       transition: all 0.2s linear;
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
         outline: rgba(59, 130, 246, 0.5);
         box-shadow:
           0 4px 6px -1px rgb(0 0 0 / 0.1),
