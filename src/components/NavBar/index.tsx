@@ -14,7 +14,7 @@ import { navData } from "./data";
 import { StyledNavBar } from "./style";
 
 const Navbar = () => {
-  const [isExpand, setIsExpland] = React.useState(true);
+  const [isExpand, setIsExpland] = React.useState(false);
   const [isExpandLock, setIsExpandLock] = React.useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = React.useState(false);
   const pathname = usePathname();

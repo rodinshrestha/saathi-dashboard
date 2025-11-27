@@ -164,6 +164,7 @@ const ProjectFormModal = ({
           touched={formik.touched.program_id}
           disabled={loader}
           isLoading={loader}
+          className="bg-color"
           requiredField
         />
 
@@ -177,6 +178,7 @@ const ProjectFormModal = ({
           onBlur={formik.handleBlur}
           error={formik.errors.project_title}
           touched={formik.touched.project_title}
+          className="bg-color"
           requiredField
         />
 
@@ -191,6 +193,7 @@ const ProjectFormModal = ({
             onBlur={formik.handleBlur}
             error={formik.errors.event_title}
             touched={formik.touched.event_title}
+            className="bg-color"
             requiredField
           />
         )}
@@ -207,6 +210,7 @@ const ProjectFormModal = ({
           touched={formik.touched.province_id}
           disabled={loader}
           isLoading={loader}
+          className="bg-color"
         />
 
         <Select
@@ -222,6 +226,7 @@ const ProjectFormModal = ({
           showTooltip={!formik.values.province_id}
           tooltipMsg="First select the province"
           disabled={!formik.values.province_id}
+          className="bg-color"
         />
 
         <div className="project-modal-date-wrapper">
@@ -233,6 +238,7 @@ const ProjectFormModal = ({
             onBlur={() => formik.setFieldTouched("start_date", true)}
             touched={formik.touched.start_date}
             error={formik.errors.start_date}
+            className="bg-color"
           />
           <DatePicker
             name="end_date"
@@ -247,6 +253,7 @@ const ProjectFormModal = ({
             disabled={!formik.values.start_date}
             tooltipMsg="First select the start date"
             showToolttip={!formik.values.start_date}
+            className="bg-color"
           />
         </div>
 
@@ -272,7 +279,7 @@ const ProjectFormModal = ({
                   type="text"
                   placeholder="Enter funder name (eg, UNFPA, UNICEF)"
                   onBlur={formik.handleBlur}
-                  className="input-dynamic-field"
+                  className="input-dynamic-field bg-color"
                 />
                 {formik.values.funders.length > 1 && (
                   <div
