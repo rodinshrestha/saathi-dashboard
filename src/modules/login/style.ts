@@ -23,6 +23,10 @@ export const StyledDiv = styled.div`
       width: 300px;
       height: 120px;
       margin: 0 auto;
+
+      img {
+        cursor: auto;
+      }
     }
 
     .login-title-wrapper {

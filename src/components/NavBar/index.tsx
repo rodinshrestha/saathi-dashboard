@@ -2,7 +2,7 @@
 import React from "react";
 
 import clsx from "clsx";
-import { LogOut } from "lucide-react";
+import { LockKeyhole, LockKeyholeOpen, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,16 +14,27 @@ import { navData } from "./data";
 import { StyledNavBar } from "./style";
 
 const Navbar = () => {
-  const [isExpand, setIsExpland] = React.useState(false);
+  const [isExpand, setIsExpland] = React.useState(true);
+  const [isExpandLock, setIsExpandLock] = React.useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = React.useState(false);
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
 
+  const handleOnMouseEnter = () => {
+    if (isExpandLock) return;
+    setIsExpland(true);
+  };
+
+  const handleOnMouseLeave = () => {
+    if (isExpandLock) return;
+    setIsExpland(false);
+  };
+
   return (
     <StyledNavBar
       className={clsx("navbar-wrapper", { expanded: isExpand })}
-      onMouseEnter={() => setIsExpland(true)}
-      onMouseLeave={() => setIsExpland(false)}
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
     >
       <div className="navbar-header">
         <div className="navbar-logo-wrapper">
@@ -43,6 +54,15 @@ const Navbar = () => {
             />
           )}
         </div>
+        {isExpand && (
+          <div className="icon-lock-wrapper">
+            {isExpandLock ? (
+              <LockKeyhole onClick={() => setIsExpandLock(false)} />
+            ) : (
+              <LockKeyholeOpen onClick={() => setIsExpandLock(true)} />
+            )}
+          </div>
+        )}
       </div>
 
       <div className="navbar-list-wrapper">

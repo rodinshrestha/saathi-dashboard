@@ -61,18 +61,24 @@ export const StyledNavBar = styled.nav`
       display: flex;
       justify-content: center;
       margin-bottom: 30px;
+      position: relative;
       .navbar-logo-wrapper {
         height: 64px;
         min-width: 50px;
-        /* width: 120px; */
-        /* min-width: 120px; */
-        /* min-width: 85px !important; */
-        /* width: 85px !important; */
-
         position: relative;
 
         img {
           object-fit: contain;
+          cursor: auto;
+        }
+      }
+
+      .icon-lock-wrapper {
+        position: absolute;
+        right: 0;
+
+        svg {
+          cursor: pointer;
         }
       }
     }
