@@ -9,14 +9,17 @@ import BarGraph from "@/components/BarGraph";
 import MiniCard from "@/components/MiniCard";
 import { getMetrixData } from "@/utils/get-metrix-data";
 
+import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
 import DashboardRecentActivityTable from "../DashboardPreventionTab/components/DashboardRecentActivityTable";
 
 import { DashboardProsecutionType } from "./dashboard-prosecution.types";
 import { StyledDiv } from "./style";
 
 const DashboardProsecutionTab = () => {
+  const { getDashboardAPiUrl } = useDashboardApiUrl();
+
   const { data, isLoading } = useSWR<DashboardProsecutionType>(
-    "/dashboard?program=prosecution"
+    getDashboardAPiUrl("prosecution")
   );
 
   const { prosecution } = data?.data || {};

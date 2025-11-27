@@ -10,13 +10,19 @@ import BarGraph from "@/components/BarGraph";
 import MiniCard from "@/components/MiniCard";
 import { getMetrixData } from "@/utils/get-metrix-data";
 
+import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
+
 import DashboardFundedByTable from "./components/DashboardFundedByTable";
 import DashboardRecentActivityTable from "./components/DashboardRecentActivityTable";
 import { DashboardPreventionType } from "./dashboard-prevention.types";
 import { StyledDiv } from "./style";
 
 const DashboardPreventionTab = () => {
-  const { data, isLoading } = useSWR<DashboardPreventionType>("/dashboard");
+  const { getDashboardAPiUrl } = useDashboardApiUrl();
+
+  const { data, isLoading } = useSWR<DashboardPreventionType>(
+    getDashboardAPiUrl("prevention")
+  );
 
   const { prevention } = data?.data || {};
 
@@ -37,7 +43,7 @@ const DashboardPreventionTab = () => {
         />
         <MiniCard
           label="Attendance Count"
-          value={prevention?.kpis?.provinces_covered}
+          value={prevention?.kpis?.attendance_count}
           icon={<UsersRound />}
           isLoading={isLoading}
         />

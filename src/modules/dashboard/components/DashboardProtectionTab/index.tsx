@@ -11,6 +11,7 @@ import MiniCard from "@/components/MiniCard";
 import PieChart from "@/components/PieChart";
 import { getMetrixData } from "@/utils/get-metrix-data";
 
+import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
 import AdditionalMetrics from "../AdditionalMetrics";
 import DashboardCoverage from "../DashboardCoverage";
 import ReferalSummary from "../ReferalSummary";
@@ -19,8 +20,10 @@ import { DashboardProtectionType } from "./dashboard-protection.types";
 import { StyledDiv } from "./style";
 
 const DashboardProtectionTab = () => {
+  const { getDashboardAPiUrl } = useDashboardApiUrl();
+
   const { data, isLoading } = useSWR<DashboardProtectionType>(
-    "/dashboard?program=protection"
+    getDashboardAPiUrl("protection")
   );
 
   const { protection } = data?.data || {};

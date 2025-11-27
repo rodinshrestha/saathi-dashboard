@@ -10,6 +10,7 @@ import MiniCard from "@/components/MiniCard";
 import PieChart from "@/components/PieChart";
 import { getMetrixData } from "@/utils/get-metrix-data";
 
+import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
 import ReferalSummary from "../ReferalSummary";
 
 import InformationByProject from "./components/InformationByProject";
@@ -17,8 +18,10 @@ import { DashboardResponseType } from "./dashboard-response.types";
 import { StyledDiv } from "./style";
 
 const DashboardResponseTab = () => {
+  const { getDashboardAPiUrl } = useDashboardApiUrl();
+
   const { data, isLoading } = useSWR<DashboardResponseType>(
-    "/dashboard?program=response"
+    getDashboardAPiUrl("response")
   );
 
   const { response } = data?.data || {};

@@ -13,6 +13,9 @@ import { StyledDiv } from "./style";
 const Dasbhoard = () => {
   const searchParams = useSearchParams();
 
+  const [selectedProgramTab, setSelectedProgramTab] =
+    React.useState("all-program");
+
   const [dashboardFilter, setDashboardFilter] =
     React.useState<DashboardFilterType>({
       start_date: null,
@@ -32,9 +35,10 @@ const Dasbhoard = () => {
       <DashboardFilter
         dashboardFilter={dashboardFilter}
         setDashboardFilter={setDashboardFilter}
+        setSelectedProgramTab={setSelectedProgramTab}
       />
 
-      <DashboardTab dashboardFilter={dashboardFilter} />
+      <DashboardTab selectedProgramTab={selectedProgramTab} />
     </StyledDiv>
   );
 };

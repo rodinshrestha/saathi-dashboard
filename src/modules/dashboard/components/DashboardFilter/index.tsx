@@ -2,10 +2,12 @@
 import React from "react";
 
 import { X, Download, SearchIcon } from "lucide-react";
+import { mutate } from "swr";
 
 import Button from "@/components/Button";
 import DatePicker from "@/components/DatePicker";
 import { Select } from "@/components/Select";
+import { useTabStore } from "@/components/Tab/tab.store";
 import Typography from "@/components/Typography";
 import useUpdateParams from "@/hooks/useUpdateParams";
 import { convertProvinceList } from "@/modules/projects/utils/convert-province-list";
@@ -13,6 +15,8 @@ import { useGlobalStore } from "@/store/useGlobalConfigStore";
 import { DashboardFilterType } from "@/types/dashboard-filter.types";
 import { getConvertedDate } from "@/utils/get-converted-date";
 import { getProgramListOption } from "@/utils/get-program-option-list";
+
+import useDashboardApiUrl from "../../hooks/useDashboardApiUrl";
 
 import { StyledDiv } from "./style";
 
@@ -27,14 +31,40 @@ const programOption = [
 type Props = {
   dashboardFilter: DashboardFilterType;
   setDashboardFilter: React.Dispatch<React.SetStateAction<DashboardFilterType>>;
+  setSelectedProgramTab: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const DashboardFilter = ({ dashboardFilter, setDashboardFilter }: Props) => {
+const DashboardFilter = ({
+  dashboardFilter,
+  setDashboardFilter,
+  setSelectedProgramTab,
+}: Props) => {
   const { provinceData, projectData } = useGlobalStore();
-  const { updateMultipleQueryParams } = useUpdateParams();
+  const { updateMultipleQueryParams, clearAllQueryParams } = useUpdateParams();
+  const { getDashboardAPiUrl } = useDashboardApiUrl();
+  const { activeTabValue } = useTabStore();
 
   const onHandleSerach = () => {
     updateMultipleQueryParams(dashboardFilter);
+    if (dashboardFilter?.program) {
+      setSelectedProgramTab(dashboardFilter.program as string);
+    }
+
+    mutate(getDashboardAPiUrl(activeTabValue));
+  };
+
+  const handleReset = () => {
+    setDashboardFilter({
+      start_date: null,
+      end_date: null,
+      province: "",
+      program: "all-program",
+      project: "",
+    });
+    setSelectedProgramTab("all-program");
+
+    clearAllQueryParams();
+    mutate((key: string) => key.startsWith("/dashboard"));
   };
 
   return (
@@ -101,7 +131,7 @@ const DashboardFilter = ({ dashboardFilter, setDashboardFilter }: Props) => {
       </div>
 
       <div className="dashboard-filter-btn-wrapper">
-        <Button variant="outline">
+        <Button variant="outline" onClick={handleReset}>
           <X size={14} />
           Clear Filter
         </Button>

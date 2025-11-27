@@ -1,20 +1,30 @@
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const useUpdateParams = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const router = useRouter();
 
-  const updateQueryParams = (key: string, value: string) => {
+  const shallowUpdateQueryParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set(key, value);
 
     const newURl = `${pathname}?${params.toString()}`;
 
-    window.history.replaceState(
+    window.history.pushState(
       { ...window.history.state, as: newURl, url: newURl },
       "",
       newURl
     );
+  };
+
+  const updateQueryParams = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(key, value);
+
+    const newURL = `${pathname}?${params.toString()}`;
+
+    router.replace(newURL);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,15 +40,20 @@ const useUpdateParams = () => {
     });
 
     const newURL = `${pathname}?${params.toString()}`;
-
-    window.history.replaceState(
-      { ...window.history.state, as: newURL, url: newURL },
-      "",
-      newURL
-    );
+    router.replace(newURL);
   };
 
-  return { updateQueryParams, updateMultipleQueryParams };
+  const clearAllQueryParams = () => {
+    const newUrl = pathname; // no ?query here
+    router.replace(newUrl);
+  };
+
+  return {
+    shallowUpdateQueryParams,
+    updateMultipleQueryParams,
+    clearAllQueryParams,
+    updateQueryParams,
+  };
 };
 
 export default useUpdateParams;

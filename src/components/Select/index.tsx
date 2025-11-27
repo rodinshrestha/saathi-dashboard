@@ -61,6 +61,8 @@ export function Select<TMulti extends boolean = false>({
     ? options.find((x) => x.value === value)
     : null;
 
+  console.log(selectedValue, "@@@");
+
   const isError = !!error && touched;
 
   return (
@@ -87,7 +89,7 @@ export function Select<TMulti extends boolean = false>({
         inputId={selectId}
         isMulti={isMulti}
         options={options}
-        value={selectedValue}
+        value={selectedValue || null}
         onChange={onChange}
         placeholder={placeholder}
         className="react-select-container"

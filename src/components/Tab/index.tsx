@@ -5,72 +5,70 @@ import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 
 import useUpdateParams from "@/hooks/useUpdateParams";
-import { DashboardFilterType } from "@/types/dashboard-filter.types";
 
 import { StyledDiv } from "./style";
+import { useTabStore } from "./tab.store";
 
 export type Tab = {
   id: string;
   label: string;
   content: React.ReactNode;
+  hide?: boolean;
 };
 
 type Props<T extends readonly Tab[]> = {
   tabs: T;
   defaultSelectedTab?: T[number]["id"];
   pushToUrl?: boolean;
-  dashboardFilter?: DashboardFilterType;
+  selectedProgramTab?: string;
 };
 
 const Tab = <T extends readonly Tab[]>({
   tabs,
   defaultSelectedTab,
   pushToUrl = false,
-  dashboardFilter,
+  selectedProgramTab,
 }: Props<T>) => {
+  const { shallowUpdateQueryParams } = useUpdateParams();
   const searchParams = useSearchParams();
+  const { setActiveTabValue } = useTabStore();
 
   const selectedTab = searchParams.get("tab");
-
-  const tabFromFilter = searchParams.get("program");
 
   const [activeTab, setActiveTab] = React.useState(
     selectedTab || defaultSelectedTab || tabs[0].id
   );
 
-  const { updateQueryParams } = useUpdateParams();
+  React.useEffect(() => {
+    if (!selectedProgramTab || selectedProgramTab === "all-program") {
+      return;
+    }
+
+    setActiveTab(selectedProgramTab);
+  }, [selectedProgramTab]);
+
+  React.useEffect(() => {
+    setActiveTabValue(activeTab);
+  }, [activeTab, setActiveTabValue]);
 
   const handleOnTabClick = (tab: Tab) => {
-    // if (disabled) return;
-
     setActiveTab(tab.id);
 
     if (pushToUrl) {
-      updateQueryParams("tab", tab.id);
+      shallowUpdateQueryParams("tab", tab.id);
     }
-  };
-
-  const getDisableTab = (id: string) => {
-    if (tabFromFilter === "all-program") {
-      return false;
-    }
-    // return tabFromFilter !== id;
-    return false;
   };
 
   return (
     <StyledDiv className="tab-wrapper">
       <div className={clsx("tab-header-list")}>
         {tabs.map((tab) => {
-          const disabled = getDisableTab(tab.id);
+          if (tab.hide) return;
           return (
             <div
               key={tab.id}
               onClick={() => handleOnTabClick(tab)}
-              className={clsx(
-                { active: activeTab === tab.id, disabled },
-                "tab-header"
-              )}
+              className={clsx({ active: activeTab === tab.id }, "tab-header")}
             >
               {tab.label}
             </div>
