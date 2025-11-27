@@ -93,8 +93,8 @@ const YouthFormWrapper = ({ data, isUpdate = false }: Props) => {
         .then(() => {
           successToast(
             isUpdate
-              ? "project update successfull"
-              : "Project created successfull"
+              ? "project updated successfully"
+              : "Project created successfully"
           );
           router.push("/registration-list");
         })

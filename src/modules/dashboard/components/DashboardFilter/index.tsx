@@ -90,7 +90,7 @@ const DashboardFilter = ({
         },
       })
       .then((res) => {
-        successToast("file has been downloaded");
+        successToast("File has been downloaded");
         getDownloadLink(res, fileName);
       })
       .catch((err) => {

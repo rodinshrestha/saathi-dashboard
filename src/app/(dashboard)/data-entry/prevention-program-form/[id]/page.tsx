@@ -12,7 +12,7 @@ const PreventionProgramUpdatePage = async ({ params }: PagePropsType) => {
     <>
       <MultiStepFormSectionTitle
         link="/data-entry"
-        linkLabel="back to Program Selection"
+        linkLabel="Back to Program Selection"
         sectionTitle="Prevention Program - Data Entry"
       />
       <Suspense fallback={<PageSpinnerLoader />}>

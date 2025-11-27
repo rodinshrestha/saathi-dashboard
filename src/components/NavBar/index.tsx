@@ -28,9 +28,19 @@ const Navbar = () => {
       <div className="navbar-header">
         <div className="navbar-logo-wrapper">
           {isExpand ? (
-            <ImageWithFallback src="/images/new-logo.png" alt="logo" fill />
+            <ImageWithFallback
+              src="/images/new-logo.png"
+              alt="logo"
+              key="new-logo"
+              fill
+            />
           ) : (
-            <ImageWithFallback src="/images/mini-logo.png" alt="logo" fill />
+            <ImageWithFallback
+              src="/images/mini-logo.png"
+              alt="logo"
+              key="mini-logo"
+              fill
+            />
           )}
         </div>
       </div>

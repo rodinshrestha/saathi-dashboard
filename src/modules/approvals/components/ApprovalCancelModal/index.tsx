@@ -36,7 +36,7 @@ const ApprovalCancelModal = ({
       .then(() => {
         fetchApprovalList().finally(() => {
           successToast(
-            `${selectedApprovalData.registration_id} has been sent back to submitter`
+            `${selectedApprovalData.registration_id} has sent back to submitter`
           );
           onClose();
           setLoader(false);

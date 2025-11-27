@@ -20,7 +20,10 @@ export const StyledNavBar = styled.nav`
 
     .nav-item {
       .nav-item-label {
-        display: none;
+        /* display: none;
+         */
+        opacity: 0;
+        white-space: nowrap;
       }
     }
 
@@ -36,6 +39,7 @@ export const StyledNavBar = styled.nav`
 
       .nav-item-label {
         display: unset;
+        opacity: 1;
         white-space: nowrap;
       }
     }
@@ -107,6 +111,9 @@ export const StyledNavBar = styled.nav`
           svg {
             min-width: 55px;
             margin-left: -18px;
+          }
+          .nav-item-label {
+            transition: all 0.2s ease-in-out;
           }
         }
       }

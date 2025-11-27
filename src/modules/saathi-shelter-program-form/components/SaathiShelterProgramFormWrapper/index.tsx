@@ -132,8 +132,8 @@ const SaathiShelterProgramFormWrapper = ({ data, isUpdate = false }: Props) => {
         .then(() => {
           successToast(
             isUpdate
-              ? "project update successfull"
-              : "Project created successfull"
+              ? "Project updated successfully"
+              : "Project created successfully"
           );
           router.push("/registration-list");
         })

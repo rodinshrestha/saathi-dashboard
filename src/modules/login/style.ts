@@ -21,14 +21,14 @@ export const StyledDiv = styled.div`
     .login-logo-wrapper {
       position: relative;
       width: 300px;
-      height: 150px;
+      height: 120px;
       margin: 0 auto;
     }
 
     .login-title-wrapper {
       text-align: center;
-      margin-bottom: 60px;
-      margin-top: 50px;
+      margin-bottom: 40px;
+      margin-top: 20px;
     }
 
     .login-form-wrapper {

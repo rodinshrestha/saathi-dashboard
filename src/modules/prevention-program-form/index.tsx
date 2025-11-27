@@ -8,7 +8,7 @@ const PreventionProgramForm = () => {
     <StyledDiv>
       <MultiStepFormSectionTitle
         link="/data-entry"
-        linkLabel="back to Program Selection"
+        linkLabel="Back to Program Selection"
         sectionTitle="Prevention Program - Data Entry"
       />
 
